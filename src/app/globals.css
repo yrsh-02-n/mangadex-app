@@ -50,9 +50,7 @@ h6 {
 }
 
 li {
-	list-style: square;
+	list-style: none;
 }
 
-li::marker {
-	color: var(--accent);
-}
+

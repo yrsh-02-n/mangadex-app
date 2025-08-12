@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export function Logo() {
 	return (
-		<Link href='#'>
+		<Link href='/' className='h-fit'>
 			<Image
 				src={'logo/logo-full.svg'}
 				width={220}
