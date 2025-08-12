@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { Murecho } from 'next/font/google'
 
 import { Header } from '@/components/header/Header'
-import { Sidebar } from '@/components/header/Sidebar'
+
 
 import { Providers } from '@/providers/Providers'
 
 import './globals.css'
+import { Sidebar } from '@/components/sidebar/Sidebar'
 
 const murecho = Murecho({
 	variable: '--font-murecho',

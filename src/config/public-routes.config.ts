@@ -1,4 +1,4 @@
-class PublicPage {
+class PublicRoutes {
 	HOME = '/'
 	RECENTLY = '/recent'
 	LATEST = '/latest'
@@ -6,3 +6,5 @@ class PublicPage {
 
 	AUTH = '/auth'
 }
+
+export const PUBLIC_ROUTES = new PublicRoutes()
