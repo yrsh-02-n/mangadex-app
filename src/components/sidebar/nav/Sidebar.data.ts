@@ -1,9 +1,17 @@
-import { BookMarked, CalendarArrowDown, ClockPlus, Dice5, Settings } from 'lucide-react'
+import { BookMarked, CalendarArrowDown, ClockPlus, Dice5, Search, Settings } from 'lucide-react';
 
-import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
-import { ISidebarItem } from '../sidebar.types'
-import { USER_ROUTES } from '@/config/user-page.config'
+
+import { PUBLIC_ROUTES } from '@/config/public-routes.config';
+import { USER_ROUTES } from '@/config/user-page.config';
+
+
+
+import { ISidebarItem } from '../sidebar.types';
+
+
+
+
 
 export const SIDEBAR_DATA: ISidebarItem[] = [
 	{
@@ -17,19 +25,24 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
 		link: PUBLIC_ROUTES.LATEST
 	},
 	{
+		icon: Search,
+		label: 'Расширенный поиск',
+		link: '#'
+	},
+	{
 		icon: Dice5,
 		label: 'Случайная манга',
 		link: PUBLIC_ROUTES.RANDOM,
-    isBottomBorder: true
+		isBottomBorder: true
 	},
 	{
 		icon: BookMarked,
 		label: 'Моя библиотека',
-		link: USER_ROUTES.LIBRARY,
+		link: USER_ROUTES.LIBRARY
 	},
 	{
 		icon: Settings,
 		label: 'Настройки аккаунта',
-		link: USER_ROUTES.SETTINGS,
-	},
+		link: USER_ROUTES.SETTINGS
+	}
 ]

@@ -10,6 +10,7 @@ const getInitialState = () => {
 	if (typeof window === 'undefined') return true
 
 	const saved = Cookies.get('sidebar-state')
+  if (window.innerWidth > 748) 
 	return saved ? JSON.parse(saved) : true
 }
 

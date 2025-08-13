@@ -16,9 +16,9 @@ export function Sidebar() {
 	return (
 		<div
 			className={cn(
-				'flex flex-col justify-between bg-primary min-h-full transition-all duration-200 ease-in',
+				'flex flex-col justify-between bg-primary min-h-full transition-all duration-100 ease-in',
 				isSidebarOpen
-					? 'w-[22rem] p-[1.5rem] max-sm:absolute max-sm:w-screen'
+					? 'w-[22rem] p-[1.5rem] max-sm:absolute max-sm:w-screen max-sm:z-999'
 					: 'w-[3rem] p-[.5rem]'
 			)}
 		>

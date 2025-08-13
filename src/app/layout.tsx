@@ -25,15 +25,15 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='ru'>
-			<body className={`${murecho.variable} antialiased text-white`}>
+			<body className={`${murecho.variable} antialiased text-white min-h-full`}>
 				<Providers>
-					<div className='flex min-h-screen'>
+					<main className='flex min-h-screen'>
 						<SidebarClient />
-						<div className='w-full'>
+						<div className='flex flex-col flex-grow w-full overflow-y-scroll'>
 							<Header />
 							{children}
 						</div>
-					</div>
+					</main>
 				</Providers>
 			</body>
 		</html>

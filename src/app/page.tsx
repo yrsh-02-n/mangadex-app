@@ -32,5 +32,5 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-	return <div className='p-[1.5rem] text-white'>Page</div>
+	return <div className='p-[1.5rem] text-white overflow-hidden'>Page</div>
 }
