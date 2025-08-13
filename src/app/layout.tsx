@@ -2,12 +2,11 @@ import type { Metadata } from 'next'
 import { Murecho } from 'next/font/google'
 
 import { Header } from '@/components/header/Header'
-
+import { SidebarClient } from '@/components/sidebar/nav/SidebarClient'
 
 import { Providers } from '@/providers/Providers'
 
 import './globals.css'
-import { Sidebar } from '@/components/sidebar/Sidebar'
 
 const murecho = Murecho({
 	variable: '--font-murecho',
@@ -29,7 +28,7 @@ export default function RootLayout({
 			<body className={`${murecho.variable} antialiased text-white`}>
 				<Providers>
 					<div className='flex min-h-screen'>
-						<Sidebar />
+						<SidebarClient />
 						<div className='w-full'>
 							<Header />
 							{children}

@@ -1,7 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import { ChevronsLeft, ChevronsRight, PanelLeftCloseIcon, X } from 'lucide-react'
+import { ChevronsRight, X } from 'lucide-react'
 import Link from 'next/link'
 
 import { useSidebarStore } from '@/store/ui.store'
@@ -17,11 +17,18 @@ export function Sidebar() {
 		<div
 			className={cn(
 				'flex flex-col justify-between bg-primary min-h-full transition-all duration-200 ease-in',
-				isSidebarOpen ? 'w-[22rem] p-[1.5rem] max-sm:absolute max-sm:w-screen' : 'w-[3rem] p-[.5rem]'
+				isSidebarOpen
+					? 'w-[22rem] p-[1.5rem] max-sm:absolute max-sm:w-screen'
+					: 'w-[3rem] p-[.5rem]'
 			)}
 		>
 			<div className='flex flex-col gap-[3rem] overflow-hidden'>
-				<div className={cn('flex gap-[1rem] justify-between items-center', !isSidebarOpen && 'flex-col')}>
+				<div
+					className={cn(
+						'flex gap-[1rem] justify-between items-center',
+						!isSidebarOpen && 'flex-col'
+					)}
+				>
 					<Logo isSidebarOpen={isSidebarOpen} />
 					<button
 						onClick={toggleSidebar}

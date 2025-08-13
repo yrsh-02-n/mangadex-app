@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie'
 import { create } from 'zustand'
 
 interface ISidebarState {
@@ -5,7 +6,23 @@ interface ISidebarState {
 	toggleSidebar: () => void
 }
 
+const getInitialState = () => {
+	if (typeof window === 'undefined') return true
+
+	const saved = Cookies.get('sidebar-state')
+	return saved ? JSON.parse(saved) : true
+}
+
 export const useSidebarStore = create<ISidebarState>(set => ({
-	isSidebarOpen: true,
-	toggleSidebar: () => set(state => ({ isSidebarOpen: !state.isSidebarOpen }))
+	isSidebarOpen: getInitialState(),
+	toggleSidebar: () =>
+		set(state => {
+			const newState = !state.isSidebarOpen
+
+			Cookies.set('sidebar-state', JSON.stringify(newState), {
+				expires: 365,
+				samesite: 'lax'
+			})
+			return { isSidebarOpen: newState }
+		})
 }))
