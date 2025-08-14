@@ -31,7 +31,7 @@ export default function RootLayout({
 						<SidebarClient />
 						<div className='flex flex-col flex-grow w-full overflow-y-scroll'>
 							<Header />
-							{children}
+							<section className='px-[2rem] pt-[1rem] pb-[2rem] text-white'>{children}</section>
 						</div>
 					</main>
 				</Providers>
