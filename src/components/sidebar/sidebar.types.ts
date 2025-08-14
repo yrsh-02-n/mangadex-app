@@ -7,7 +7,11 @@ export interface ISidebarItem {
 	isBottomBorder?: boolean
 }
 
+export interface ISidebarMenuProps {
+	isSidebarOpen: boolean
+}
+
 export interface IMenuItemProps {
-	item: ISidebarItem
-	isShowedSideBar: boolean
+	item?: ISidebarItem
+	isSidebarOpen: boolean
 }

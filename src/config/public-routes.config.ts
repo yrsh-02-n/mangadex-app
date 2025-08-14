@@ -1,7 +1,8 @@
 class PublicRoutes {
 	HOME = '/'
-	RECENTLY = '/recent'
-	LATEST = '/latest'
+	TITLES = '/titles'
+	RECENTLY = '/titles/recent'
+	LATEST = '/titles/latest'
 	RANDOM = '/random'
 
 	AUTH = '/auth'

@@ -1,5 +1,7 @@
 import { Metadata } from 'next'
 
+import { Heading } from '@/components/ui/heading/Heading'
+
 export const metadata: Metadata = {
 	title: 'MangaNexus | Поиск манги',
 	description: 'Поиск и каталогизация манги',
@@ -32,5 +34,11 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-	return <div className='p-[1.5rem] text-white'>Page</div>
+	return (
+		<div className='text-white overflow-hidden'>
+			<section>
+				<Heading isH1>Недавно добавленные</Heading>
+			</section>
+		</div>
+	)
 }
