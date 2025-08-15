@@ -1,9 +1,10 @@
 'use client'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { useRef } from 'react'
+import { useState } from 'react'
 
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
+import { GridCard } from '@/components/titleCards/GridCard'
 import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
 
@@ -12,7 +13,8 @@ import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { mangaService } from '@/services/manga.service'
 
 export default function TitlesPage() {
-	const scrollContainerRef = useRef<HTMLDivElement>(null)
+	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
+
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, error, isError } =
 		useInfiniteQuery({
 			queryKey: ['allManga'],
@@ -56,16 +58,30 @@ export default function TitlesPage() {
 
 	return (
 		<div>
-			<Heading isH1>Расширенный поиск</Heading>
-			<ListingContainer ref={scrollContainerRef}>
-				{allTitles.map((title, index) => (
-					<TileCard
-						key={index}
-						attributes={title.attributes}
-						id={title.id}
-						relationships={title.relationships}
-					/>
-				))}
+			<div>
+				<Heading isH1>Расширенный поиск</Heading>
+			</div>
+			<ListingContainer
+				onModeChange={setDisplayMode}
+				displayMode={displayMode}
+			>
+				{displayMode === 'tiles'
+					? allTitles.map((title, index) => (
+							<TileCard
+								key={index}
+								attributes={title.attributes}
+								id={title.id}
+								relationships={title.relationships}
+							/>
+						))
+					: allTitles.map((title, index) => (
+							<GridCard
+								key={index}
+								attributes={title.attributes}
+								id={title.id}
+								relationships={title.relationships}
+							/>
+						))}
 			</ListingContainer>
 		</div>
 	)
