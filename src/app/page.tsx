@@ -8,9 +8,9 @@ export const metadata: Metadata = {
 	keywords: ['Манга', 'Манга на русском'],
 	icons: {
 		icon: [
-			{ url: '/favicon/favicon.svg' },
-			{ url: '/favicon/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-			{ url: '/favicon/icon-512x512.png', sizes: '512x512', type: 'image/png' }
+			{ url: '/favicon.ico' },
+			{ url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+			{ url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' }
 		]
 	},
 	authors: [{ name: 'Кирилл Л.' }],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 				url: 'https://yrshdev.ru/og-image.jpg',
 				width: 1200,
 				height: 630,
-				alt: 'Портфолио frontend-разработичика и web-дизайнера Кирилла Л.'
+				alt: 'Поиск и каталогизация манги'
 			}
 		],
 		locale: 'ru_RU'
