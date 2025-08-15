@@ -22,8 +22,15 @@ export enum ReadingStatus {
 }
 
 export enum ContentRating {
-  SAFE = 'safe',
-  SUGGESTIVE = 'suggestive',
-  EROTICA = 'erotica',
-  PORNOGRAPHIC = 'pornographic'
+	SAFE = 'safe',
+	SUGGESTIVE = 'suggestive',
+	EROTICA = 'erotica',
+	PORNOGRAPHIC = 'pornographic'
+}
+
+export enum RelationshipType {
+	AUTHOR = 'author',
+	ARTIST = 'artist',
+	COVER_ART = 'cover_art',
+	MANGA = 'manga'
 }

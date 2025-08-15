@@ -25,13 +25,18 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='ru'>
-			<body className={`${murecho.variable} antialiased text-white min-h-full`}>
+			<body className={`${murecho.variable} antialiased text-white h-screen`}>
 				<Providers>
-					<main className='flex min-h-screen'>
+					<main className='flex h-full'>
 						<SidebarClient />
-						<div className='flex flex-col flex-grow w-full overflow-y-scroll'>
+						<div className='flex flex-col flex-grow flex-1 w-full h-full'>
 							<Header />
-							<section className='px-[2rem] pt-[1rem] pb-[2rem] text-white'>{children}</section>
+							<section
+								id='main-scroll-container'
+								className='flex-grow min-h-0 px-[2rem] pt-[1rem] pb-[2rem] text-white overflow-y-scroll'
+							>
+								{children}
+							</section>
 						</div>
 					</main>
 				</Providers>

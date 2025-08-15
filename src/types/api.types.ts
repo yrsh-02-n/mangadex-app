@@ -21,6 +21,12 @@ export interface ChapterListOrder {
 	chapter?: SortOrder
 }
 
+export interface MangaResponse {
+	result: string
+	response: string
+	data: ITitle
+}
+
 export interface MangaListResponse {
 	result: 'ok' | 'error'
 	response: 'collection'
