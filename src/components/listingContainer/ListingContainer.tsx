@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { DisplayModeSwitcher } from '../ui/DisplayModeSwitcher/DisplayModeSwitcher'
 
@@ -22,7 +22,7 @@ export function ListingContainer({
 				className={
 					displayMode === 'tiles'
 						? 'grid grid-cols-6 gap-[1rem] max-lg:grid-cols-3 max-md:grid-cols-2 max-s:grid-cols-1'
-						: 'grid grid-cols-2 gap-[1rem]'
+						: 'grid grid-cols-2 gap-[1rem] max-xl:grid-cols-1'
 				}
 			>
 				{children}

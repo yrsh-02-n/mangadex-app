@@ -2,7 +2,10 @@ import { ICoverArtRelationship } from '@/types/coverArt.types'
 import { RelationshipType } from '@/types/enums'
 import { IBaseRelationship } from '@/types/relationship.types'
 
-export const getCoverArt = (relationships: IBaseRelationship[] | undefined, id: string | undefined) => {
+export const getCoverArt = (
+	relationships: IBaseRelationship[] | undefined,
+	id: string | undefined
+) => {
 	if (!relationships) {
 		return '/placeholder-cover.png'
 	}
@@ -12,7 +15,7 @@ export const getCoverArt = (relationships: IBaseRelationship[] | undefined, id: 
 
 	const coverUrl = coverRel
 		? `https://uploads.mangadex.org/covers/${id}/${coverRel.attributes.fileName}.256.jpg`
-		: '/placeholder-cover.png' // dont forget to add a placeholder
+		: '/placeholder-cover.jpg' //
 
 	return coverUrl
 }

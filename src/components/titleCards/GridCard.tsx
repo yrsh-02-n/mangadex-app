@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
 import { getCoverArt } from '@/utils/getCoverArt'
+import { getDesription } from '@/utils/getDesription'
 import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
 import { getTags } from '@/utils/getTags'
 
+import { TitleStatus } from '../ui/status/TitleStatus'
 import { Tag } from '../ui/tag/Tag'
 
 import { ITitle } from '@/types/title.types'
@@ -16,29 +18,47 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 	const title = getLocalizedTitle(attributes)
 	const coverUrl = getCoverArt(relationships, id)
 	const tags = getTags(attributes)
+	const description = getDesription(attributes)
 
 	return (
 		<div>
-			<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
-				<div className='flex w-full bg-primary rounded'>
-					<Image
-						width={200}
-						height={250}
-						alt={`${title}`}
-						src={coverUrl}
-						className='rounded-tl-sm rounded-bl-sm shadow-md object-cover'
-					/>
-					{/* <div className='absolute inset-0 flex items-start'>
-						<Tag
-							className='ml-[.2rem] mt-[.2rem]'
-							tag={tags && tags[0]}
+			<div className='flex w-full bg-primary rounded max-s:relative'>
+				<div
+					className='relative w-[12rem] h-[auto] min-h-[18rem] max-md:max-w-[8rem]
+        max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full'
+				>
+					<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
+						<Image
+							fill
+							alt={`${title}`}
+							src={coverUrl}
+							className='rounded-tl-sm rounded-bl-sm shadow-md object-cover max-s:opacity-10 z-[1]'
 						/>
-					</div> */}
-					<div className='flex flex-1 p-[2rem]'>
-						<p className='w-full text-lg text-white line-clamp-2'>{title}</p>
+					</Link>
+				</div>
+
+				<div className='flex flex-col gap-[1rem] p-[1.5rem] flex-1 max-w-full'>
+					<div className='flex items-top justify-between gap-[1rem] max-lg:flex-col-reverse'>
+						<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
+							<p className='w-full text-xl font-semibold text-white line-clamp-2'>{title}</p>
+						</Link>
+						<TitleStatus attributes={attributes} />
+					</div>
+					<div className='flex items-start gap-[0.5rem] flex-wrap'>
+						{tags?.slice(0, 5).map((tag, index) => (
+							<Tag
+								key={index}
+								className=''
+								tag={tag}
+								href={tag.id}
+							/>
+						))}
+					</div>
+					<div>
+						<p className='line-clamp-3 text-balance max-s:line-clamp-5'>{description}</p>
 					</div>
 				</div>
-			</Link>
+			</div>
 		</div>
 	)
 }

@@ -28,7 +28,10 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 						className='rounded shadow-md object-cover'
 					/>
 					<div className='absolute inset-0 flex items-start'>
-            <Tag className='ml-[.2rem] mt-[.2rem]' tag={tags && tags[0]}/>
+						<Tag
+							className='ml-[.5rem] mt-[.2rem]'
+							tag={tags && tags[0]}
+						/>
 					</div>
 					<div className='absolute inset-0 flex items-end'>
 						<p className='w-full py-[.2rem] px-[1rem] bg-black/70 text-white line-clamp-2'>
