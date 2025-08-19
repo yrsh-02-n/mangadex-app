@@ -1,23 +1,37 @@
-import { ReactNode } from 'react'
 import cn from 'clsx'
+import Link from 'next/link'
+import { ReactNode } from 'react'
+
 import { ITag } from '@/types/title.types'
 
 interface TagProps {
 	tag?: ITag
 	children?: ReactNode
 	className?: string
+	href?: string
 }
 
-export function Tag({ children, tag, className }: TagProps) {
+export function Tag({ children, tag, className, href }: TagProps) {
 	const getTagName = () => {
 		if (children) return children
-		if (!tag) return 'unknown'
+		if (!tag) return 'Неизвестный тег'
 
 		if (tag?.attributes?.name) {
 			const nameValues = Object.values(tag.attributes.name)
-			return nameValues[0] || 'Unknown'
+			return nameValues[0] || 'Неизвестный тег'
 		}
+		return 'Неизвестный тег'
 	}
 
-	return <div className={cn('bg-black/70 text-white px-[.5rem] py-[.2rem] rounded', className)}>{getTagName()}</div>
+	const content = (
+		<span className={cn('bg-black/70 text-white px-[.5rem] py-[.2rem] rounded', className)}>
+			{getTagName()}
+		</span>
+	)
+
+	if (href) {
+		return <Link href={href}>{content}</Link>
+	}
+
+	return content
 }

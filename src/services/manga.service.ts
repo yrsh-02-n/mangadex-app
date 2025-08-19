@@ -3,7 +3,8 @@ import { defaultAxios } from '@/api/axios'
 import { MangaListResponse } from '@/types/api.types'
 
 class MangaService {
-	private _TITLES = '/manga?availableTranslatedLanguage[]=ru'
+	private _TITLES = '/manga?contentRating[]=safe'
+	// private _TITLES = '/manga?availableTranslatedLanguage[]=ru'
 	// private _TITLES = '/manga'
 
 	getAll(params?: { limit?: number; offset?: number; total?: number }) {

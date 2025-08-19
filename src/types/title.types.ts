@@ -37,6 +37,7 @@ export interface ITagAttributes {
 	description?: string // may be ILocalized string
 	group?: string
 	version?: number
+  id: string
 }
 
 export interface ITag {
