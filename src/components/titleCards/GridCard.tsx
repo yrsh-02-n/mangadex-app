@@ -55,7 +55,7 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 						))}
 					</div>
 					<div>
-						<p className='line-clamp-3 text-balance max-s:line-clamp-5'>{description}</p>
+						<p className='line-clamp-5 text-balance max-s:line-clamp-6'>{description}</p>
 					</div>
 				</div>
 			</div>

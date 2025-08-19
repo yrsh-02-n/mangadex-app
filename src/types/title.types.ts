@@ -1,10 +1,4 @@
-import {
-	ContentRating,
-	PublicationDemographic,
-	ReadingStatus,
-	RelationshipType,
-	Status
-} from './enums'
+import { ContentRating, PublicationDemographic, Status } from './enums'
 import { IBaseRelationship } from './relationship.types'
 
 // for alternative language title
@@ -37,7 +31,7 @@ export interface ITagAttributes {
 	description?: string // may be ILocalized string
 	group?: string
 	version?: number
-  id: string
+	id: string
 }
 
 export interface ITag {
