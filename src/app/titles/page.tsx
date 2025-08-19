@@ -7,6 +7,7 @@ import { ListingContainer } from '@/components/listingContainer/ListingContainer
 import { GridCard } from '@/components/titleCards/GridCard'
 import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
+import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 
@@ -49,40 +50,55 @@ export default function TitlesPage() {
 				: undefined
 	})
 
-	if (isLoading) return <div>Загрузка...</div>
-	if (isError) return <div>Ошибка: {error?.message}</div>
-
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 	console.log(allTitles)
 
 	return (
-		<div>
+		<section>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
 			</div>
-			<ListingContainer
-				onModeChange={setDisplayMode}
-				displayMode={displayMode}
-			>
-				{displayMode === 'tiles'
-					? allTitles.map((title, index) => (
-							<TileCard
-								key={index}
-								attributes={title.attributes}
-								id={title.id}
-								relationships={title.relationships}
-							/>
-						))
-					: allTitles.map((title, index) => (
-							<GridCard
-								key={index}
-								attributes={title.attributes}
-								id={title.id}
-								relationships={title.relationships}
-							/>
-						))}
-			</ListingContainer>
-		</div>
+			{!isLoading ? (
+				<ListingContainer
+					onModeChange={setDisplayMode}
+					displayMode={displayMode}
+				>
+					{displayMode === 'tiles'
+						? allTitles.map((title, index) => (
+								<TileCard
+									key={index}
+									attributes={title.attributes}
+									id={title.id}
+									relationships={title.relationships}
+								/>
+							))
+						: allTitles.map((title, index) => (
+								<GridCard
+									key={index}
+									attributes={title.attributes}
+									id={title.id}
+									relationships={title.relationships}
+								/>
+							))}
+				</ListingContainer>
+			) : (
+				<ListingContainer
+					onModeChange={setDisplayMode}
+					displayMode={displayMode}
+				>
+					<SkeletonLoader
+						count={18}
+						className='h-[22rem]'
+					/>
+				</ListingContainer>
+			)}
+			{isError && (
+				<div className='flex flex-col items-center'>
+					<p className='text-xl'>Ничего не загрузилось.</p>
+					<p>Попробуйте обновить страницу.</p>
+				</div>
+			)}
+		</section>
 	)
 }

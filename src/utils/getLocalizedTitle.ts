@@ -11,10 +11,9 @@ export const getLocalizedTitle = (attributes: IMangaAttributes) => {
 	if (attributes.title) {
 		if (typeof attributes.title === 'object') {
 			for (const lang of priorities) {
-        if (attributes.title[lang])
-          return attributes.title[lang]
-      }
+				if (attributes.title[lang]) return attributes.title[lang]
+			}
 		}
 	}
-  return ''
+	return ''
 }

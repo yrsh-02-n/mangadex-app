@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 interface ButtonProps {
 	children: ReactNode
 	variable: 'primary' | 'secondary'
-	isDisabled: boolean
+	isDisabled?: boolean
 	onClick?: () => void
 	className?: string
 }

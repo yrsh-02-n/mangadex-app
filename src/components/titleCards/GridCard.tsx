@@ -48,14 +48,13 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 						{tags?.slice(0, 5).map((tag, index) => (
 							<Tag
 								key={index}
-								className=''
 								tag={tag}
 								href={tag.id}
 							/>
 						))}
 					</div>
 					<div>
-						<p className='line-clamp-3 text-balance max-s:line-clamp-5'>{description}</p>
+						<p className='line-clamp-5 text-balance max-s:line-clamp-6'>{description}</p>
 					</div>
 				</div>
 			</div>

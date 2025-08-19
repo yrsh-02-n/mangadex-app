@@ -1,9 +1,11 @@
 import { defaultAxios } from '@/api/axios'
 
-import { MangaListResponse } from '@/types/api.types'
+import { MangaListResponse, MangaResponse } from '@/types/api.types'
+import { ITitle } from '@/types/title.types'
 
 class MangaService {
 	private _TITLES = '/manga?contentRating[]=safe'
+	private _TITLE = '/manga'
 	// private _TITLES = '/manga?availableTranslatedLanguage[]=ru'
 	// private _TITLES = '/manga'
 
@@ -12,6 +14,14 @@ class MangaService {
 			params: {
 				...params,
 				// extended params from https://api.mangadex.org/docs/01-concepts/reference-expansion/
+				'includes[]': ['author', 'artist', 'cover_art']
+			}
+		})
+	}
+
+	byId(id?: string | null) {
+		return defaultAxios.get<MangaResponse>(`${this._TITLE}/${id}`, {
+			params: {
 				'includes[]': ['author', 'artist', 'cover_art']
 			}
 		})
