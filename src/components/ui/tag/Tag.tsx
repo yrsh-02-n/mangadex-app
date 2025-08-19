@@ -1,6 +1,7 @@
 import cn from 'clsx'
 import Link from 'next/link'
 import { ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { ITag } from '@/types/title.types'
 
@@ -24,7 +25,7 @@ export function Tag({ children, tag, className, href }: TagProps) {
 	}
 
 	const content = (
-		<span className={cn('bg-black/70 text-white px-[.5rem] py-[.2rem] rounded', className)}>
+		<span className={twMerge('bg-black/70 text-white px-[.5rem] py-[.2rem] rounded', className)}>
 			{getTagName()}
 		</span>
 	)

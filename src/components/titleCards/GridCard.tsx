@@ -48,7 +48,6 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 						{tags?.slice(0, 5).map((tag, index) => (
 							<Tag
 								key={index}
-								className=''
 								tag={tag}
 								href={tag.id}
 							/>

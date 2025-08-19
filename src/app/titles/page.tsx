@@ -55,7 +55,7 @@ export default function TitlesPage() {
 	console.log(allTitles)
 
 	return (
-		<div>
+		<section>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
 			</div>
@@ -89,7 +89,7 @@ export default function TitlesPage() {
 				>
 					<SkeletonLoader
 						count={18}
-						className='h-[32rem]'
+						className='h-[22rem]'
 					/>
 				</ListingContainer>
 			)}
@@ -99,6 +99,6 @@ export default function TitlesPage() {
 					<p>Попробуйте обновить страницу.</p>
 				</div>
 			)}
-		</div>
+		</section>
 	)
 }
