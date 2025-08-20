@@ -41,7 +41,7 @@ export function SlugHeading({ data }: Props) {
 							fill
 							alt={`${title}`}
 							src={coverUrl}
-							className='rounded-sm shadow-md object-cover'
+							className='rounded-sm shadow-md object-cover max-[810px]:object-top'
 						/>
 					</div>
 
