@@ -22,10 +22,12 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 			<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 				<div className='relative aspect-[8/11]'>
 					<Image
+            sizes='max-width:334px'
 						fill
 						alt={`${title}`}
 						src={coverUrl}
 						className='rounded shadow-md object-cover'
+            priority
 					/>
 					<div className='absolute inset-0 flex items-start'>
 						<Tag

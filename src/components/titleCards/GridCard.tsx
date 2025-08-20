@@ -23,19 +23,21 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 	return (
 		<div>
 			<div className='flex w-full bg-primary rounded max-s:relative'>
-				<div
-					className='relative w-[12rem] h-[auto] min-h-[18rem] max-md:max-w-[8rem]
+				<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
+					<div
+						className='relative w-[12rem] h-[auto] min-h-[18rem] max-md:max-w-[8rem]
         max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full'
-				>
-					<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
+					>
 						<Image
+							sizes='max-width:334px'
 							fill
 							alt={`${title}`}
 							src={coverUrl}
 							className='rounded-tl-sm rounded-bl-sm shadow-md object-cover max-s:opacity-10 z-[1]'
+							priority
 						/>
-					</Link>
-				</div>
+					</div>
+				</Link>
 
 				<div className='flex flex-col gap-[1rem] p-[1.5rem] flex-1 max-w-full'>
 					<div className='flex items-top justify-between gap-[1rem] max-lg:flex-col-reverse'>
