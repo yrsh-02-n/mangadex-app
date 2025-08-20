@@ -52,7 +52,6 @@ export default function TitlesPage() {
 
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
-	console.log(allTitles)
 
 	return (
 		<section>

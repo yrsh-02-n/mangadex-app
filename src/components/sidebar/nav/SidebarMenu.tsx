@@ -1,7 +1,9 @@
 'use client'
 
-import { ISidebarMenuProps } from '../sidebar.types'
 import cn from 'clsx'
+
+import { ISidebarMenuProps } from '../sidebar.types'
+
 import { NavItem } from './NavItem'
 import { SIDEBAR_DATA } from './Sidebar.data'
 
