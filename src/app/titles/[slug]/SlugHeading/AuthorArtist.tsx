@@ -12,6 +12,6 @@ export function AuthorArtist({ data }: Props) {
 
 	{
 		if (author?.name === artist?.name) return <p>{'Автор и художник: ' + author?.name}</p>
-		return <p>{'Автор: ' + author?.name + ', ' + 'Художник: ' + artist?.name}</p>
+		return <p>{'Автор: ' + author?.name + ', ' + 'художник: ' + artist?.name}</p>
 	}
 }
