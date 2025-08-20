@@ -35,3 +35,11 @@ export interface MangaListResponse {
 	offset: number
 	total: number
 }
+
+export interface MangaData {
+	data: ITitle | undefined
+}
+
+export interface MangaRes {
+	data: MangaResponse | undefined
+}

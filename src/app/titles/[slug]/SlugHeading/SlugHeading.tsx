@@ -12,13 +12,9 @@ import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
 import { getTags } from '@/utils/getTags'
 
 import { AuthorArtist } from './AuthorArtist'
-import { MangaResponse } from '@/types/api.types'
+import { MangaRes } from '@/types/api.types'
 
-interface Props {
-	data: MangaResponse | undefined
-}
-
-export function SlugHeading({ data }: Props) {
+export function SlugHeading({ data }: MangaRes) {
 	const mangaData = data?.data
 	const title = mangaData?.attributes ? getLocalizedTitle(mangaData.attributes) : ''
 	// title on original lang
@@ -30,10 +26,8 @@ export function SlugHeading({ data }: Props) {
 	const tags = mangaData?.attributes && getTags(mangaData.attributes)
 	const year = mangaData?.attributes.year
 
-  
-
 	return (
-		<section className='w-full'>
+		<section className='w-full mb-[2rem]'>
 			{mangaData ? (
 				<div className='flex gap-[2rem] max-[810px]:flex-col'>
 					<div className='relative w-[19rem] h-[auto] min-w-[18rem] min-h-[19rem] max-[810px]:w-full max-[810px]:max-w-full'>
@@ -42,7 +36,7 @@ export function SlugHeading({ data }: Props) {
 							alt={`${title}`}
 							src={coverUrl}
 							className='rounded-sm shadow-md object-cover max-[810px]:object-top'
-              priority
+							priority
 						/>
 					</div>
 
@@ -84,7 +78,7 @@ export function SlugHeading({ data }: Props) {
 							</div>
 							<div className='pb-[2rem]'>
 								<AuthorArtist data={data} />
-                <p>{'Год выхода: ' + year}</p>
+								<p>{'Год выхода: ' + year}</p>
 							</div>
 							<Button
 								variable='primary'
