@@ -1,7 +1,6 @@
 import { defaultAxios } from '@/api/axios'
 
-import { MangaListResponse, MangaResponse } from '@/types/api.types'
-import { ITitle } from '@/types/title.types'
+import { ChaptersListResponse, ChaptersResponse, MangaListResponse, MangaResponse } from '@/types/api.types'
 
 class MangaService {
 	private _TITLES = '/manga?contentRating[]=safe'
@@ -25,6 +24,10 @@ class MangaService {
 				'includes[]': ['author', 'artist', 'cover_art']
 			}
 		})
+	}
+
+	getChaptersById(id?: string | null) {
+		return defaultAxios.get<ChaptersListResponse>(`${this._TITLE}/${id}/feed`)
 	}
 }
 

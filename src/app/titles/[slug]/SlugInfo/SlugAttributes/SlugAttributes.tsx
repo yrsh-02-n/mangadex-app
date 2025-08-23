@@ -21,10 +21,8 @@ export function SlugAttributes({ data }: MangaRes) {
 	const hasThemeTags = themeTags.length > 0
 	const hasFormatTags = formatTags.length > 0
 
-	const demographic = mangaData?.attributes.publicationDemographic
-  const latestChapter = mangaData?.attributes.latestUploadedChapter
-  console.log(mangaData?.attributes);
-  
+	const demographic = mangaData?.attributes?.publicationDemographic
+	const hasDemographic = demographic !== null
 
 	return (
 		<div className='flex flex-col gap-[1.5rem] bg-primary rounded p-[1.5rem]'>
@@ -68,9 +66,11 @@ export function SlugAttributes({ data }: MangaRes) {
 				</SlugAttributesItem>
 			) : null}
 
-			<SlugAttributesItem itemName='Возрастная категория'>
-				<Tag>{demographic}</Tag>
-			</SlugAttributesItem>
+			{hasDemographic ? (
+				<SlugAttributesItem itemName='Возрастная категория'>
+					<Tag>{demographic}</Tag>
+				</SlugAttributesItem>
+			) : null}
 
 			{hasFormatTags ? (
 				<SlugAttributesItem itemName='Формат'>
@@ -83,10 +83,6 @@ export function SlugAttributes({ data }: MangaRes) {
 					))}
 				</SlugAttributesItem>
 			) : null}
-
-			{/* <SlugAttributesItem itemName='Последняя глава'>
-				<Tag>{latestChapter}</Tag>
-			</SlugAttributesItem> */}
 		</div>
 	)
 }

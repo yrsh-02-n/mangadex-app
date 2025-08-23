@@ -24,7 +24,7 @@ export function SlugHeading({ data }: MangaRes) {
 	const description = mangaData?.attributes ? getDesription(mangaData.attributes) : ''
 	const coverUrl = getCoverArt(mangaData?.relationships, mangaData?.id)
 	const tags = mangaData?.attributes && getTags(mangaData.attributes)
-	const year = mangaData?.attributes.year
+	const year = mangaData?.attributes?.year
 
 	return (
 		<section className='w-full mb-[2rem]'>
@@ -33,6 +33,7 @@ export function SlugHeading({ data }: MangaRes) {
 					<div className='relative w-[19rem] h-[auto] min-w-[18rem] min-h-[19rem] max-[810px]:w-full max-[810px]:max-w-full'>
 						<Image
 							fill
+							sizes='width: 280px'
 							alt={`${title}`}
 							src={coverUrl}
 							className='rounded-sm shadow-md object-cover max-[810px]:object-top'
