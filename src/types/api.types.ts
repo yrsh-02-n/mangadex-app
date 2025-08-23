@@ -1,3 +1,4 @@
+import { IChapter } from './chapters.types'
 import { ITitle } from './title.types'
 
 export type SortOrder = 'asc' | 'desc'
@@ -42,4 +43,23 @@ export interface MangaData {
 
 export interface MangaRes {
 	data: MangaResponse | undefined
+}
+
+export interface ChaptersResponse {
+	result: string
+	response: string
+	data: IChapter[]
+}
+
+export interface ChaptersRes {
+	data: ChaptersResponse | undefined
+}
+
+export interface ChaptersListResponse {
+	result?: 'ok' | 'error'
+	response?: 'collection'
+	data: IChapter[]
+	limit?: number
+	offset?: number
+	total?: number
 }

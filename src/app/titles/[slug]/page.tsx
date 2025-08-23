@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 
 import { SlugHeading } from './SlugHeading/SlugHeading'
-import { SlugInfo } from './SlugInfo/SlugInfo'
 import { mangaService } from '@/services/manga.service'
+import { SlugInfo } from './SlugInfo/SlugInfo'
 
 export default function TitlePage() {
 	const params = useParams()
@@ -21,22 +21,10 @@ export default function TitlePage() {
 		retry: false
 	})
 
-	// if (isLoading) {
-	// 	return <div>Загрузка...</div>
-	// }
-
-	// if (isError) {
-	// 	return <div>Ошибка: {error?.message}</div>
-	// }
-
-	// if (!data) {
-	// 	return <div>Манга не найдена</div>
-	// }
-
 	return (
 		<div>
 			<SlugHeading data={data} />
-			<SlugInfo data={data} />
+      <SlugInfo data={data} />
 		</div>
 	)
 }
