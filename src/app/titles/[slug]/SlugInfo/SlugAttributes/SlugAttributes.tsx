@@ -26,7 +26,7 @@ export function SlugAttributes({ data }: MangaRes) {
 
 	return (
 		<div className='flex flex-col gap-[1.5rem] bg-primary rounded p-[1.5rem]'>
-			{isAuthorAndArtist ? (
+			{!isAuthorAndArtist ? (
 				<SlugAttributesItem itemName='Автор и художник'>
 					<Tag>{author?.name}</Tag>
 				</SlugAttributesItem>

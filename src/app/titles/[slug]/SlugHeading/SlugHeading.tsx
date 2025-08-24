@@ -67,7 +67,7 @@ export function SlugHeading({ data }: MangaRes) {
 
 							<p className='mb-[2rem]'>{description}</p>
 
-							<div className='flex gap-x-[1rem] gap-y-[1.5rem] flex-wrap mb-[2rem]'>
+							<div className='flex gap-x-[1rem] gap-y-[1.5rem] flex-wrap mb-[2rem] max-md:hidden'>
 								{tags?.map((tag, index) => (
 									<Tag
 										key={index}
