@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { sortStringAsNumberOrLocale } from '@/utils/sortStringAsNumberOrLocale'
 
+import AccordionLink from './AccordionLink'
 import { accordionItemClasses } from './styles/accordionItemClasses'
 import { ChaptersListResponse } from '@/types/api.types'
 import { IChapter } from '@/types/chapters.types'
@@ -38,8 +39,7 @@ interface ChaptersAccordionProps {
 
 export default function ChaptersAccordion({ data }: ChaptersAccordionProps) {
 	const chaptersData = data?.data
-  console.log(chaptersData);
-  
+	console.log(chaptersData)
 
 	if (!chaptersData || chaptersData.length === 0) {
 		return <div>Главы не найдены</div>
@@ -59,7 +59,10 @@ export default function ChaptersAccordion({ data }: ChaptersAccordionProps) {
 	)
 
 	return (
-		<Accordion itemClasses={accordionItemClasses} className='px-0'>
+		<Accordion
+			itemClasses={accordionItemClasses}
+			className='px-0'
+		>
 			{sortedVolumeKeys.map(volumeKey => {
 				const chaptersInVolume = chaptersByVolume[volumeKey]
 
@@ -88,21 +91,13 @@ export default function ChaptersAccordion({ data }: ChaptersAccordionProps) {
 								return (
 									<li key={chapterNumberKey}>
 										<div className='p-[1rem] mt-[1rem] bg-bg/30 rounded'>
-											<p className='text-lg mb-[.5rem]'>Глава {chapterNumberKey}</p>
+											<p className='text-lg mb-[1rem]'>Глава {chapterNumberKey}</p>
 											<ul>
 												{chaptersWithSameNumber.map(chapter => (
-													<Link
+													<AccordionLink
 														key={chapter.id}
-														href={'https://mangadex.org/chapter/' + chapter.id}
-                            target='blank_'
-													>
-														<li>
-															{chapter.attributes?.translatedLanguage
-																? `[${chapter.attributes.translatedLanguage.toUpperCase()}]`
-																: ''}
-															{chapter.attributes?.title && ` ${chapter.attributes.title}`}
-														</li>
-													</Link>
+														chapter={chapter}
+													/>
 												))}
 											</ul>
 										</div>
