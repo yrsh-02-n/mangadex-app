@@ -11,7 +11,7 @@ export function SlugAttributes({ data }: MangaRes) {
 
 	const author = getAuthor(mangaData?.relationships)
 	const artist = getArtist(mangaData?.relationships)
-	const isAuthorAndArtist = author !== artist
+	const isAuthorAndArtist = author?.name === artist?.name
 
 	const tags = mangaData?.attributes && getTags(mangaData.attributes)
 	const genreTags = tags?.filter(tag => tag.attributes.group === 'genre') || []
@@ -26,7 +26,7 @@ export function SlugAttributes({ data }: MangaRes) {
 
 	return (
 		<div className='flex flex-col gap-[1.5rem] bg-primary rounded p-[1.5rem]'>
-			{!isAuthorAndArtist ? (
+			{isAuthorAndArtist ? (
 				<SlugAttributesItem itemName='Автор и художник'>
 					<Tag>{author?.name}</Tag>
 				</SlugAttributesItem>
