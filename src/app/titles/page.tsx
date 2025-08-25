@@ -11,12 +11,14 @@ import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 
+import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
+import { SearchBlock } from './searchBlock/SearchBlock'
 import { mangaService } from '@/services/manga.service'
 
 export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 
-	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, error, isError } =
+	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useInfiniteQuery({
 			queryKey: ['allManga'],
 			queryFn: async ({ pageParam = 0 }) => {
@@ -25,7 +27,7 @@ export default function TitlesPage() {
 					limit,
 					offset: pageParam
 				})
-				return response.data // check I have data
+				return response.data // check data
 			},
 			getNextPageParam: (lastPage, allPages) => {
 				// check if there is still data or not
@@ -57,6 +59,7 @@ export default function TitlesPage() {
 		<section>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
+				<DynSearchBlock data={data} />
 			</div>
 			{!isLoading ? (
 				<ListingContainer

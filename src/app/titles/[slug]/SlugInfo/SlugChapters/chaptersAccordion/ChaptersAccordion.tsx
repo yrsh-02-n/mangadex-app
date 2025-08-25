@@ -39,7 +39,6 @@ interface ChaptersAccordionProps {
 
 export default function ChaptersAccordion({ data }: ChaptersAccordionProps) {
 	const chaptersData = data?.data
-	console.log(chaptersData)
 
 	if (!chaptersData || chaptersData.length === 0) {
 		return <div>Главы не найдены</div>
