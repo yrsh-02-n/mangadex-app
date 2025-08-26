@@ -1,6 +1,7 @@
 'use client'
 
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
+import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
@@ -9,24 +10,43 @@ import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
+import { useSearchStore } from '@/store/search.store'
+
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 
 import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
-import { SearchBlock } from './searchBlock/SearchBlock'
 import { mangaService } from '@/services/manga.service'
+import { MangaListResponse } from '@/types/api.types'
 
 export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
+	const currentFilters = useSearchStore()
+	const searchParams = useSearchParams()
+
+	type QueryKey = readonly ['searchManga', string[]]
 
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
-		useInfiniteQuery({
-			queryKey: ['allManga'],
-			queryFn: async ({ pageParam = 0 }) => {
+		useInfiniteQuery<
+			MangaListResponse,
+			Error,
+			InfiniteData<MangaListResponse, number>,
+			QueryKey,
+			number
+		>({
+			queryKey: ['searchManga', currentFilters.appliedDemographics],
+			queryFn: async ({ pageParam = 0, queryKey }) => {
 				const limit = 18
-				const response = await mangaService.getAll({
+
+				const [, appliedDemosAtQueryTime] = queryKey
+
+				const searchParams = {
+					publicationDemographic: appliedDemosAtQueryTime
+				}
+				const paginationParams: { limit: number; offset: number } = {
 					limit,
 					offset: pageParam
-				})
+				}
+				const response = await mangaService.getBySearchParams(searchParams, paginationParams)
 				return response.data // check data
 			},
 			getNextPageParam: (lastPage, allPages) => {
