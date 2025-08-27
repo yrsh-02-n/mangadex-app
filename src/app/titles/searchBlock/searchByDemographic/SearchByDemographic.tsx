@@ -12,7 +12,7 @@ const demographicOptions = [
 ]
 
 export function SearchByDemographic() {
-	const { selectedDemographics, setSelectedDemographics, appliedDemographics } = useSearchStore()
+	const { selectedDemographics, setSelectedDemographics } = useSearchStore()
 
 	const handleChange = (selectedOptions: readonly ISelectOption[] | null) => {
 		const newSelectedValues = selectedOptions ? selectedOptions.map(option => option.value) : []

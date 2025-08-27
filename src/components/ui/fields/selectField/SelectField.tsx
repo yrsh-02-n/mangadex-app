@@ -1,4 +1,4 @@
-import Select from 'react-select'
+import Select, { GroupBase, MultiValueProps, components } from 'react-select'
 
 import { SelectFieldStyles } from './SelectFieldStyles'
 
@@ -9,6 +9,34 @@ export interface ISelectOption {
 }
 
 type SelectValue = readonly ISelectOption[] | null
+
+// for change tags display to '+1' format at mobile resolution
+const AdaptiveMultiValue: React.FC<
+	MultiValueProps<ISelectOption, true, GroupBase<ISelectOption>>
+> = props => {
+	const allSelectedValues = props.selectProps.value as SelectValue
+	const isSelectedArray = Array.isArray(allSelectedValues)
+	const selectedCount = isSelectedArray ? allSelectedValues.length : 0
+
+	const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 480 : false
+
+	if (isMobile && isSelectedArray && selectedCount > 1) {
+		const isFirst = props.index === 0
+
+		if (isFirst) {
+			return (
+				<components.MultiValue {...props}>
+					<div className=''>+{selectedCount}</div>
+				</components.MultiValue>
+			)
+		} else {
+			return null
+		}
+	}
+
+	return <components.MultiValue {...props} />
+}
+//
 
 interface Props {
 	options: readonly ISelectOption[]
@@ -26,6 +54,9 @@ export function SelectField({ options, placeholder, value, onChange }: Props) {
 			styles={SelectFieldStyles}
 			value={value}
 			onChange={onChange}
+			components={{
+				MultiValue: AdaptiveMultiValue
+			}}
 		/>
 	)
 }

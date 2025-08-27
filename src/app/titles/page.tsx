@@ -1,7 +1,6 @@
 'use client'
 
 import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
-import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
@@ -14,6 +13,8 @@ import { useSearchStore } from '@/store/search.store'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 
+import { SyncFiltersUrl } from '@/utils/syncFiltersUrl'
+
 import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
 import { mangaService } from '@/services/manga.service'
 import { MangaListResponse } from '@/types/api.types'
@@ -21,7 +22,6 @@ import { MangaListResponse } from '@/types/api.types'
 export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 	const currentFilters = useSearchStore()
-	const searchParams = useSearchParams()
 
 	type QueryKey = readonly ['searchManga', string[]]
 
@@ -79,6 +79,7 @@ export default function TitlesPage() {
 		<section>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
+				<SyncFiltersUrl />
 				<DynSearchBlock data={data} />
 			</div>
 			{!isLoading ? (

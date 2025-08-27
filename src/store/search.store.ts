@@ -10,6 +10,7 @@ interface SearchActions {
 	applyFilters: () => void
 	resetSelectedFilters: () => void
 	resetAppliedFilters: () => void
+	initializeFilters: (filters: Partial<SearchState>) => void
 }
 
 export const useSearchStore = create<SearchState & SearchActions>()((set, get) => ({
@@ -30,5 +31,13 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 	resetAppliedFilters: () =>
 		set({
 			appliedDemographics: []
+		}),
+	initializeFilters: filters => {
+		const appliedDemos = filters.appliedDemographics ?? []
+		set({
+			// appliedDemographics: filters.appliedDemographics ?? []
+			appliedDemographics: appliedDemos,
+			selectedDemographics: appliedDemos
 		})
+	}
 }))
