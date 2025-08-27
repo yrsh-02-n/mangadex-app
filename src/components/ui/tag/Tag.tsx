@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
+import { getLocalizedTag } from '@/utils/getLocalizedTag'
+
 import { ITag } from '@/types/title.types'
 
 interface TagProps {
@@ -18,7 +20,9 @@ export function Tag({ children, tag, className, href }: TagProps) {
 
 		if (tag?.attributes?.name) {
 			const nameValues = Object.values(tag.attributes.name)
-			return nameValues[0] || 'Неизвестный тег'
+			const displayTagName = getLocalizedTag(nameValues[0])
+			return displayTagName || 'Неизвестный тег'
+			// return nameValues[0] || 'Неизвестный тег'
 		}
 		return 'Неизвестный тег'
 	}

@@ -5,6 +5,7 @@ import { getTags } from '@/utils/getTags'
 
 import { SlugAttributesItem } from './SlugAttributesItem'
 import { MangaRes } from '@/types/api.types'
+import { getLocalizedDemographic } from '@/utils/getLocalizedDemographic'
 
 export function SlugAttributes({ data }: MangaRes) {
 	const mangaData = data?.data
@@ -22,7 +23,7 @@ export function SlugAttributes({ data }: MangaRes) {
 	const hasFormatTags = formatTags.length > 0
 
 	const demographic = mangaData?.attributes?.publicationDemographic
-	const hasDemographic = demographic !== null
+	const hasDemographic = demographic !== null && demographic !== undefined
 
 	return (
 		<div className='flex flex-col gap-[1.5rem] bg-primary rounded p-[1.5rem]'>
@@ -68,7 +69,7 @@ export function SlugAttributes({ data }: MangaRes) {
 
 			{hasDemographic ? (
 				<SlugAttributesItem itemName='Возрастная категория'>
-					<Tag>{demographic}</Tag>
+					<Tag>{getLocalizedDemographic(demographic)}</Tag>
 				</SlugAttributesItem>
 			) : null}
 

@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
-import { SearchState, useSearchStore } from '@/store/search.store'
+import { useSearchStore } from '@/store/search.store'
 
 export const SyncFiltersUrl = () => {
 	const router = useRouter()

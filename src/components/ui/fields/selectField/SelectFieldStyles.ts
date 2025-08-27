@@ -43,8 +43,7 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	}),
 	// options inside menu
 	menuList: provided => ({
-		...provided,
-		maxHeight: '500px' // list maxHeight
+		...provided
 	}),
 	// option item
 	option: (provided, state) => ({

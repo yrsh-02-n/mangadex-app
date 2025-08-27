@@ -1,5 +1,4 @@
 import { Accordion, AccordionItem } from '@heroui/accordion'
-import Link from 'next/link'
 
 import { sortStringAsNumberOrLocale } from '@/utils/sortStringAsNumberOrLocale'
 
