@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Flag from 'react-flagkit'
 
-import { Flags } from '@/components/ui/flags/Flags'
+import { FLAGS } from '@/constants/flags.constants'
 
 import { IChapter } from '@/types/chapters.types'
 
@@ -20,7 +20,7 @@ export default function AccordionLink({ chapter }: IAccordionLink) {
 			<li className=''>
 				<div className='flex gap-[.5rem] mb-[.5rem]'>
 					{chapter.attributes?.translatedLanguage ? (
-						<Flag country={Flags[chapter.attributes.translatedLanguage]} />
+						<Flag country={FLAGS[chapter.attributes.translatedLanguage]} />
 					) : null}
 					{chapter.attributes?.title ? ` ${chapter.attributes.title}` : 'Без заголовка'}
 				</div>

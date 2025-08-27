@@ -1,4 +1,4 @@
-export const Flags: Record<string, string> = {
+export const FLAGS: Record<string, string> = {
 	ja: 'JP',
 	en: 'GB',
 	vi: 'VN',
