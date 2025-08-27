@@ -11,7 +11,7 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 		borderColor: state.isFocused ? 'var(--primary)' : 'var(--primary)',
 		boxShadow: state.isFocused ? 'var(--primary)' : provided.boxShadow,
 		minHeight: '32px',
-    cursor: 'pointer',
+		cursor: 'pointer',
 		':hover': {
 			borderColor: state.isFocused ? 'var(--primary)' : 'var(--primary)'
 		}
@@ -19,7 +19,8 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	// input and value
 	valueContainer: provided => ({
 		...provided,
-		backgroundColor: 'var(--primary)'
+		backgroundColor: 'var(--primary)',
+		flexWrap: 'nowrap'
 	}),
 	// input
 	input: provided => ({
@@ -62,7 +63,8 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	// multiValue
 	multiValue: provided => ({
 		...provided,
-		backgroundColor: 'var(--accent)' // tag bg
+		backgroundColor: 'var(--accent)', // tag bg
+		maxWidth: '150px'
 	}),
 	// multiValue text
 	multiValueLabel: provided => ({
