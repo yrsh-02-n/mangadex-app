@@ -34,3 +34,7 @@ export enum RelationshipType {
 	COVER_ART = 'cover_art',
 	MANGA = 'manga'
 }
+
+export enum LanguageCodes {
+  
+}

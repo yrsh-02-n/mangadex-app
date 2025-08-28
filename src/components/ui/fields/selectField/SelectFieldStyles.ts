@@ -20,7 +20,7 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	valueContainer: provided => ({
 		...provided,
 		backgroundColor: 'var(--primary)',
-		flexWrap: 'nowrap'
+		flexWrap: 'nowrap',
 	}),
 	// input
 	input: provided => ({

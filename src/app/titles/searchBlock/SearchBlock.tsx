@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button/Button'
 
 import { useSearchStore } from '@/store/search.store'
 
+import { SearchByOriginLang } from './languages/searchByOriginLang/SearchByOriginLang'
 import { SearchByDemographic } from './searchByDemographic/SearchByDemographic'
 import { MangaListResponse } from '@/types/api.types'
 
@@ -16,8 +17,9 @@ export function SearchBlock({ data }: SearchBlockProps) {
 
 	return (
 		<>
-			<div className='mb-[3rem]'>
+			<div className='flex gap-[1rem] mb-[3rem] w-full'>
 				<SearchByDemographic />
+				<SearchByOriginLang />
 			</div>
 			<div>
 				<Button
