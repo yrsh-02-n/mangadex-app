@@ -39,8 +39,8 @@ export function SearchByDemographic() {
 	)
 
 	return (
-		<div>
-			<p className='mb-[1rem]'>Возрастная группа</p>
+		<div className='w-full'>
+			<p className='mb-[.8rem]'>Возрастная группа</p>
 			<SelectField
 				options={demographicOptions}
 				placeholder='Любая'

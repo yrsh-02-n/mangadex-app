@@ -43,6 +43,12 @@ export function SlugAttributes({ data }: MangaRes) {
 				</>
 			)}
 
+      {hasDemographic ? (
+				<SlugAttributesItem itemName='Возрастная категория'>
+					<Tag>{getLocalizedDemographic(demographic)}</Tag>
+				</SlugAttributesItem>
+			) : null}
+
 			{hasGenreTags ? (
 				<SlugAttributesItem itemName='Жанры'>
 					{genreTags.map((tag, index) => (
@@ -64,12 +70,6 @@ export function SlugAttributes({ data }: MangaRes) {
 							href={tag.id}
 						/>
 					))}
-				</SlugAttributesItem>
-			) : null}
-
-			{hasDemographic ? (
-				<SlugAttributesItem itemName='Возрастная категория'>
-					<Tag>{getLocalizedDemographic(demographic)}</Tag>
 				</SlugAttributesItem>
 			) : null}
 

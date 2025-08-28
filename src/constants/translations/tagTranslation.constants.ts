@@ -11,7 +11,7 @@ export const TAG_TRANSLATIONS: Record<string, string> = {
 	'Official Colored': 'Официально раскрашенный',
 	Oneshot: 'Однотомник',
 	'Self-Published': 'Самиздат',
-	'Web Comic': 'Веб-комикс',
+	'Web Comic': 'Web-комикс',
 
 	// Genre (Жанр)
 	Action: 'Экшен',

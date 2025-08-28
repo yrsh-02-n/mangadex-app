@@ -43,8 +43,8 @@ export function SlugHeading({ data }: MangaRes) {
 
 					<div className='bg-primary rounded w-full p-[1.5rem]'>
 						<div>
-							<div className='flex items-start justify-between'>
-								<div>
+							<div className='flex items-start justify-between max-md:flex-col'>
+								<div className='max-md:order-2'>
 									<Heading
 										isH1
 										className='mb-[0.5rem]'
@@ -60,7 +60,7 @@ export function SlugHeading({ data }: MangaRes) {
 									</Heading>
 								</div>
 
-								<div>
+								<div className='max-md:order-1 max-md:mb-[1rem]'>
 									{mangaData?.attributes && <TitleStatus attributes={mangaData.attributes} />}
 								</div>
 							</div>

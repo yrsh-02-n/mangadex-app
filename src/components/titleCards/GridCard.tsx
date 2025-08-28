@@ -47,7 +47,7 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 						<TitleStatus attributes={attributes} />
 					</div>
 					<div className='flex items-start gap-[0.5rem] flex-wrap'>
-						{tags?.slice(0, 5).map((tag, index) => (
+						{tags?.slice(0, 4).map((tag, index) => (
 							<Tag
 								key={index}
 								tag={tag}
