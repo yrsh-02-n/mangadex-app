@@ -45,7 +45,7 @@ export function Sidebar() {
 			</div>
 			<div className={cn('flex flex-col gap-[1rem]', !isSidebarOpen && 'hidden')}>
 				<span className='text-sm text-white text-nowrap'>
-					Сайт работает на{' '}
+					Сайт работает на базе{' '}
 					<Link
 						href={'https://mangadex.org/'}
 						className='transition-colors duration-200 hover:text-accent'
