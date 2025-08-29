@@ -1,11 +1,21 @@
-import Select, { GroupBase, MultiValueProps, components } from 'react-select'
+import Flag from 'react-flagkit'
+import Select, {
+	GroupBase,
+	MultiValueProps,
+	OptionProps,
+	SingleValueProps,
+	components
+} from 'react-select'
+
+import { FLAGS } from '@/constants/flags.constants'
 
 import { SelectFieldStyles } from './SelectFieldStyles'
+import { languagesOptions } from '@/app/titles/searchBlock/languages/languages.options'
 
 export interface ISelectOption {
 	readonly value: string
 	readonly label: string
-	readonly color?: string
+	readonly flag?: string
 }
 
 type SelectValue = readonly ISelectOption[] | null
@@ -38,6 +48,17 @@ const AdaptiveMultiValue: React.FC<
 }
 //
 
+// Single value with flag
+const { Option } = components
+const IconOption: React.FC<OptionProps<ISelectOption>> = props => (
+	<Option {...props}>
+		<div className='flex gap-[.5rem]'>
+			{props.data.flag && <Flag country={props.data.flag} />}
+			{props.data.label}
+		</div>
+	</Option>
+)
+
 interface Props {
 	options: readonly ISelectOption[]
 	placeholder: string
@@ -55,7 +76,8 @@ export function SelectField({ options, placeholder, value, onChange }: Props) {
 			value={value}
 			onChange={onChange}
 			components={{
-				MultiValue: AdaptiveMultiValue
+				MultiValue: AdaptiveMultiValue,
+				Option: IconOption
 			}}
 		/>
 	)
