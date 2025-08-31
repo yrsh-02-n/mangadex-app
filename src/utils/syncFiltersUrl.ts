@@ -13,6 +13,7 @@ export const SyncFiltersUrl = () => {
 
 	const appliedDemographics = useSearchStore(state => state.appliedDemographics)
 	const appliedOriginalLangs = useSearchStore(state => state.appliedOriginalLangs)
+	const appliedTranslatedLangs = useSearchStore(state => state.appliedTranslatedLangs)
 	const initializedFilters = useSearchStore(state => state.initializeFilters)
 
 	// parse url parameters
@@ -24,6 +25,7 @@ export const SyncFiltersUrl = () => {
 		const parseFiltersFromURL = () => {
 			const demosParam = searchParams.get('demos')
 			const originLangParam = searchParams.get('originLang')
+			const transLangsParam = searchParams.get('translatedLang')
 
 			let demos: string[] = []
 			if (demosParam) {
@@ -34,7 +36,17 @@ export const SyncFiltersUrl = () => {
 			if (originLangParam) {
 				originLang = originLangParam.split(',').filter(Boolean)
 			}
-			return { appliedDemographics: demos, appliedOriginalLangs: originLang }
+
+			let transLang: string[] = []
+			if (transLangsParam) {
+				transLang = transLangsParam.split(',').filter(Boolean)
+			}
+
+			return {
+				appliedDemographics: demos,
+				appliedOriginalLangs: originLang,
+				appliedTranslatedLangs: transLang
+			}
 		}
 
 		const initialFilters = parseFiltersFromURL()
@@ -63,6 +75,12 @@ export const SyncFiltersUrl = () => {
 				params.delete('originLang')
 			}
 
+			if (appliedTranslatedLangs.length > 0) {
+				params.set('translatedLang', appliedTranslatedLangs.join(','))
+			} else {
+				params.delete('translatedLang')
+			}
+
 			return params.toString()
 		}
 
@@ -74,7 +92,14 @@ export const SyncFiltersUrl = () => {
 			router.replace(newUrl)
 			router.replace(newUrl, { scroll: false })
 		}
-	}, [pathName, router, searchParams, appliedDemographics, appliedOriginalLangs])
+	}, [
+		pathName,
+		router,
+		searchParams,
+		appliedDemographics,
+		appliedOriginalLangs,
+		appliedTranslatedLangs
+	])
 
 	return null
 }
