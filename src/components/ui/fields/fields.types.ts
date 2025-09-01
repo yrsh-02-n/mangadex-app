@@ -5,7 +5,7 @@ export interface IFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 	error?: string
 	icon?: ComponentType<{ size?: number; className?: string }>
 	fullwidth?: boolean
-	variant?: 'default' | 'search'
+	variant?: 'default' | 'search' | 'select'
 	size?: 'sm' | 'md' | 'lg'
   placeholder?: string
 	className?: string

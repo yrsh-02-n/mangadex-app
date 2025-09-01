@@ -8,6 +8,7 @@ import { SearchByOriginLang } from './languages/searchByOriginLang/SearchByOrigi
 import { SearchByTranslatedLang } from './languages/searchByTranslatedLang/SearchByTranslatedLang'
 import { SearchByDemographic } from './searchByDemographic/SearchByDemographic'
 import { MangaListResponse } from '@/types/api.types'
+import { SearchByTags } from './searchByTag/SearchByTags'
 
 interface SearchBlockProps {
 	data: InfiniteData<MangaListResponse, unknown> | undefined
@@ -18,10 +19,11 @@ export function SearchBlock({ data }: SearchBlockProps) {
 
 	return (
 		<>
-			<div className='flex gap-[1rem] mb-[3rem] w-full'>
+			<div className='grid grid-cols-3 gap-[1rem] mb-[3rem] w-full'>
 				<SearchByDemographic />
 				<SearchByOriginLang />
 				<SearchByTranslatedLang />
+        <SearchByTags/>
 			</div>
 			<div>
 				<Button
