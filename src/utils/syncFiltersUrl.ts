@@ -6,14 +6,16 @@ import { useEffect, useRef } from 'react'
 import { useSearchStore } from '@/store/search.store'
 
 export const SyncFiltersUrl = () => {
+	const isInitializedRef = useRef(false)
 	const router = useRouter()
 	const pathName = usePathname()
 	const searchParams = useSearchParams()
-	const isInitializedRef = useRef(false)
 
 	const appliedDemographics = useSearchStore(state => state.appliedDemographics)
 	const appliedOriginalLangs = useSearchStore(state => state.appliedOriginalLangs)
 	const appliedTranslatedLangs = useSearchStore(state => state.appliedTranslatedLangs)
+	const appliedIncludedTags = useSearchStore(state => state.appliedIncludedTags)
+	const appliedExcludedTags = useSearchStore(state => state.appliedExcludedTags)
 	const initializedFilters = useSearchStore(state => state.initializeFilters)
 
 	// parse url parameters
@@ -26,6 +28,8 @@ export const SyncFiltersUrl = () => {
 			const demosParam = searchParams.get('demos')
 			const originLangParam = searchParams.get('originLang')
 			const transLangsParam = searchParams.get('translatedLang')
+			const exTagsParam = searchParams.get('excludedTags')
+			const inTagsParam = searchParams.get('includedTags')
 
 			let demos: string[] = []
 			if (demosParam) {
@@ -42,10 +46,22 @@ export const SyncFiltersUrl = () => {
 				transLang = transLangsParam.split(',').filter(Boolean)
 			}
 
+			let exTag: string[] = []
+			if (exTagsParam) {
+				exTag = exTagsParam.split(',').filter(Boolean)
+			}
+
+			let inTag: string[] = []
+			if (inTagsParam) {
+				inTag = inTagsParam.split(',').filter(Boolean)
+			}
+
 			return {
 				appliedDemographics: demos,
 				appliedOriginalLangs: originLang,
-				appliedTranslatedLangs: transLang
+				appliedTranslatedLangs: transLang,
+				appliedExcludedTags: exTag,
+				appliedIncludedTags: inTag
 			}
 		}
 
@@ -81,6 +97,18 @@ export const SyncFiltersUrl = () => {
 				params.delete('translatedLang')
 			}
 
+			if (appliedExcludedTags.length > 0) {
+				params.set('excludedTags', appliedExcludedTags.join(','))
+			} else {
+				params.delete('excludedTags')
+			}
+
+			if (appliedIncludedTags.length > 0) {
+				params.set('includedTags', appliedIncludedTags.join(','))
+			} else {
+				params.delete('includedTags')
+			}
+
 			return params.toString()
 		}
 
@@ -98,7 +126,9 @@ export const SyncFiltersUrl = () => {
 		searchParams,
 		appliedDemographics,
 		appliedOriginalLangs,
-		appliedTranslatedLangs
+		appliedTranslatedLangs,
+		appliedExcludedTags,
+		appliedIncludedTags
 	])
 
 	return null

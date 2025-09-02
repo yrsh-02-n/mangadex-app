@@ -23,7 +23,7 @@ export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 	const currentFilters = useSearchStore()
 
-	type QueryKey = readonly ['searchManga', string[], string[], string[]]
+	type QueryKey = readonly ['searchManga', string[], string[], string[], string[], string[]]
 
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useInfiniteQuery<
@@ -37,17 +37,28 @@ export default function TitlesPage() {
 				'searchManga',
 				currentFilters.appliedDemographics,
 				currentFilters.appliedOriginalLangs,
-				currentFilters.appliedTranslatedLangs
+				currentFilters.appliedTranslatedLangs,
+				currentFilters.appliedIncludedTags,
+				currentFilters.appliedExcludedTags
 			],
 			queryFn: async ({ pageParam = 0, queryKey }) => {
 				const limit = 18
 
-				const [, appliedDemosAtQueryTime, appliedOriginLangs, appliedTranslatedlLangs] = queryKey
+				const [
+					,
+					appliedDemosAtQueryTime,
+					appliedOriginLangs,
+					appliedTranslatedlLangs,
+					appliedIncludedTags,
+					appliedExcludedTags
+				] = queryKey
 
 				const searchParams = {
 					publicationDemographic: appliedDemosAtQueryTime,
 					originalLanguage: appliedOriginLangs,
-					availableTranslatedLanguage: appliedTranslatedlLangs
+					availableTranslatedLanguage: appliedTranslatedlLangs,
+					includedTags: appliedIncludedTags,
+					excludedTags: appliedExcludedTags
 				}
 				const paginationParams: { limit: number; offset: number } = {
 					limit,

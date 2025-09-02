@@ -13,7 +13,7 @@ export function TagsModal({ ref, isShow, children, width = '100%' }: props) {
 		<div
 			ref={ref}
 			className={twMerge(
-				'absolute w-full min-h-[30rem] bg-primary rounded hidden p-[1rem]',
+				'absolute w-full max-h-[30rem] bg-primary rounded hidden p-[1rem] overflow-y-auto',
 				isShow && 'block z-100 mt-[1rem]'
 			)}
 			style={{ width }}

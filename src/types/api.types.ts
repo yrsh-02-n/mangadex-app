@@ -1,5 +1,5 @@
 import { IChapter } from './chapters.types'
-import { ITitle } from './title.types'
+import { ITag, ITitle } from './title.types'
 
 export type SortOrder = 'asc' | 'desc'
 
@@ -62,4 +62,10 @@ export interface ChaptersListResponse {
 	limit?: number
 	offset?: number
 	total?: number
+}
+
+export interface TagsResponse {
+  result: string
+  response: string
+  data: ITag[]
 }

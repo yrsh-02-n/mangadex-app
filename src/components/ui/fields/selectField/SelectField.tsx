@@ -1,16 +1,7 @@
 import Flag from 'react-flagkit'
-import Select, {
-	GroupBase,
-	MultiValueProps,
-	OptionProps,
-	SingleValueProps,
-	components
-} from 'react-select'
-
-import { FLAGS } from '@/constants/flags.constants'
+import Select, { GroupBase, MultiValueProps, OptionProps, components } from 'react-select'
 
 import { SelectFieldStyles } from './SelectFieldStyles'
-import { languagesOptions } from '@/app/titles/searchBlock/languages/languages.options'
 
 export interface ISelectOption {
 	readonly value: string
