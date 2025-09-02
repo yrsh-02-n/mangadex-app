@@ -20,7 +20,7 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	valueContainer: provided => ({
 		...provided,
 		backgroundColor: 'var(--primary)',
-		flexWrap: 'nowrap',
+		flexWrap: 'nowrap'
 	}),
 	// input
 	input: provided => ({
@@ -56,7 +56,7 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 				? 'var(--accent)'
 				: 'var(--primary)',
 		':active': {
-			backgroundColor: state.isSelected ? state.data.color : 'var(--accent-hover)'
+			backgroundColor: 'var(--accent-hover)'
 		}
 	}),
 	// multiValue

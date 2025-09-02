@@ -1,5 +1,5 @@
 import cn from 'clsx'
-import { LucideChevronDown } from 'lucide-react'
+import { LucideChevronDown, X } from 'lucide-react'
 
 import { IFieldProps } from './fields.types'
 
@@ -11,13 +11,17 @@ export function DefaultField({
 	label,
 	placeholder,
 	fullwidth,
-	className
+	className,
+	defaultValue,
+	isEmpty,
+	onClick
 }: IFieldProps) {
 	return (
 		<div className={cn('flex flex-col', fullwidth && 'w-full')}>
 			{label && <label className='text-black'>{label}</label>}
 			<div className={cn('relative flex', fullwidth && 'w-full')}>
 				<input
+					defaultValue={defaultValue}
 					className={cn(
 						'text-white bg-primary rounded px-[.7rem] py-[.5rem] placeholder:text-white/50 placeholder:opacity-100 focus-visible:outline-0 focus:outline-0',
 						fullwidth && 'w-full',
@@ -35,6 +39,13 @@ export function DefaultField({
 				)}
 				{variant === 'select' && (
 					<span className='absolute flex items-center justify-between right-0 h-full w-[2.2rem] max-h-[2.4rem] p-[.5rem] pl-0'>
+						{isEmpty && (
+							<X
+								onClick={onClick}
+								size={20}
+								className='absolute min-w-[20px] min-h-[20px] right-[42px]'
+							/>
+						)}
 						<span className='stretch bg-accent w-[1px] h-full' />
 						<LucideChevronDown
 							size={20}

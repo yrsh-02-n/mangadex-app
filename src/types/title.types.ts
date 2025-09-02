@@ -27,7 +27,9 @@ export interface IMangaAttributes {
 }
 
 export interface ITagAttributes {
-	name: 'en' | string // may be ILocalized string
+	name: {
+		en: string
+	} // may be ILocalized string
 	description?: string // may be ILocalized string
 	group?: string
 	version?: number

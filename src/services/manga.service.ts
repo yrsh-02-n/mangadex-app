@@ -5,7 +5,8 @@ import {
 	ChaptersResponse,
 	MangaData,
 	MangaListResponse,
-	MangaResponse
+	MangaResponse,
+	TagsResponse
 } from '@/types/api.types'
 
 class MangaService {
@@ -35,6 +36,10 @@ class MangaService {
 
 	getChaptersById(id?: string | null) {
 		return defaultAxios.get<ChaptersListResponse>(`${this._TITLE}/${id}/feed`)
+	}
+
+	getTags() {
+		return defaultAxios.get<TagsResponse>(`${this._TITLE}/tag`)
 	}
 
 	getBySearchParams(
