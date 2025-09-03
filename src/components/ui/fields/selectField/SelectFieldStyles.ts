@@ -92,5 +92,13 @@ export const SelectFieldStyles: StylesConfig<ISelectOption, true> = {
 	indicatorSeparator: provided => ({
 		...provided,
 		backgroundColor: 'var(--accent)'
+	}),
+	// clear btn
+	clearIndicator: provided => ({
+		...provided,
+		color: 'white',
+		':hover': {
+			color: 'white'
+		}
 	})
 }
