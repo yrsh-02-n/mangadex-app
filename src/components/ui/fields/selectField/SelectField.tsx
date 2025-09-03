@@ -1,7 +1,15 @@
-import Flag from 'react-flagkit'
-import Select, { GroupBase, MultiValueProps, OptionProps, components } from 'react-select'
+import { LucideChevronDown, X } from 'lucide-react';
+import { ClearIndicatorProps, CrossIconProps } from 'node_modules/react-select/dist/declarations/src/components/indicators';
+import Flag from 'react-flagkit';
+import Select, { DropdownIndicatorProps, GroupBase, MultiValueProps, MultiValueRemoveProps, OptionProps, components } from 'react-select';
 
-import { SelectFieldStyles } from './SelectFieldStyles'
+
+
+import { SelectFieldStyles } from './SelectFieldStyles';
+
+
+
+
 
 export interface ISelectOption {
 	readonly value: string
@@ -50,6 +58,32 @@ const IconOption: React.FC<OptionProps<ISelectOption>> = props => (
 	</Option>
 )
 
+// replace dropdown icon
+const { DropdownIndicator } = components
+const DropdownIcon: React.FC<
+	DropdownIndicatorProps<ISelectOption, true, GroupBase<ISelectOption>>
+> = props => (
+	<DropdownIndicator {...props}>
+		<LucideChevronDown
+			size={20}
+			className='text-white opacity-100 stroke-[2.5] transition-colors duration-200 hover:text-accent'
+		/>
+	</DropdownIndicator>
+)
+
+// replace remove btn
+const { ClearIndicator } = components
+const RemoveIcon: React.FC<ClearIndicatorProps<ISelectOption, true>> = props => (
+	<ClearIndicator {...props}>
+		<X
+			size={20}
+			// className='absolute min-w-[20px] min-h-[20px] right-[42px]'
+		/>
+	</ClearIndicator>
+)
+
+// const
+
 interface Props {
 	options: readonly ISelectOption[]
 	placeholder: string
@@ -68,7 +102,9 @@ export function SelectField({ options, placeholder, value, onChange }: Props) {
 			onChange={onChange}
 			components={{
 				MultiValue: AdaptiveMultiValue,
-				Option: IconOption
+				Option: IconOption,
+				DropdownIndicator: DropdownIcon,
+				ClearIndicator: RemoveIcon
 			}}
 		/>
 	)

@@ -23,13 +23,15 @@ export function DefaultField({
 				<input
 					defaultValue={defaultValue}
 					className={cn(
-						'text-white bg-primary rounded px-[.7rem] py-[.5rem] placeholder:text-white/50 placeholder:opacity-100 focus-visible:outline-0 focus:outline-0',
+						'text-white bg-primary rounded px-[.7rem] py-[.5rem] placeholder:text-white/50 placeholder:opacity-100 focus-visible:outline-0 focus:outline-0 outline-0',
 						fullwidth && 'w-full',
 						size === 'sm' ? 'h-[2rem]' : size === 'md' ? 'h-[3rem]' : 'h-[5rem]',
-						variant === 'search' && 'pr-[2.5rem]',
-						variant === 'select' && 'pr-[2.5rem] w-full max-h-[2.4rem] cursor-pointer',
+						variant === 'search' && 'pr-[2.5rem] focus-visible:outline-0 focus:outline-0 outline-0',
+						variant === 'select' &&
+							'pr-[2.5rem] w-full max-h-[2.4rem] cursor-pointer focus-visible:outline-0 focus:outline-0 outline-0',
 						className
 					)}
+					readOnly={variant === 'select'}
 					placeholder={placeholder}
 				/>
 				{Icon && (
@@ -38,15 +40,15 @@ export function DefaultField({
 					</button>
 				)}
 				{variant === 'select' && (
-					<span className='absolute flex items-center justify-between right-0 h-full w-[2.2rem] max-h-[2.4rem] p-[.5rem] pl-0'>
+					<span className='absolute flex items-center justify-between right-0 h-full gap-[.5rem] max-h-[2.4rem] py-[.53rem] pr-[.55rem] pl-0 focus-visible:outline-0 focus:outline-0 outline-0'>
 						{isEmpty && (
 							<X
 								onClick={onClick}
 								size={20}
-								className='absolute min-w-[20px] min-h-[20px] right-[42px]'
+								className='absolute min-w-[20px] min-h-[20px] right-[46px]'
 							/>
 						)}
-						<span className='stretch bg-accent w-[1px] h-full' />
+						<span className='stretch bg-accent w-[1px] h-full my-[8px]' />
 						<LucideChevronDown
 							size={20}
 							className='text-white opacity-100 stroke-[2.5] transition-colors duration-200 hover:text-accent'
