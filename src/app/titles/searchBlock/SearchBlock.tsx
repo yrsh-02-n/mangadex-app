@@ -7,6 +7,7 @@ import { useSearchStore } from '@/store/search.store'
 import { SearchByOriginLang } from './languages/searchByOriginLang/SearchByOriginLang'
 import { SearchByTranslatedLang } from './languages/searchByTranslatedLang/SearchByTranslatedLang'
 import { SearchByDemographic } from './searchByDemographic/SearchByDemographic'
+import { SearchByStatus } from './searchByStatus/SearchByStatus'
 import { SearchByTags } from './searchByTag/SearchByTags'
 import { MangaListResponse } from '@/types/api.types'
 
@@ -24,6 +25,7 @@ export function SearchBlock({ data }: SearchBlockProps) {
 				<SearchByOriginLang />
 				<SearchByTranslatedLang />
 				<SearchByTags />
+				<SearchByStatus />
 			</div>
 			<div>
 				<Button

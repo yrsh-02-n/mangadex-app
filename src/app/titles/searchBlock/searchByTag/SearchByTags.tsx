@@ -62,7 +62,7 @@ export function SearchByTags() {
 
 	return (
 		<div className='w-full relative'>
-			<p className='mb-[.8rem]'>Фильтр по тегам</p>
+			<p className='mb-[.4rem]'>Фильтр по тегам</p>
 			<button
 				ref={buttonRef}
 				className='w-full relative'

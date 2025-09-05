@@ -19,7 +19,7 @@ export function SearchByOriginLang() {
 
 	return (
 		<div className='w-full'>
-			<p className='mb-[.8rem]'>Язык оригинала</p>
+			<p className='mb-[.4rem]'>Язык оригинала</p>
 			<SelectField
 				options={languagesOptions}
 				placeholder='Любой'

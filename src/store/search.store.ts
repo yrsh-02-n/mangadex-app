@@ -13,6 +13,9 @@ export interface SearchState {
 	appliedIncludedTags: string[]
 	selectedExcludedTags: string[]
 	appliedExcludedTags: string[]
+
+	selectedStatus: string[]
+	appliedStatus: string[]
 }
 
 interface SearchActions {
@@ -23,6 +26,8 @@ interface SearchActions {
 
 	setSelectedIncludedTags: (includedTags: string[]) => void
 	setSelectedExcludedTags: (excludedTags: string[]) => void
+
+	setSelectedStatus: (selectedStatus: string[]) => void
 
 	applyFilters: () => void
 	resetSelectedFilters: () => void
@@ -41,12 +46,15 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 	selectedExcludedTags: [],
 	appliedIncludedTags: [],
 	appliedExcludedTags: [],
+	selectedStatus: [],
+	appliedStatus: [],
 
 	setSelectedDemographics: demos => set({ selectedDemographics: demos }),
 	setSelectedOriginalLangs: originLang => set({ selectedOriginalLangs: originLang }),
 	setSelectedTranslatedLangs: translatedLang => set({ selectedTranslatedLangs: translatedLang }),
 	setSelectedIncludedTags: includedTags => set({ selectedIncludedTags: includedTags }),
 	setSelectedExcludedTags: excludedTags => set({ selectedExcludedTags: excludedTags }),
+	setSelectedStatus: status => set({ selectedStatus: status }),
 
 	applyFilters: () =>
 		set({
@@ -54,7 +62,8 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			appliedOriginalLangs: get().selectedOriginalLangs,
 			appliedTranslatedLangs: get().selectedTranslatedLangs,
 			appliedIncludedTags: get().selectedIncludedTags,
-			appliedExcludedTags: get().selectedExcludedTags
+			appliedExcludedTags: get().selectedExcludedTags,
+			appliedStatus: get().selectedStatus
 		}),
 	resetSelectedFilters: () =>
 		set({
@@ -67,7 +76,9 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			selectedIncludedTags: [],
 			appliedIncludedTags: [],
 			selectedExcludedTags: [],
-			appliedExcludedTags: []
+			appliedExcludedTags: [],
+			selectedStatus: [],
+			appliedStatus: []
 		}),
 	resetAppliedFilters: () =>
 		set({
@@ -75,7 +86,8 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			appliedOriginalLangs: [],
 			appliedTranslatedLangs: [],
 			appliedExcludedTags: [],
-			appliedIncludedTags: []
+			appliedIncludedTags: [],
+			appliedStatus: []
 		}),
 	initializeFilters: filters => {
 		const appliedDemos = filters.appliedDemographics ?? []
@@ -83,6 +95,7 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 		const appliedTransLangs = filters.appliedTranslatedLangs ?? []
 		const appliedIncTags = filters.appliedIncludedTags ?? []
 		const appliedExcTags = filters.appliedExcludedTags ?? []
+		const appliedStatuses = filters.appliedStatus ?? []
 		set({
 			appliedDemographics: appliedDemos,
 			selectedDemographics: appliedDemos,
@@ -93,7 +106,9 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			appliedIncludedTags: appliedIncTags,
 			selectedIncludedTags: appliedIncTags,
 			appliedExcludedTags: appliedExcTags,
-			selectedExcludedTags: appliedExcTags
+			selectedExcludedTags: appliedExcTags,
+			selectedStatus: appliedStatuses,
+			appliedStatus: appliedStatuses
 		})
 	}
 }))

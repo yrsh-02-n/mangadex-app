@@ -36,7 +36,7 @@ export function SearchByTranslatedLang() {
 
 	return (
 		<div className='w-full'>
-			<p className='mb-[.8rem]'>Доступный перевод</p>
+			<p className='mb-[.4rem]'>Доступный перевод</p>
 			<SelectField
 				options={sortedLanguages}
 				placeholder='Любой'
