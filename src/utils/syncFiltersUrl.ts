@@ -16,6 +16,7 @@ export const SyncFiltersUrl = () => {
 	const appliedTranslatedLangs = useSearchStore(state => state.appliedTranslatedLangs)
 	const appliedIncludedTags = useSearchStore(state => state.appliedIncludedTags)
 	const appliedExcludedTags = useSearchStore(state => state.appliedExcludedTags)
+	const appliedStatuses = useSearchStore(state => state.appliedStatus)
 	const initializedFilters = useSearchStore(state => state.initializeFilters)
 
 	// parse url parameters
@@ -30,6 +31,7 @@ export const SyncFiltersUrl = () => {
 			const transLangsParam = searchParams.get('translatedLang')
 			const exTagsParam = searchParams.get('excludedTags')
 			const inTagsParam = searchParams.get('includedTags')
+			const appliedStatuses = searchParams.get('status')
 
 			let demos: string[] = []
 			if (demosParam) {
@@ -56,12 +58,18 @@ export const SyncFiltersUrl = () => {
 				inTag = inTagsParam.split(',').filter(Boolean)
 			}
 
+			let StatusValue: string[] = []
+			if (appliedStatuses) {
+				StatusValue = appliedStatuses.split(',').filter(Boolean)
+			}
+
 			return {
 				appliedDemographics: demos,
 				appliedOriginalLangs: originLang,
 				appliedTranslatedLangs: transLang,
 				appliedExcludedTags: exTag,
-				appliedIncludedTags: inTag
+				appliedIncludedTags: inTag,
+				appliedStatuses: StatusValue
 			}
 		}
 
@@ -109,6 +117,10 @@ export const SyncFiltersUrl = () => {
 				params.delete('includedTags')
 			}
 
+			if (appliedStatuses.length > 0) {
+				params.set('status', appliedStatuses.join(','))
+			}
+
 			return params.toString()
 		}
 
@@ -128,7 +140,8 @@ export const SyncFiltersUrl = () => {
 		appliedOriginalLangs,
 		appliedTranslatedLangs,
 		appliedExcludedTags,
-		appliedIncludedTags
+		appliedIncludedTags,
+		appliedStatuses
 	])
 
 	return null

@@ -23,7 +23,15 @@ export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 	const currentFilters = useSearchStore()
 
-	type QueryKey = readonly ['searchManga', string[], string[], string[], string[], string[]]
+	type QueryKey = readonly [
+		'searchManga',
+		string[],
+		string[],
+		string[],
+		string[],
+		string[],
+		string[]
+	]
 
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useInfiniteQuery<
@@ -39,7 +47,8 @@ export default function TitlesPage() {
 				currentFilters.appliedOriginalLangs,
 				currentFilters.appliedTranslatedLangs,
 				currentFilters.appliedIncludedTags,
-				currentFilters.appliedExcludedTags
+				currentFilters.appliedExcludedTags,
+				currentFilters.appliedStatus
 			],
 			queryFn: async ({ pageParam = 0, queryKey }) => {
 				const limit = 18
@@ -50,7 +59,8 @@ export default function TitlesPage() {
 					appliedOriginLangs,
 					appliedTranslatedlLangs,
 					appliedIncludedTags,
-					appliedExcludedTags
+					appliedExcludedTags,
+					appliedStatus
 				] = queryKey
 
 				const searchParams = {
@@ -58,7 +68,8 @@ export default function TitlesPage() {
 					originalLanguage: appliedOriginLangs,
 					availableTranslatedLanguage: appliedTranslatedlLangs,
 					includedTags: appliedIncludedTags,
-					excludedTags: appliedExcludedTags
+					excludedTags: appliedExcludedTags,
+					status: appliedStatus
 				}
 				const paginationParams: { limit: number; offset: number } = {
 					limit,
@@ -138,6 +149,12 @@ export default function TitlesPage() {
 				<div className='flex flex-col items-center'>
 					<p className='text-xl'>Ничего не загрузилось.</p>
 					<p>Попробуйте обновить страницу.</p>
+				</div>
+			)}
+			{allTitles.length === 0 && (
+				<div className='flex flex-col items-center justify-center h-full'>
+					<p className='text-xl'>По вашему запросу ничего не найдено.</p>
+					<p>Попробуйте применить другие параметры.</p>
 				</div>
 			)}
 		</section>

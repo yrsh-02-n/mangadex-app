@@ -1,5 +1,7 @@
 import cn from 'clsx'
 
+import { getLocalizedStatus } from '@/utils/getLocalizedStatus'
+
 import { Status } from '@/types/enums'
 import { IMangaAttributes } from '@/types/title.types'
 
@@ -20,10 +22,10 @@ export function TitleStatus({ attributes }: ITitleStatus) {
 				)}
 			/>
 			<span>
-				{attributes.status === Status.ONGOING && 'Онгоинг'}
-				{attributes.status === Status.CANCELLED && 'Отменено'}
-				{attributes.status === Status.COMPLETED && 'Завершено'}
-				{attributes.status === Status.HIATUS && 'Приостановлено'}
+				{attributes.status === Status.ONGOING && getLocalizedStatus(Status.ONGOING)}
+				{attributes.status === Status.CANCELLED && getLocalizedStatus(Status.CANCELLED)}
+				{attributes.status === Status.COMPLETED && getLocalizedStatus(Status.COMPLETED)}
+				{attributes.status === Status.HIATUS && getLocalizedStatus(Status.HIATUS)}
 			</span>
 		</div>
 	)

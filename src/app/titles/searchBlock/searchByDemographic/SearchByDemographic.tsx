@@ -40,7 +40,7 @@ export function SearchByDemographic() {
 
 	return (
 		<div className='w-full'>
-			<p className='mb-[.8rem]'>Возрастная группа</p>
+			<p className='mb-[.4rem]'>Возрастная группа</p>
 			<SelectField
 				options={demographicOptions}
 				placeholder='Любая'
