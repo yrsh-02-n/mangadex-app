@@ -30,7 +30,8 @@ export default function TitlesPage() {
 		string[],
 		string[],
 		string[],
-		string[]
+		string[],
+		number | undefined
 	]
 
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
@@ -48,7 +49,8 @@ export default function TitlesPage() {
 				currentFilters.appliedTranslatedLangs,
 				currentFilters.appliedIncludedTags,
 				currentFilters.appliedExcludedTags,
-				currentFilters.appliedStatus
+				currentFilters.appliedStatus,
+				currentFilters.appliedYear ?? undefined
 			],
 			queryFn: async ({ pageParam = 0, queryKey }) => {
 				const limit = 18
@@ -60,7 +62,8 @@ export default function TitlesPage() {
 					appliedTranslatedlLangs,
 					appliedIncludedTags,
 					appliedExcludedTags,
-					appliedStatus
+					appliedStatus,
+					appliedYear
 				] = queryKey
 
 				const searchParams = {
@@ -69,7 +72,8 @@ export default function TitlesPage() {
 					availableTranslatedLanguage: appliedTranslatedlLangs,
 					includedTags: appliedIncludedTags,
 					excludedTags: appliedExcludedTags,
-					status: appliedStatus
+					status: appliedStatus,
+					year: appliedYear
 				}
 				const paginationParams: { limit: number; offset: number } = {
 					limit,

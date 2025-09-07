@@ -5,31 +5,15 @@ import { Modal } from '@/components/ui/modal/Modal'
 
 import { useSearchStore } from '@/store/search.store'
 
-import { SelectedTagsDisplay } from './tagsModal/SelectedTagsDisplay'
-import { TagsModalItem } from './tagsModal/TagsModalItem'
-import { mangaService } from '@/services/manga.service'
+import { YearSlider } from './yearSlider/YearSlider'
 
-const tags = await mangaService.getTags()
-
-export function SearchByTags() {
+export function SearchByYear() {
 	const [isShow, setIsShow] = useState(false)
 	const buttonRef = useRef<HTMLButtonElement>(null)
 	const modalRef = useRef<HTMLDivElement>(null)
-
-	const includedTags = useSearchStore(state => state.selectedIncludedTags)
-	const excludedTags = useSearchStore(state => state.selectedExcludedTags)
 	const [fieldKey, setFieldKey] = useState(0)
+	const { selectedYear, setSelectedYear } = useSearchStore()
 
-	const hasTags = includedTags.length > 0 || excludedTags.length > 0
-
-	// garanted reset feild value by reset btn
-	useEffect(() => {
-		setFieldKey(prev => prev + 1)
-	}, [includedTags, excludedTags])
-
-	const tagsData = tags.data.data
-
-	// close modal outside and by click on input
 	useEffect(() => {
 		const handleClick = (event: MouseEvent) => {
 			if (
@@ -56,13 +40,18 @@ export function SearchByTags() {
 		e.stopPropagation() // not open modal
 
 		// Сlear store
-		useSearchStore.getState().setSelectedIncludedTags([])
-		useSearchStore.getState().setSelectedExcludedTags([])
+		useSearchStore.getState().setSelectedYear(undefined)
+		setSelectedYear(undefined)
+		setFieldKey(prev => prev + 1)
+	}
+
+	const yearValueHandler = (year: number) => {
+		setSelectedYear(year)
 	}
 
 	return (
 		<div className='w-full relative'>
-			<p className='mb-[.4rem]'>Фильтр по тегам</p>
+			<p className='mb-[.4rem]'>Год выхода</p>
 			<button
 				ref={buttonRef}
 				className='w-full relative'
@@ -71,34 +60,32 @@ export function SearchByTags() {
 				<DefaultField
 					key={fieldKey}
 					type='text'
-					placeholder={!hasTags ? 'Включить / Исключить теги' : ''}
+					placeholder='Выбрать год'
 					variant='select'
-					isEmpty={hasTags}
+					value={selectedYear?.toString() || ''}
 					onClick={handleResetField}
-					readOnly
+					readOnly={false}
+					isEmpty={!!selectedYear}
+					onChange={e => {
+						const year = parseInt(e.target.value)
+						if (!isNaN(year)) {
+							setSelectedYear(year)
+						}
+					}}
 				/>
-				<SelectedTagsDisplay tagsData={tagsData} />
 			</button>
 			{isShow && (
 				<Modal
 					ref={modalRef}
 					isShow={isShow}
+					className='h-[3.5rem]'
 				>
-					<TagsModalItem
-						data={tagsData}
-						tagGroup='format'
-						groupTitle='Формат издания'
-					/>
-					<TagsModalItem
-						data={tagsData}
-						tagGroup='genre'
-						groupTitle='Жанры'
-					/>
-					<TagsModalItem
-						data={tagsData}
-						tagGroup='theme'
-						groupTitle='Тематика'
-					/>
+					<div className='flex flex-col justify-end h-full'>
+						<YearSlider
+							value={selectedYear}
+							onChange={yearValueHandler}
+						/>
+					</div>
 				</Modal>
 			)}
 		</div>
