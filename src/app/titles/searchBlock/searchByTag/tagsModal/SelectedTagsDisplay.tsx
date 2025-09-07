@@ -1,8 +1,4 @@
-import { X } from 'lucide-react'
-
 import { useSearchStore } from '@/store/search.store'
-
-import { getLocalizedTag } from '@/utils/getLocalizedTag'
 
 import { ITag } from '@/types/title.types'
 
@@ -14,22 +10,6 @@ interface SelectedTagsDisplayProps {
 export function SelectedTagsDisplay({ tagsData, onRemoveTag }: SelectedTagsDisplayProps) {
 	const includedTags = useSearchStore(state => state.selectedIncludedTags)
 	const excludedTags = useSearchStore(state => state.selectedExcludedTags)
-	const setIncludedTags = useSearchStore(state => state.setSelectedIncludedTags)
-	const setExcludedTags = useSearchStore(state => state.setSelectedExcludedTags)
-
-	const getTagName = (id: string) => {
-		const tag = tagsData.find(t => t.id === id)
-		return tag ? getLocalizedTag(tag.attributes.name.en) : ''
-	}
-
-	const handleRemoveTag = (tagId: string, type: 'included' | 'excluded') => {
-		if (type === 'included') {
-			setIncludedTags(includedTags.filter(id => id !== tagId))
-		} else {
-			setExcludedTags(excludedTags.filter(id => id !== tagId))
-		}
-		onRemoveTag?.(tagId, type)
-	}
 
 	if (includedTags.length === 0 && excludedTags.length === 0) {
 		return null

@@ -9,6 +9,7 @@ import { SearchByTranslatedLang } from './languages/searchByTranslatedLang/Searc
 import { SearchByDemographic } from './searchByDemographic/SearchByDemographic'
 import { SearchByStatus } from './searchByStatus/SearchByStatus'
 import { SearchByTags } from './searchByTag/SearchByTags'
+import { SearchByYear } from './searchByYear/SearchByYear'
 import { MangaListResponse } from '@/types/api.types'
 
 interface SearchBlockProps {
@@ -22,10 +23,11 @@ export function SearchBlock({ data }: SearchBlockProps) {
 		<>
 			<div className='grid grid-cols-3 gap-[1rem] mb-[3rem] w-full max-lg:grid-cols-2 max-md:grid-cols-1'>
 				<SearchByDemographic />
-				<SearchByOriginLang />
-				<SearchByTranslatedLang />
 				<SearchByTags />
 				<SearchByStatus />
+				<SearchByYear />
+				<SearchByOriginLang />
+				<SearchByTranslatedLang />
 			</div>
 			<div>
 				<Button

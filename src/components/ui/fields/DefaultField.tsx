@@ -14,14 +14,24 @@ export function DefaultField({
 	className,
 	defaultValue,
 	isEmpty,
-	onClick
+	value,
+	onClick,
+	onChange,
+	readOnly,
+	...props
 }: IFieldProps) {
+	const computedReadOnly = readOnly !== undefined ? readOnly : variant === 'select'
+
 	return (
 		<div className={cn('flex flex-col', fullwidth && 'w-full')}>
 			{label && <label className='text-black'>{label}</label>}
 			<div className={cn('relative flex', fullwidth && 'w-full')}>
 				<input
 					defaultValue={defaultValue}
+					value={value || defaultValue || ''}
+					onChange={onChange}
+					readOnly={computedReadOnly}
+					placeholder={placeholder}
 					className={cn(
 						'text-white bg-primary rounded px-[.7rem] py-[.5rem] placeholder:text-white/50 placeholder:opacity-100 focus-visible:outline-0 focus:outline-0 outline-0',
 						fullwidth && 'w-full',
@@ -31,8 +41,6 @@ export function DefaultField({
 							'pr-[2.5rem] w-full max-h-[2.4rem] cursor-pointer focus-visible:outline-0 focus:outline-0 outline-0',
 						className
 					)}
-					readOnly={variant === 'select'}
-					placeholder={placeholder}
 				/>
 				{Icon && (
 					<button className='absolute top-[.25rem] right-[.5rem] text-white'>

@@ -12,4 +12,5 @@ export interface IFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 	defaultValue?: string[] | string
 	isEmpty?: boolean
 	onClick?: (e: React.MouseEvent) => void
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

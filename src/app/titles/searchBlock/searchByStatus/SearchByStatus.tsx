@@ -41,7 +41,7 @@ export function SearchByStatus() {
 
 	return (
 		<div className='w-full'>
-			<p className='mb-[.4rem]'>Статус</p>
+			<p className='mb-[.4rem]'>Статус публикации</p>
 			<SelectField
 				options={statusOptions}
 				placeholder='Любой'

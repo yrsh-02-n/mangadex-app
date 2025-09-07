@@ -17,6 +17,7 @@ export const SyncFiltersUrl = () => {
 	const appliedIncludedTags = useSearchStore(state => state.appliedIncludedTags)
 	const appliedExcludedTags = useSearchStore(state => state.appliedExcludedTags)
 	const appliedStatuses = useSearchStore(state => state.appliedStatus)
+	const appliedYear = useSearchStore(state => state.appliedYear)
 	const initializedFilters = useSearchStore(state => state.initializeFilters)
 
 	// parse url parameters
@@ -32,6 +33,7 @@ export const SyncFiltersUrl = () => {
 			const exTagsParam = searchParams.get('excludedTags')
 			const inTagsParam = searchParams.get('includedTags')
 			const appliedStatuses = searchParams.get('status')
+			const appliedY = searchParams.get('year')
 
 			let demos: string[] = []
 			if (demosParam) {
@@ -63,20 +65,28 @@ export const SyncFiltersUrl = () => {
 				StatusValue = appliedStatuses.split(',').filter(Boolean)
 			}
 
+			let YearValue: number | undefined = undefined
+			if (appliedY) {
+				YearValue = +appliedY
+			}
+
 			return {
 				appliedDemographics: demos,
 				appliedOriginalLangs: originLang,
 				appliedTranslatedLangs: transLang,
 				appliedExcludedTags: exTag,
 				appliedIncludedTags: inTag,
-				appliedStatuses: StatusValue
+				appliedStatuses: StatusValue,
+				appliedY: YearValue
 			}
 		}
+
+		console.log(appliedYear)
 
 		const initialFilters = parseFiltersFromURL()
 		initializedFilters(initialFilters)
 		isInitializedRef.current = true
-	}, [searchParams, initializedFilters])
+	}, [searchParams, initializedFilters, appliedYear])
 
 	// query string generation
 	useEffect(() => {
@@ -119,6 +129,14 @@ export const SyncFiltersUrl = () => {
 
 			if (appliedStatuses.length > 0) {
 				params.set('status', appliedStatuses.join(','))
+			} else {
+				params.delete('status')
+			}
+
+			if (appliedYear !== undefined && appliedYear !== null) {
+				params.set('year', appliedYear.toString())
+			} else {
+				params.delete('year')
 			}
 
 			return params.toString()
@@ -141,7 +159,8 @@ export const SyncFiltersUrl = () => {
 		appliedTranslatedLangs,
 		appliedExcludedTags,
 		appliedIncludedTags,
-		appliedStatuses
+		appliedStatuses,
+		appliedYear
 	])
 
 	return null
