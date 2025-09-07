@@ -77,7 +77,7 @@ export const SyncFiltersUrl = () => {
 				appliedExcludedTags: exTag,
 				appliedIncludedTags: inTag,
 				appliedStatuses: StatusValue,
-				appliedY: YearValue
+				appliedYear: YearValue
 			}
 		}
 
@@ -86,7 +86,7 @@ export const SyncFiltersUrl = () => {
 		const initialFilters = parseFiltersFromURL()
 		initializedFilters(initialFilters)
 		isInitializedRef.current = true
-	}, [searchParams, initializedFilters, appliedYear])
+	}, [searchParams, initializedFilters])
 
 	// query string generation
 	useEffect(() => {

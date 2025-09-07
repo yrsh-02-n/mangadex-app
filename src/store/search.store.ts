@@ -122,7 +122,8 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			selectedExcludedTags: appliedExcTags,
 			selectedStatus: appliedStatuses,
 			appliedStatus: appliedStatuses,
-			appliedYear: appliedY
+			appliedYear: appliedY,
+			selectedYear: appliedY
 		})
 	}
 }))

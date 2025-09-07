@@ -78,7 +78,7 @@ export function SearchByYear() {
 				<Modal
 					ref={modalRef}
 					isShow={isShow}
-					className='h-[3rem]'
+					className='h-[3.5rem]'
 				>
 					<div className='flex flex-col justify-end h-full'>
 						<YearSlider

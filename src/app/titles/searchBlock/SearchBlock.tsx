@@ -21,7 +21,7 @@ export function SearchBlock({ data }: SearchBlockProps) {
 
 	return (
 		<>
-			<div className='grid grid-cols-3 gap-[1rem] mb-[3rem] w-full max-lg:grid-cols-2 max-md:grid-cols-1'>
+			<div className='grid grid-cols-3 gap-[1rem] mb-[2rem] w-full max-lg:grid-cols-2 max-md:grid-cols-1'>
 				<SearchByDemographic />
 				<SearchByTags />
 				<SearchByStatus />
@@ -29,7 +29,7 @@ export function SearchBlock({ data }: SearchBlockProps) {
 				<SearchByOriginLang />
 				<SearchByTranslatedLang />
 			</div>
-			<div>
+			<div className='flex gap-[1rem]'>
 				<Button
 					variable='primary'
 					onClick={applyFilters}
