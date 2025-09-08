@@ -5,21 +5,18 @@ import { useState } from 'react'
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
 import { GridCard } from '@/components/titleCards/GridCard'
 import { TileCard } from '@/components/titleCards/TileCard'
+import { SearchField } from '@/components/ui/fields/searchField/SearchField'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
-import { useSearchQuery } from '@/hooks/useSearchQuery'
-
+import { useSearchQueryByTitle } from '@/hooks/useSearchQueryByTitle'
 import { SyncFiltersUrl } from '@/utils/syncFiltersUrl'
 
-import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
-
-export default function TitlesPage() {
+export default function SearchPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
-
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
-		useSearchQuery()
+		useSearchQueryByTitle()
 
 	useEffectScroll({
 		fetchNextPage,
@@ -38,10 +35,10 @@ export default function TitlesPage() {
 
 	return (
 		<section>
-			<div>
-				<Heading isH1>Расширенный поиск</Heading>
-				<SyncFiltersUrl />
-				<DynSearchBlock data={data} />
+			<div className='w-full flex flex-col mb-[3rem]'>
+				<Heading isH1>Поиск манги</Heading>
+        <SyncFiltersUrl />
+				<SearchField />
 			</div>
 			{!isLoading ? (
 				<ListingContainer

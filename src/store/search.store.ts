@@ -19,6 +19,9 @@ export interface SearchState {
 
 	selectedYear: number | undefined
 	appliedYear: number | undefined
+
+	selectedTitle: string | undefined
+	appliedTitle: string | undefined
 }
 
 interface SearchActions {
@@ -34,9 +37,13 @@ interface SearchActions {
 
 	setSelectedYear: (selectedYear: number | undefined) => void
 
+	setSelectedTitle: (selectedTitle: string | undefined) => void
+
 	applyFilters: () => void
 	resetSelectedFilters: () => void
 	resetAppliedFilters: () => void
+	resetSelectedTitle: () => void
+	resetAppliedTitle: () => void
 	initializeFilters: (filters: Partial<SearchState>) => void
 }
 
@@ -55,6 +62,8 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 	appliedStatus: [],
 	selectedYear: undefined,
 	appliedYear: undefined,
+	selectedTitle: undefined,
+	appliedTitle: undefined,
 
 	setSelectedDemographics: demos => set({ selectedDemographics: demos }),
 	setSelectedOriginalLangs: originLang => set({ selectedOriginalLangs: originLang }),
@@ -63,6 +72,7 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 	setSelectedExcludedTags: excludedTags => set({ selectedExcludedTags: excludedTags }),
 	setSelectedStatus: status => set({ selectedStatus: status }),
 	setSelectedYear: year => set({ selectedYear: year }),
+	setSelectedTitle: title => set({ selectedTitle: title }),
 
 	applyFilters: () =>
 		set({
@@ -72,7 +82,8 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			appliedIncludedTags: get().selectedIncludedTags,
 			appliedExcludedTags: get().selectedExcludedTags,
 			appliedStatus: get().selectedStatus,
-			appliedYear: get().selectedYear
+			appliedYear: get().selectedYear,
+			appliedTitle: get().selectedTitle
 		}),
 	resetSelectedFilters: () =>
 		set({
@@ -89,7 +100,9 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			selectedStatus: [],
 			appliedStatus: [],
 			selectedYear: undefined,
-			appliedYear: undefined
+			appliedYear: undefined,
+			selectedTitle: undefined,
+			appliedTitle: undefined
 		}),
 	resetAppliedFilters: () =>
 		set({
@@ -99,7 +112,17 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			appliedExcludedTags: [],
 			appliedIncludedTags: [],
 			appliedStatus: [],
-			appliedYear: undefined
+			appliedYear: undefined,
+			selectedTitle: undefined,
+			appliedTitle: undefined
+		}),
+	resetSelectedTitle: () =>
+		set({
+			selectedTitle: undefined
+		}),
+	resetAppliedTitle: () =>
+		set({
+			appliedTitle: undefined
 		}),
 	initializeFilters: filters => {
 		const appliedDemos = filters.appliedDemographics ?? []
@@ -109,6 +132,7 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 		const appliedExcTags = filters.appliedExcludedTags ?? []
 		const appliedStatuses = filters.appliedStatus ?? []
 		const appliedY = filters.appliedYear ?? undefined
+		const appliedManga = filters.appliedTitle ?? undefined
 		set({
 			appliedDemographics: appliedDemos,
 			selectedDemographics: appliedDemos,
@@ -123,7 +147,9 @@ export const useSearchStore = create<SearchState & SearchActions>()((set, get) =
 			selectedStatus: appliedStatuses,
 			appliedStatus: appliedStatuses,
 			appliedYear: appliedY,
-			selectedYear: appliedY
+			selectedYear: appliedY,
+			selectedTitle: appliedManga,
+			appliedTitle: appliedManga
 		})
 	}
 }))

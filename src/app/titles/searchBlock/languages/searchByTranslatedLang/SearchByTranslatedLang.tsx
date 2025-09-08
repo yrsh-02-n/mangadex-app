@@ -14,19 +14,19 @@ export function SearchByTranslatedLang() {
 	}
 
 	const sortedLanguages = [...languagesOptions].sort((a, b) => {
-		// Русский первым
+		// russian lang first
 		if (a.value === 'ru') return -1
 		if (b.value === 'ru') return 1
 
-		// Белорусский вторым
+		// belarusian lang second
 		if (a.value === 'be') return -1
 		if (b.value === 'be') return 1
 
-		// Английский третьим
+		// english third
 		if (a.value === 'en') return -1
 		if (b.value === 'en') return 1
 
-		// Остальные как есть
+		// other
 		return 0
 	})
 

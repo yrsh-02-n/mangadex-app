@@ -27,6 +27,7 @@ export function DefaultField({
 			{label && <label className='text-black'>{label}</label>}
 			<div className={cn('relative flex', fullwidth && 'w-full')}>
 				<input
+					type='text'
 					defaultValue={defaultValue}
 					value={value || defaultValue || ''}
 					onChange={onChange}
