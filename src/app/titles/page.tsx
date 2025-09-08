@@ -1,6 +1,5 @@
 'use client'
 
-import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
@@ -9,89 +8,18 @@ import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
-import { useSearchStore } from '@/store/search.store'
-
 import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useSearchQuery } from '@/hooks/useSearchQuery'
 
 import { SyncFiltersUrl } from '@/utils/syncFiltersUrl'
 
 import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
-import { mangaService } from '@/services/manga.service'
-import { MangaListResponse } from '@/types/api.types'
 
 export default function TitlesPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
-	const currentFilters = useSearchStore()
-
-	type QueryKey = readonly [
-		'searchManga',
-		string[],
-		string[],
-		string[],
-		string[],
-		string[],
-		string[],
-		number | undefined
-	]
 
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
-		useInfiniteQuery<
-			MangaListResponse,
-			Error,
-			InfiniteData<MangaListResponse, number>,
-			QueryKey,
-			number
-		>({
-			queryKey: [
-				'searchManga',
-				currentFilters.appliedDemographics,
-				currentFilters.appliedOriginalLangs,
-				currentFilters.appliedTranslatedLangs,
-				currentFilters.appliedIncludedTags,
-				currentFilters.appliedExcludedTags,
-				currentFilters.appliedStatus,
-				currentFilters.appliedYear ?? undefined
-			],
-			queryFn: async ({ pageParam = 0, queryKey }) => {
-				const limit = 18
-
-				const [
-					,
-					appliedDemosAtQueryTime,
-					appliedOriginLangs,
-					appliedTranslatedlLangs,
-					appliedIncludedTags,
-					appliedExcludedTags,
-					appliedStatus,
-					appliedYear
-				] = queryKey
-
-				const searchParams = {
-					publicationDemographic: appliedDemosAtQueryTime,
-					originalLanguage: appliedOriginLangs,
-					availableTranslatedLanguage: appliedTranslatedlLangs,
-					includedTags: appliedIncludedTags,
-					excludedTags: appliedExcludedTags,
-					status: appliedStatus,
-					year: appliedYear
-				}
-				const paginationParams: { limit: number; offset: number } = {
-					limit,
-					offset: pageParam
-				}
-				const response = await mangaService.getBySearchParams(searchParams, paginationParams)
-				return response.data // check data
-			},
-			getNextPageParam: (lastPage, allPages) => {
-				// check if there is still data or not
-				const totalLoaded = allPages.reduce((sum, page) => sum + page.data.length, 0)
-				if (totalLoaded < lastPage.total) {
-					return totalLoaded // or lastPage.offset + lastPage.limit
-				}
-				return undefined // if pages are gone
-			},
-			initialPageParam: 0
-		})
+		useSearchQuery()
 
 	useEffectScroll({
 		fetchNextPage,

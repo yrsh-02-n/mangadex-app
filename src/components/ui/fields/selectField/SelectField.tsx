@@ -1,15 +1,15 @@
-import { LucideChevronDown, X } from 'lucide-react';
-import { ClearIndicatorProps, CrossIconProps } from 'node_modules/react-select/dist/declarations/src/components/indicators';
-import Flag from 'react-flagkit';
-import Select, { DropdownIndicatorProps, GroupBase, MultiValueProps, MultiValueRemoveProps, OptionProps, components } from 'react-select';
+import { LucideChevronDown, X } from 'lucide-react'
+import { ClearIndicatorProps } from 'node_modules/react-select/dist/declarations/src/components/indicators'
+import Flag from 'react-flagkit'
+import Select, {
+	DropdownIndicatorProps,
+	GroupBase,
+	MultiValueProps,
+	OptionProps,
+	components
+} from 'react-select'
 
-
-
-import { SelectFieldStyles } from './SelectFieldStyles';
-
-
-
-
+import { SelectFieldStyles } from './SelectFieldStyles'
 
 export interface ISelectOption {
 	readonly value: string
@@ -75,14 +75,9 @@ const DropdownIcon: React.FC<
 const { ClearIndicator } = components
 const RemoveIcon: React.FC<ClearIndicatorProps<ISelectOption, true>> = props => (
 	<ClearIndicator {...props}>
-		<X
-			size={20}
-			// className='absolute min-w-[20px] min-h-[20px] right-[42px]'
-		/>
+		<X size={20} />
 	</ClearIndicator>
 )
-
-// const
 
 interface Props {
 	options: readonly ISelectOption[]
