@@ -18,6 +18,7 @@ export const SyncFiltersUrl = () => {
 	const appliedExcludedTags = useSearchStore(state => state.appliedExcludedTags)
 	const appliedStatuses = useSearchStore(state => state.appliedStatus)
 	const appliedYear = useSearchStore(state => state.appliedYear)
+	const appliedTitle = useSearchStore(state => state.appliedTitle)
 	const initializedFilters = useSearchStore(state => state.initializeFilters)
 
 	// parse url parameters
@@ -34,6 +35,7 @@ export const SyncFiltersUrl = () => {
 			const inTagsParam = searchParams.get('includedTags')
 			const appliedStatuses = searchParams.get('status')
 			const appliedY = searchParams.get('year')
+			const appliedManga = searchParams.get('title')
 
 			let demos: string[] = []
 			if (demosParam) {
@@ -70,6 +72,11 @@ export const SyncFiltersUrl = () => {
 				YearValue = +appliedY
 			}
 
+			let titleValue: string | undefined = undefined
+			if (appliedManga && appliedManga !== '') {
+				titleValue = appliedManga
+			}
+
 			return {
 				appliedDemographics: demos,
 				appliedOriginalLangs: originLang,
@@ -77,11 +84,10 @@ export const SyncFiltersUrl = () => {
 				appliedExcludedTags: exTag,
 				appliedIncludedTags: inTag,
 				appliedStatuses: StatusValue,
-				appliedYear: YearValue
+				appliedYear: YearValue,
+				appliedTitle: titleValue
 			}
 		}
-
-		console.log(appliedYear)
 
 		const initialFilters = parseFiltersFromURL()
 		initializedFilters(initialFilters)
@@ -139,6 +145,12 @@ export const SyncFiltersUrl = () => {
 				params.delete('year')
 			}
 
+			if (appliedTitle !== undefined && appliedTitle !== '') {
+				params.set('title', appliedTitle)
+			} else {
+				params.delete('title')
+			}
+
 			return params.toString()
 		}
 
@@ -147,7 +159,6 @@ export const SyncFiltersUrl = () => {
 		const currentUrl = `${pathName}?${searchParams.toString()}`
 
 		if (newUrl !== currentUrl) {
-			router.replace(newUrl)
 			router.replace(newUrl, { scroll: false })
 		}
 	}, [
@@ -160,7 +171,8 @@ export const SyncFiltersUrl = () => {
 		appliedExcludedTags,
 		appliedIncludedTags,
 		appliedStatuses,
-		appliedYear
+		appliedYear,
+		appliedTitle
 	])
 
 	return null
