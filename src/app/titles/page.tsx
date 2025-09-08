@@ -11,7 +11,7 @@ import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useSearchQuery } from '@/hooks/useSearchQuery'
 
-import { SyncFiltersUrl } from '@/utils/syncFiltersUrl'
+import { DynamicSyncFiltersUrl } from '@/utils/syncfiltersUrl/DynamicSyncFiltersUrl'
 
 import { DynSearchBlock } from './searchBlock/DynamicSearchBlock'
 
@@ -40,7 +40,7 @@ export default function TitlesPage() {
 		<section>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
-				<SyncFiltersUrl />
+				<DynamicSyncFiltersUrl />
 				<DynSearchBlock data={data} />
 			</div>
 			{!isLoading ? (

@@ -11,7 +11,8 @@ import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useSearchQueryByTitle } from '@/hooks/useSearchQueryByTitle'
-import { SyncFiltersUrl } from '@/utils/syncFiltersUrl'
+
+import { DynamicSyncFiltersUrl } from '@/utils/syncfiltersUrl/DynamicSyncFiltersUrl'
 
 export default function SearchPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
@@ -37,7 +38,8 @@ export default function SearchPage() {
 		<section>
 			<div className='w-full flex flex-col mb-[3rem]'>
 				<Heading isH1>Поиск манги</Heading>
-        <SyncFiltersUrl />
+				<DynamicSyncFiltersUrl />
+
 				<SearchField />
 			</div>
 			{!isLoading ? (
