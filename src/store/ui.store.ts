@@ -6,12 +6,19 @@ interface ISidebarState {
 	toggleSidebar: () => void
 }
 
+interface IModalSearchState {
+	isSearchModalOpen: boolean
+	searchTerm: string
+	setSearchTerm: (term: string) => void
+	openSearchModal: () => void
+	closeSearchModal: () => void
+}
+
 const getInitialState = () => {
 	if (typeof window === 'undefined') return true
 
 	const saved = Cookies.get('sidebar-state')
-  if (window.innerWidth > 748) 
-	return saved ? JSON.parse(saved) : true
+	if (window.innerWidth > 748) return saved ? JSON.parse(saved) : true
 }
 
 export const useSidebarStore = create<ISidebarState>(set => ({
@@ -26,4 +33,12 @@ export const useSidebarStore = create<ISidebarState>(set => ({
 			})
 			return { isSidebarOpen: newState }
 		})
+}))
+
+export const useSearchModalState = create<IModalSearchState>()(set => ({
+	isSearchModalOpen: false,
+	searchTerm: '',
+	setSearchTerm: term => set({ searchTerm: term }),
+	openSearchModal: () => set({ isSearchModalOpen: true }),
+	closeSearchModal: () => set({ isSearchModalOpen: false })
 }))

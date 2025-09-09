@@ -5,9 +5,10 @@ import { useState } from 'react'
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
 import { GridCard } from '@/components/titleCards/GridCard'
 import { TileCard } from '@/components/titleCards/TileCard'
-import { SearchField } from '@/components/ui/fields/searchField/SearchField'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
+
+import { useSearchStore } from '@/store/search.store'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useSearchQueryByTitle } from '@/hooks/useSearchQueryByTitle'
@@ -16,6 +17,7 @@ import { DynamicSyncFiltersUrl } from '@/utils/syncfiltersUrl/DynamicSyncFilters
 
 export default function SearchPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
+	const { appliedTitle } = useSearchStore()
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useSearchQueryByTitle()
 
@@ -37,10 +39,10 @@ export default function SearchPage() {
 	return (
 		<section>
 			<div className='w-full flex flex-col mb-[3rem]'>
-				<Heading isH1>Поиск манги</Heading>
+				<Heading isH1>
+					Поиск манги по названию: <span className='text-accent'>{appliedTitle}</span>
+				</Heading>
 				<DynamicSyncFiltersUrl />
-
-				<SearchField />
 			</div>
 			{!isLoading ? (
 				<ListingContainer
