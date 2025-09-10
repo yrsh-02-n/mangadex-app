@@ -13,11 +13,34 @@ class MangaService {
 	})
 
 	getTags() {
-		return this.proxyAxios.get<TagsResponse>('/api/mangadex-proxy', {
-			params: {
-				endpoint: '/manga/tag'
-			}
-		})
+		return this.proxyAxios
+			.get<TagsResponse>('/api/mangadex-proxy', {
+				params: {
+					endpoint: '/manga/tag'
+				}
+			})
+			.then(response => {
+				// exclude some tags
+				const restrictedTagNames = [
+					'Incest',
+					"Boys' Love",
+					"Girls' Love",
+					'Genderswap',
+					'Loli',
+					'Shota',
+          'Crossdressing'
+				]
+
+				const filteredData = {
+					...response.data,
+					data: response.data.data.filter(tag => {
+						const tagName = tag.attributes.name.en
+						return !restrictedTagNames.includes(tagName)
+					})
+				}
+
+				return { data: filteredData }
+			})
 	}
 
 	getAll(params?: { limit?: number; offset?: number; total?: number }) {
