@@ -13,7 +13,7 @@ export function YearSlider({
 	return (
 		<div className='w-full px-3'>
 			<ReactSlider
-				value={value ?? 1910}
+				value={value ?? 2015}
 				onChange={onChange}
 				min={1910}
 				max={currentYear}

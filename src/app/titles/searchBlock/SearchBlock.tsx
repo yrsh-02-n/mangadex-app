@@ -29,16 +29,18 @@ export function SearchBlock({ data }: SearchBlockProps) {
 				<SearchByOriginLang />
 				<SearchByTranslatedLang />
 			</div>
-			<div className='flex gap-[1rem]'>
+			<div className='flex gap-[1rem] max-md:mb-[2rem] max-s:flex-wrap'>
 				<Button
 					variable='primary'
 					onClick={applyFilters}
+          className='max-md:w-full'
 				>
 					Искать
 				</Button>
 				<Button
 					variable='secondary'
 					onClick={resetSelectedFilters}
+          className='max-md:w-full'
 				>
 					Сбросить фильтры
 				</Button>
