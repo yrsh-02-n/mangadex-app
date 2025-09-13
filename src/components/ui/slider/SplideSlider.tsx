@@ -2,6 +2,7 @@
 
 import { Splide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
+import { useEffect, useRef } from 'react'
 
 export function SplideSlider({
 	children,
@@ -12,12 +13,11 @@ export function SplideSlider({
 	arrows = true,
 	pagination = true,
 	className = '',
-	options = {},
 	onSlideChange,
+	options = {},
 	...props
 }: {
 	children: React.ReactNode
-	onSlideChange?: (index: number) => void
 	slidesPerView?: number
 	gap?: string
 	loop?: boolean
@@ -25,44 +25,51 @@ export function SplideSlider({
 	arrows?: boolean
 	pagination?: boolean
 	className?: string
+	onSlideChange?: (index: number) => void
 	options?: object
 }) {
-	const defaultAutoplay = {
-		delay: 2000,
-		pauseOnHover: false,
-		pauseOnFocus: false
-	}
-
-	let autoplaySettings: false | { delay: number; pauseOnHover: boolean; pauseOnFocus: boolean } =
-		false
-
-	if (autoplay === true) {
-		autoplaySettings = defaultAutoplay
-	} else if (typeof autoplay === 'object' && autoplay !== null) {
-		autoplaySettings = { ...defaultAutoplay, ...autoplay }
-	}
+	const splideRef = useRef<any>(null)
 
 	const defaultOptions = {
 		perPage: slidesPerView,
 		perMove: 1,
 		gap: gap,
 		loop: loop,
-		autoplay: autoplaySettings,
+		type: 'loop',
 		arrows: arrows,
 		pagination: pagination,
-		rewind: true,
+		rewind: false,
+		...(typeof autoplay === 'object' ? { autoplay } : {}),
 		...options
 	}
 
-	const handleActive = (splide: any) => {
-		onSlideChange?.(splide.index)
-	}
+	useEffect(() => {
+		let intervalId: any
+
+		if (typeof autoplay === 'boolean' && autoplay && splideRef.current) {
+			const startAutoplay = () => {
+				intervalId = setInterval(() => {
+					if (splideRef.current) {
+						splideRef.current.go('>')
+					}
+				}, 4000)
+			}
+
+			startAutoplay()
+		}
+
+		return () => {
+			if (intervalId) clearInterval(intervalId)
+		}
+	}, [autoplay])
 
 	return (
 		<div className={className}>
 			<Splide
+				ref={splideRef}
 				options={defaultOptions}
-				onMove={handleActive}
+				onMoved={(splide: any) => onSlideChange?.(splide.index)}
+				onActive={(splide: any) => onSlideChange?.(splide.index)}
 				{...props}
 			>
 				{children}
