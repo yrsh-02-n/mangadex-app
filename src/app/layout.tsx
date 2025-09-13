@@ -24,12 +24,15 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='ru' data-scroll-behavior="smooth">
+		<html
+			lang='ru'
+			data-scroll-behavior='smooth'
+		>
 			<body className={`${murecho.variable} antialiased text-white h-screen`}>
 				<Providers>
-					<main className='flex h-full'>
+					<main className='flex h-full w-full'>
 						<SidebarClient />
-						<div className='flex flex-col flex-grow flex-1 w-full h-full'>
+						<div className='flex flex-col flex-grow h-full min-w-0'>
 							<Header />
 							<section
 								id='main-scroll-container'
