@@ -84,17 +84,15 @@ ul {
 }
 
 .splide__arrow--prev {
-	/* Стили для левой стрелки */
 	left: -90px !important;
 }
 
 .splide__arrow--next {
-	/* Стили для правой стрелки */
 	right: 0px !important;
 }
 
 .splide__pagination {
-	bottom: 10px !important;
+	position: absolute;
 }
 
 .splide__pagination__page {

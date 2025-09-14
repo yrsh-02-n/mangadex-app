@@ -4,6 +4,8 @@ import { Splide } from '@splidejs/react-splide'
 import '@splidejs/react-splide/css'
 import { useEffect, useRef } from 'react'
 
+import { SliderControls } from './SliderControls'
+
 export function SplideSlider({
 	children,
 	slidesPerView = 1,
@@ -15,6 +17,7 @@ export function SplideSlider({
 	className = '',
 	onSlideChange,
 	options = {},
+	sliderBtnStyles = '',
 	...props
 }: {
 	children: React.ReactNode
@@ -27,6 +30,7 @@ export function SplideSlider({
 	className?: string
 	onSlideChange?: (index: number) => void
 	options?: object
+	sliderBtnStyles?: string
 }) {
 	const splideRef = useRef<any>(null)
 
@@ -43,6 +47,18 @@ export function SplideSlider({
 		...options
 	}
 
+	const goPrev = () => {
+		if (splideRef.current) {
+			splideRef.current.go('<')
+		}
+	}
+
+	const goNext = () => {
+		if (splideRef.current) {
+			splideRef.current.go('>')
+		}
+	}
+
 	useEffect(() => {
 		let intervalId: any
 
@@ -52,7 +68,7 @@ export function SplideSlider({
 					if (splideRef.current) {
 						splideRef.current.go('>')
 					}
-				}, 4000)
+				}, 5000)
 			}
 
 			startAutoplay()
@@ -64,7 +80,7 @@ export function SplideSlider({
 	}, [autoplay])
 
 	return (
-		<div className={className}>
+		<div className='relative'>
 			<Splide
 				ref={splideRef}
 				options={defaultOptions}
@@ -74,6 +90,11 @@ export function SplideSlider({
 			>
 				{children}
 			</Splide>
+			<SliderControls
+				prevAction={goPrev}
+				nextAction={goNext}
+				sliderBtnStyles={sliderBtnStyles}
+			/>
 		</div>
 	)
 }

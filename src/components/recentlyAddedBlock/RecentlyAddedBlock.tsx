@@ -9,6 +9,7 @@ import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { getCoverArt } from '@/utils/getCoverArt'
 
 import { FullWidthSliderCard } from '../titleCards/FullWidthSliderCard'
+import { SkeletonLoader } from '../ui/skeletonLoader/SkeletonLoader'
 import { SplideSlider } from '../ui/slider/SplideSlider'
 
 import { ITitle } from '@/types/title.types'
@@ -53,9 +54,15 @@ export function RecentlyAddedBlock() {
 
 	return (
 		<>
-			<div className='overflow-hidden w-full'>
+			{isLoading && (
+				<SkeletonLoader
+					count={1}
+					className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'
+				/>
+			)}
+			<div className='w-full'>
 				<div
-					className='absolute top-0 w-full h-[32rem] right-0 z-[-1]'
+					className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'
 					style={{
 						backgroundImage: getBackgroundImage(activeTitle),
 						backgroundSize: 'cover',
@@ -67,20 +74,25 @@ export function RecentlyAddedBlock() {
 				></div>
 
 				{allTitles.length > 0 ? (
-					<SplideSlider
-						slidesPerView={1}
-						onSlideChange={index => {
-							const validIndex = Math.max(0, Math.min(index, allTitles.length - 1))
-							setActiveIndex(validIndex)
-						}}
-						autoplay
-					>
-						{allTitles.slice(0, 10).map(title => (
-							<SplideSlide key={title.id}>
-								<FullWidthSliderCard {...title} />
-							</SplideSlide>
-						))}
-					</SplideSlider>
+					<div className='relative'>
+						<SplideSlider
+							slidesPerView={1}
+							onSlideChange={index => {
+								const validIndex = Math.max(0, Math.min(index, allTitles.length - 1))
+								setActiveIndex(validIndex)
+							}}
+							autoplay
+							arrows={false}
+							pagination={false}
+							sliderBtnStyles='max-lg:top-[-0.2rem] max-sm:top-[0.3rem]'
+						>
+							{allTitles.slice(0, 10).map((title, index) => (
+								<SplideSlide key={title.id}>
+									<FullWidthSliderCard {...title} />
+								</SplideSlide>
+							))}
+						</SplideSlider>
+					</div>
 				) : (
 					<div className='h-64 flex items-center justify-center'>
 						{isLoading ? 'Загрузка...' : 'Нет данных'}
