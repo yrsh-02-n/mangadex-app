@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 
+import { DynamicResentlyAddedBlock } from '@/components/recentlyAddedBlock/DynamicResentlyAddedBlock'
 import { Heading } from '@/components/ui/heading/Heading'
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default async function Home() {
 		<div className='text-white overflow-hidden'>
 			<section>
 				<Heading isH1>Недавно добавленные</Heading>
+				<DynamicResentlyAddedBlock />
 			</section>
 		</div>
 	)

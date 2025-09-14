@@ -6,7 +6,7 @@
 	--primary-hover: #2b2b2b;
 	--accent: #ff0202;
 	--accent-hover: #da1c19;
-  --disabled: #343434;
+	--disabled: #343434;
 	--white: #ffffff;
 }
 
@@ -58,7 +58,52 @@ li {
 }
 
 ul {
-  margin: 0;
+	margin: 0;
 }
 
+/* Splide slider */
+.splide__arrows {
+	position: absolute;
+	bottom: 30px;
+	right: 1.5rem;
+}
 
+.splide__arrow {
+	background: var(--primary) !important;
+	color: white !important;
+	width: 40px !important;
+	height: 40px !important;
+	border-radius: 8px !important;
+	opacity: 0.8 !important;
+	transition: opacity 0.3s ease !important;
+}
+
+.splide__arrow:hover {
+	opacity: 1 !important;
+	background: var(--accent) !important;
+}
+
+.splide__arrow--prev {
+	left: -90px !important;
+}
+
+.splide__arrow--next {
+	right: 0px !important;
+}
+
+.splide__pagination {
+	position: absolute;
+}
+
+.splide__pagination__page {
+	background: #ccc !important;
+	width: 10px !important;
+	height: 10px !important;
+	border-radius: 50% !important;
+	margin: 0 5px !important;
+}
+
+.splide__pagination__page.is-active {
+	background: var(--accent) !important;
+	transform: scale(1.2) !important;
+}

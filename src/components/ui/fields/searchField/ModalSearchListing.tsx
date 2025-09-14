@@ -9,10 +9,9 @@ import { useSearchAutocomplete } from '@/hooks/useSearchAutocomplete'
 import { Modal } from '../../modal/Modal'
 import { SkeletonLoader } from '../../skeletonLoader/SkeletonLoader'
 
-// ModalSearchListing.tsx
 export function ModalSearchListing() {
 	const { searchTerm, isSearchModalOpen, closeSearchModal } = useSearchModalState()
-	const { data, isLoading, error, isError, isLoadingError } = useSearchAutocomplete(searchTerm)
+	const { data, isLoading } = useSearchAutocomplete(searchTerm)
 	const modalRef = useRef<HTMLDivElement>(null)
 
 	// Auto open/close modal by value length

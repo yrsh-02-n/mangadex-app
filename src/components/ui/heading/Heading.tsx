@@ -6,6 +6,7 @@ interface IHeadingProps {
 	isH1: boolean
 	children: ReactNode
 	className?: string
+  hasLin?: boolean
 }
 
 // TODO: add back button

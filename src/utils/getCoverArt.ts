@@ -14,7 +14,7 @@ export const getCoverArt = (
 	)
 
 	const coverUrl = coverRel
-		? `https://uploads.mangadex.org/covers/${id}/${coverRel.attributes.fileName}.256.jpg`
+		? `https://uploads.mangadex.org/covers/${id}/${coverRel.attributes.fileName}.512.jpg`
 		: '/placeholder-cover.jpg'
 
 	return coverUrl
