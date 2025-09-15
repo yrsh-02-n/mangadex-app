@@ -32,11 +32,11 @@ export default function RootLayout({
 				<Providers>
 					<main className='flex h-full w-full'>
 						<SidebarClient />
-						<div className='flex flex-col flex-grow h-full min-w-0'>
+						<div className='flex flex-col flex-grow h-full min-w-0 relative'>
 							<Header />
 							<section
 								id='main-scroll-container'
-								className='flex-grow min-h-0 px-[1.5rem] pt-[1rem] pb-[2rem] text-white overflow-y-scroll'
+								className='flex-grow min-h-0 pb-[2rem] text-white overflow-y-scroll'
 							>
 								{children}
 							</section>

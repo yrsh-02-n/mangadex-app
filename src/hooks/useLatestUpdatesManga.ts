@@ -3,7 +3,7 @@ import { InfiniteData, QueryKey, useInfiniteQuery, useQuery } from '@tanstack/re
 import { mangaService } from '@/services/manga.service'
 import { MangaListResponse } from '@/types/api.types'
 
-export const useRecentlyAddedManga = () => {
+export const useLatestupdatesManga = () => {
 	return useInfiniteQuery<
 		MangaListResponse,
 		Error,
@@ -11,7 +11,7 @@ export const useRecentlyAddedManga = () => {
 		QueryKey,
 		number
 	>({
-		queryKey: ['getRecentlyAdded'],
+		queryKey: ['getLatestUpdates'],
 		queryFn: async ({ pageParam = 0 }) => {
 			const limit = 18
 
@@ -20,7 +20,7 @@ export const useRecentlyAddedManga = () => {
 				offset: pageParam as number
 			}
 
-			const response = await mangaService.getRecentlyAdded(paginationParams)
+			const response = await mangaService.getLatestUpdated(paginationParams)
 			return response.data
 		},
 		getNextPageParam: (lastPage, allPages) => {

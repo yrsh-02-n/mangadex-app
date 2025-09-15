@@ -4,12 +4,16 @@ import { SplideSlide } from '@splidejs/react-splide'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 
+import { PUBLIC_ROUTES } from '@/config/public-routes.config'
+
 import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useRecentlyAddedManga } from '@/hooks/useRecentlyAddedManga'
 
 import { getCoverArt } from '@/utils/getCoverArt'
 
 import { FullWidthSliderCard } from '../titleCards/FullWidthSliderCard'
+import { ArrowButton } from '../ui/button/ArrowButton'
+import { Heading } from '../ui/heading/Heading'
 import { SkeletonLoader } from '../ui/skeletonLoader/SkeletonLoader'
 import { SplideSlider } from '../ui/slider/SplideSlider'
 
@@ -50,11 +54,11 @@ export function RecentlyAddedBlock() {
 			{isLoading && (
 				<SkeletonLoader
 					count={1}
-					className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'
+					className='top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'
 				/>
 			)}
-			<div className='w-full'>
-				<div className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'>
+			<div className='w-full relative px-[1.5rem]'>
+				<div className='absolute z-[-1] w-full h-[32rem] right-0 max-lg:h-[34rem]'>
 					<Image
 						src={getCoverArt(activeTitle?.relationships, activeTitle?.id) || ''}
 						alt='Background'
@@ -72,10 +76,20 @@ export function RecentlyAddedBlock() {
 						className='absolute inset-0'
 						style={{
 							background:
-								'linear-gradient(to top, var(--bg), rgba(18, 18, 18, 0.9) 50%,  rgba(0,0,0,0) 100%)',
+								'linear-gradient(to top, var(--bg), rgba(18, 18, 18, 0.9) 50%, rgba(0,0,0,0) 100%)',
 							transition: 'opacity 0.2s ease'
 						}}
 					/>
+				</div>
+
+				<div className='flex items-center gap-[.5rem] mb-[2rem] pt-[6rem]'>
+					<Heading
+						className='mb-0'
+						isH1
+					>
+						Недавно добавленные
+					</Heading>
+					<ArrowButton link={PUBLIC_ROUTES.RECENTLY} />
 				</div>
 
 				{allTitles.length > 0 ? (

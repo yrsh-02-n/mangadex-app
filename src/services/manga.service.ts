@@ -92,6 +92,18 @@ class MangaService {
 		})
 	}
 
+	getLatestUpdated(params?: { limit?: number; offset?: number; total?: number }) {
+		return this.proxyAxios.get<MangaListResponse>('/api/mangadex-proxy', {
+			params: {
+				endpoint: '/manga',
+				...params,
+				'[readableAt]': 'desc',
+				'contentRating[]': 'safe',
+				'includes[]': ['author', 'artist', 'cover_art']
+			}
+		})
+	}
+
 	getBySearchParams(
 		searchParams?: {
 			title?: string

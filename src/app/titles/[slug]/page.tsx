@@ -4,14 +4,14 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 
 import { SlugHeading } from './SlugHeading/SlugHeading'
-import { mangaService } from '@/services/manga.service'
 import { SlugInfo } from './SlugInfo/SlugInfo'
+import { mangaService } from '@/services/manga.service'
 
 export default function TitlePage() {
 	const params = useParams()
 	const slug = params?.slug
 
-	const { data, isLoading, isError, error } = useQuery({
+	const { data } = useQuery({
 		queryKey: ['TitleById', slug as string],
 		queryFn: () => {
 			if (!slug) throw new Error('ID не найден')
@@ -22,9 +22,9 @@ export default function TitlePage() {
 	})
 
 	return (
-		<div>
+		<div className='px-[1.5rem] mt-[6rem]'>
 			<SlugHeading data={data} />
-      <SlugInfo data={data} />
+			<SlugInfo data={data} />
 		</div>
 	)
 }
