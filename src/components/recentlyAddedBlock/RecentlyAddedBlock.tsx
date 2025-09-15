@@ -13,8 +13,6 @@ import { FullWidthSliderCard } from '../titleCards/FullWidthSliderCard'
 import { SkeletonLoader } from '../ui/skeletonLoader/SkeletonLoader'
 import { SplideSlider } from '../ui/slider/SplideSlider'
 
-import { ITitle } from '@/types/title.types'
-
 export function RecentlyAddedBlock() {
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useRecentlyAddedManga()
@@ -47,13 +45,6 @@ export function RecentlyAddedBlock() {
 				: undefined
 	})
 
-	// get cover url for bg
-	const getBackgroundImage = (title: ITitle | undefined) => {
-		if (!title) return 'none'
-		const imageUrl = getCoverArt(title.relationships, title.id)
-		return imageUrl ? `url(${imageUrl})` : 'none'
-	}
-
 	return (
 		<>
 			{isLoading && (
@@ -69,14 +60,21 @@ export function RecentlyAddedBlock() {
 						alt='Background'
 						fill
 						style={{
-							filter: 'brightness(0.20)',
 							transition: 'filter 0.2s ease',
 							objectPosition: 'center 40%',
 							objectFit: 'cover',
 							opacity: activeTitle ? 1 : 0
 						}}
 						priority
-						quality={85}
+						quality={100}
+					/>
+					<div
+						className='absolute inset-0'
+						style={{
+							background:
+								'linear-gradient(to top, var(--bg), rgba(18, 18, 18, 0.9) 50%,  rgba(0,0,0,0) 100%)',
+							transition: 'opacity 0.2s ease'
+						}}
 					/>
 				</div>
 
