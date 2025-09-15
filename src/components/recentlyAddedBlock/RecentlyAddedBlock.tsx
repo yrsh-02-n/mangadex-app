@@ -1,6 +1,7 @@
 'use client'
 
 import { SplideSlide } from '@splidejs/react-splide'
+import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 
 import { useAllManga } from '@/hooks/useAllManga'
@@ -61,17 +62,22 @@ export function RecentlyAddedBlock() {
 				/>
 			)}
 			<div className='w-full'>
-				<div
-					className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'
-					style={{
-						backgroundImage: getBackgroundImage(activeTitle),
-						backgroundSize: 'cover',
-						backgroundPosition: 'center 40%',
-						filter: 'brightness(0.12)',
-						transition: 'background-image 0.2s ease',
-						opacity: activeTitle ? 1 : 0
-					}}
-				></div>
+				<div className='absolute top-0 w-full h-[32rem] right-0 z-[-1] max-lg:h-[34rem]'>
+					<Image
+						src={getCoverArt(activeTitle?.relationships, activeTitle?.id) || ''}
+						alt='Background'
+						fill
+						style={{
+							filter: 'brightness(0.12)',
+							transition: 'filter 0.2s ease',
+							objectPosition: 'center 40%',
+							objectFit: 'cover',
+							opacity: activeTitle ? 1 : 0
+						}}
+						priority
+						quality={85}
+					/>
+				</div>
 
 				{allTitles.length > 0 ? (
 					<div className='relative'>
@@ -86,7 +92,7 @@ export function RecentlyAddedBlock() {
 							pagination={false}
 							sliderBtnStyles='max-lg:top-[-0.2rem] max-sm:top-[0.3rem]'
 						>
-							{allTitles.slice(0, 10).map((title, index) => (
+							{allTitles.slice(0, 10).map(title => (
 								<SplideSlide key={title.id}>
 									<FullWidthSliderCard {...title} />
 								</SplideSlide>
