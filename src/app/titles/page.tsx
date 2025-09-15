@@ -37,7 +37,7 @@ export default function TitlesPage() {
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
 				<DynamicSyncFiltersUrl />

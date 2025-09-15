@@ -13,6 +13,7 @@ export function SplideSlider({
 	loop = true,
 	autoplay = false,
 	arrows = true,
+	drag = false,
 	pagination = true,
 	className = '',
 	onSlideChange,
@@ -26,6 +27,7 @@ export function SplideSlider({
 	loop?: boolean
 	autoplay?: boolean | { delay?: number; pauseOnHover?: boolean; pauseOnFocus?: boolean }
 	arrows?: boolean
+	drag?: boolean
 	pagination?: boolean
 	className?: string
 	onSlideChange?: (index: number) => void
@@ -39,10 +41,11 @@ export function SplideSlider({
 		perMove: 1,
 		gap: gap,
 		loop: loop,
-		type: 'loop',
+		type: 'fade',
+		drag: false,
 		arrows: arrows,
 		pagination: pagination,
-		rewind: false,
+		rewind: true,
 		...(typeof autoplay === 'object' ? { autoplay } : {}),
 		...options
 	}

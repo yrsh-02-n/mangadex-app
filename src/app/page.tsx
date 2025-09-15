@@ -1,7 +1,12 @@
 import { Metadata } from 'next'
 
+import { DynamicLatestUpdatesBlock } from '@/components/latestUpdatesBlock/DynamicLatestUpdatesBlock'
 import { DynamicResentlyAddedBlock } from '@/components/recentlyAddedBlock/DynamicResentlyAddedBlock'
+import { ArrowButton } from '@/components/ui/button/ArrowButton'
+import { Button } from '@/components/ui/button/Button'
 import { Heading } from '@/components/ui/heading/Heading'
+
+import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
 export const metadata: Metadata = {
 	title: 'MangaNexus | Поиск манги',
@@ -36,10 +41,21 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 	return (
-		<div className='text-white overflow-hidden'>
-			<section>
-				<Heading isH1>Недавно добавленные</Heading>
+		<div className='text-white overflow-hidden flex flex-col gap-[6rem]'>
+			<section className='relative'>
 				<DynamicResentlyAddedBlock />
+			</section>
+			<section className='px-[1.5rem]'>
+				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
+					<Heading
+						className='mb-0'
+						isH1
+					>
+						Последние обновления
+					</Heading>
+					<ArrowButton link={PUBLIC_ROUTES.LATEST} />
+				</div>
+				{/* <DynamicLatestUpdatesBlock /> */}
 			</section>
 		</div>
 	)

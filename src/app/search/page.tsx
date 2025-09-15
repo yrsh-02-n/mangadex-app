@@ -37,7 +37,7 @@ export default function SearchPage() {
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div className='w-full flex flex-col mb-[3rem]'>
 				<Heading isH1>
 					Поиск манги по названию: <span className='text-accent'>{appliedTitle}</span>

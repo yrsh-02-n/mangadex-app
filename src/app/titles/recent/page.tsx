@@ -32,7 +32,7 @@ export default function RecentlyAddedPage() {
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div>
 				<Heading isH1>Недавно добавленные</Heading>
 			</div>
