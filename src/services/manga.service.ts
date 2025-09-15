@@ -28,7 +28,7 @@ class MangaService {
 					'Genderswap',
 					'Loli',
 					'Shota',
-          'Crossdressing'
+					'Crossdressing'
 				]
 
 				const filteredData = {
@@ -76,6 +76,18 @@ class MangaService {
 		return this.proxyAxios.get<ChaptersListResponse>('/api/mangadex-proxy', {
 			params: {
 				endpoint: `/manga/${id}/feed`
+			}
+		})
+	}
+
+	getRecentlyAdded(params?: { limit?: number; offset?: number; total?: number }) {
+		return this.proxyAxios.get<MangaListResponse>('/api/mangadex-proxy', {
+			params: {
+				endpoint: '/manga',
+				...params,
+				'order[createdAt]': 'desc',
+				'contentRating[]': 'safe',
+				'includes[]': ['author', 'artist', 'cover_art']
 			}
 		})
 	}

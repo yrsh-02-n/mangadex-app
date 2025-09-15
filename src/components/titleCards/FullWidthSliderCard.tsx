@@ -66,7 +66,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 								{description}
 							</p>
 						</div>
-						<div className='pb-[2rem] max-xs:hidden'>
+						<div className='pb-[2rem]'>
 							{isAuthorAndArtist ? (
 								<p>Автор и художник: {author?.name}</p>
 							) : (

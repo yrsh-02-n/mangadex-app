@@ -4,8 +4,8 @@ import { SplideSlide } from '@splidejs/react-splide'
 import Image from 'next/image'
 import { useEffect, useMemo, useState } from 'react'
 
-import { useAllManga } from '@/hooks/useAllManga'
 import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useRecentlyAddedManga } from '@/hooks/useRecentlyAddedManga'
 
 import { getCoverArt } from '@/utils/getCoverArt'
 
@@ -16,7 +16,8 @@ import { SplideSlider } from '../ui/slider/SplideSlider'
 import { ITitle } from '@/types/title.types'
 
 export function RecentlyAddedBlock() {
-	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } = useAllManga()
+	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
+		useRecentlyAddedManga()
 	const [activeIndex, setActiveIndex] = useState<number>(0)
 	const allTitles = useMemo(() => {
 		return data?.pages.flatMap(page => page.data) || []
@@ -68,7 +69,7 @@ export function RecentlyAddedBlock() {
 						alt='Background'
 						fill
 						style={{
-							filter: 'brightness(0.12)',
+							filter: 'brightness(0.20)',
 							transition: 'filter 0.2s ease',
 							objectPosition: 'center 40%',
 							objectFit: 'cover',
