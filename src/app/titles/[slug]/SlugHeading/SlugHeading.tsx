@@ -1,18 +1,28 @@
-import Image from 'next/image'
+import Image from 'next/image';
 
-import { Button } from '@/components/ui/button/Button'
-import { Heading } from '@/components/ui/heading/Heading'
-import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
-import { TitleStatus } from '@/components/ui/status/TitleStatus'
-import { Tag } from '@/components/ui/tag/Tag'
 
-import { getCoverArt } from '@/utils/getCoverArt'
-import { getDesription } from '@/utils/getDesription'
-import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
-import { getTags } from '@/utils/getTags'
 
-import { AuthorArtist } from './AuthorArtist'
-import { MangaRes } from '@/types/api.types'
+import { Button } from '@/components/ui/button/Button';
+import { Heading } from '@/components/ui/heading/Heading';
+import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader';
+import { TitleStatus } from '@/components/ui/status/TitleStatus';
+import { Tag } from '@/components/ui/tag/Tag';
+
+
+
+import { getCoverArt } from '@/utils/getCoverArt';
+import { getDesription } from '@/utils/getDesription';
+import { getLocalizedTitle } from '@/utils/getLocalizedTitle';
+import { getTags } from '@/utils/getTags';
+
+
+
+import { AuthorArtist } from './AuthorArtist';
+import { MangaRes } from '@/types/api.types';
+
+
+
+
 
 export function SlugHeading({ data }: MangaRes) {
 	const mangaData = data?.data
@@ -22,7 +32,7 @@ export function SlugHeading({ data }: MangaRes) {
 	const firstAvailableTitle = firstTitleObject ? Object.values(firstTitleObject)[0] : undefined
 	//
 	const description = mangaData?.attributes ? getDesription(mangaData.attributes) : ''
-	const coverUrl = getCoverArt(mangaData?.relationships, mangaData?.id)
+	const coverUrl = getCoverArt(mangaData?.relationships, mangaData?.id, 'small')
 	const tags = mangaData?.attributes && getTags(mangaData.attributes)
 	const year = mangaData?.attributes?.year
 

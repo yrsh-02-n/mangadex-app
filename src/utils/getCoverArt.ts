@@ -4,18 +4,30 @@ import { IBaseRelationship } from '@/types/relationship.types'
 
 export const getCoverArt = (
 	relationships: IBaseRelationship[] | undefined,
-	id: string | undefined
+	id: string | undefined,
+	size?: 'thumbnail' | 'small' | 'medium' | 'large' | 'original'
 ) => {
-	if (!relationships) {
+	if (!relationships || !id) {
 		return '/placeholder-cover.png'
 	}
+
 	const coverRel = relationships?.find(
 		(rel): rel is ICoverArtRelationship => rel.type === RelationshipType.COVER_ART
 	)
 
-	const coverUrl = coverRel
-		? `https://uploads.mangadex.org/covers/${id}/${coverRel.attributes.fileName}.512.jpg`
-		: '/placeholder-cover.jpg'
+	if (!coverRel) {
+		return '/placeholder-cover.jpg'
+	}
 
-	return coverUrl
+	const baseFileName = coverRel.attributes.fileName
+
+	switch (size) {
+		case 'thumbnail':
+			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
+		case 'small':
+			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.512.jpg`
+		case 'original':
+		default:
+			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}`
+	}
 }

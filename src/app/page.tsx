@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 import { DynamicLatestUpdatesBlock } from '@/components/latestUpdatesBlock/DynamicLatestUpdatesBlock'
 import { DynamicResentlyAddedBlock } from '@/components/recentlyAddedBlock/DynamicResentlyAddedBlock'
 import { ArrowButton } from '@/components/ui/button/ArrowButton'
-import { Button } from '@/components/ui/button/Button'
 import { Heading } from '@/components/ui/heading/Heading'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
