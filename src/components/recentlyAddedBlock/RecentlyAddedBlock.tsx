@@ -65,18 +65,18 @@ export function RecentlyAddedBlock() {
 						fill
 						style={{
 							transition: 'filter 0.2s ease',
-							objectPosition: 'center 40%',
+							objectPosition: 'center 20%',
 							objectFit: 'cover',
 							opacity: activeTitle ? 1 : 0
 						}}
 						priority
-						quality={100}
+						quality={85}
 					/>
 					<div
 						className='absolute inset-0'
 						style={{
 							background:
-								'linear-gradient(to top, var(--bg), rgba(18, 18, 18, 0.9) 50%, rgba(0,0,0,0) 100%)',
+								'linear-gradient(to top, var(--bg), rgba(18, 18, 18, 0.8) 50%, rgba(0,0,0,0) 100%)',
 							transition: 'opacity 0.2s ease'
 						}}
 					/>
@@ -100,7 +100,7 @@ export function RecentlyAddedBlock() {
 								const validIndex = Math.max(0, Math.min(index, allTitles.length - 1))
 								setActiveIndex(validIndex)
 							}}
-							autoplay
+							autoplay={{ delay: 5000, pauseOnHover: true, pauseOnFocus: true }}
 							arrows={false}
 							pagination={false}
 							sliderBtnStyles='max-lg:top-[-0.2rem] max-sm:top-[0.3rem]'

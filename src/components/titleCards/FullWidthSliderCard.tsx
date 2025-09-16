@@ -18,7 +18,7 @@ import { ITitle } from '@/types/title.types'
 export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 	// utils
 	const title = getLocalizedTitle(attributes)
-	const coverUrl = getCoverArt(relationships, id)
+	const coverUrl = getCoverArt(relationships, id, 'small')
 	const tags = getTags(attributes)
 	const limitedTags = getLimitedTags({ tags: tags || [] })
 	const description = getDesription(attributes)
@@ -48,7 +48,9 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 
 					<div className='flex flex-col gap-[1rem] pl-[1.5rem] flex-1 max-w-full max-sm:pl-0'>
 						<div className='flex items-top justify-between gap-[1rem] max-lg:flex-col-reverse'>
-							<p className='w-full text-3xl font-semibold text-white line-clamp-1 max-s:text-2xl'>{title}</p>
+							<p className='w-full text-3xl font-semibold text-white line-clamp-1 max-s:text-2xl'>
+								{title}
+							</p>
 
 							<TitleStatus attributes={attributes} />
 						</div>

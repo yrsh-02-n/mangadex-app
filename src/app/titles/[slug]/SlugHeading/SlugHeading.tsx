@@ -22,7 +22,7 @@ export function SlugHeading({ data }: MangaRes) {
 	const firstAvailableTitle = firstTitleObject ? Object.values(firstTitleObject)[0] : undefined
 	//
 	const description = mangaData?.attributes ? getDesription(mangaData.attributes) : ''
-	const coverUrl = getCoverArt(mangaData?.relationships, mangaData?.id)
+	const coverUrl = getCoverArt(mangaData?.relationships, mangaData?.id, 'small')
 	const tags = mangaData?.attributes && getTags(mangaData.attributes)
 	const year = mangaData?.attributes?.year
 

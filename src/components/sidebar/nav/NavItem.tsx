@@ -14,18 +14,12 @@ export function NavItem({ item }: IMenuItemProps) {
 	if (!item) return null
 	const isActive = pathName === item.link
 
-	const toggleSidebarByLinks = () => {
-		if (window.innerWidth >= 810) return
-		window.innerWidth < 810 && toggleSidebar()
-	}
-
 	return (
 		<li className={item.isBottomBorder ? 'pb-[2rem] mb-[.8rem] border-b border-white' : ''}>
 			<Link
 				href={item.link}
 				title={item.label}
 				className='flex gap-[.8rem] items-center group text-nowrap'
-				onClick={toggleSidebarByLinks}
 			>
 				<item.icon
 					size={24}

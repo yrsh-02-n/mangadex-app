@@ -1,20 +1,32 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
-import { getCoverArt } from '@/utils/getCoverArt'
-import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
-import { getTags } from '@/utils/getTags'
 
-import { Tag } from '../ui/tag/Tag'
+import { PUBLIC_ROUTES } from '@/config/public-routes.config';
 
-import { ITitle } from '@/types/title.types'
+
+
+import { getCoverArt } from '@/utils/getCoverArt';
+import { getLocalizedTitle } from '@/utils/getLocalizedTitle';
+import { getTags } from '@/utils/getTags';
+
+
+
+import { Tag } from '../ui/tag/Tag';
+
+
+
+import { ITitle } from '@/types/title.types';
+
+
+
+
 
 export function TileCard({ attributes, id, relationships }: ITitle) {
 	// utils
 	const title = getLocalizedTitle(attributes)
-	const coverUrl = getCoverArt(relationships, id)
+	const coverUrl = getCoverArt(relationships, id, 'thumbnail')
 	const tags = getTags(attributes)
 
 	return (
