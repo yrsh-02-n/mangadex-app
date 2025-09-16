@@ -79,7 +79,7 @@ export function SlugHeading({ data }: MangaRes) {
 							</div>
 							<div className='pb-[2rem]'>
 								<AuthorArtist data={data} />
-								<p>{'Год выхода: ' + year}</p>
+								{year !== null ? <p>{'Год выхода: ' + year}</p> : <p>{'Год выхода: ниезвестен'}</p>}
 							</div>
 							<Button
 								variable='primary'

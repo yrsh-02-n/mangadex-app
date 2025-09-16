@@ -1,3 +1,3 @@
 export default function NotFoundPage() {
-  return <div>404</div>
+  return <section className="px-[1.5rem] mt-[6rem]">404</section>
 }

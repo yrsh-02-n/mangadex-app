@@ -84,7 +84,7 @@ export function RecentlyAddedBlock() {
 
 				<div className='flex items-center gap-[.5rem] mb-[2rem] pt-[6rem]'>
 					<Heading
-						className='mb-0'
+						className='mb-0 text-shadow-lg'
 						isH1
 					>
 						Недавно добавленные
@@ -92,7 +92,7 @@ export function RecentlyAddedBlock() {
 					<ArrowButton link={PUBLIC_ROUTES.RECENTLY} />
 				</div>
 
-				{allTitles.length > 0 ? (
+				{allTitles.length > 0 && (
 					<div className='relative'>
 						<SplideSlider
 							slidesPerView={1}
@@ -111,10 +111,6 @@ export function RecentlyAddedBlock() {
 								</SplideSlide>
 							))}
 						</SplideSlider>
-					</div>
-				) : (
-					<div className='h-64 flex items-center justify-center'>
-						{isLoading ? 'Загрузка...' : 'Нет данных'}
 					</div>
 				)}
 			</div>
