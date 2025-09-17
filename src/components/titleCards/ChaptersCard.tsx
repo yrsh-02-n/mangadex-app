@@ -1,5 +1,7 @@
+import cn from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
@@ -11,7 +13,18 @@ import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
 import ChapterLink from '@/app/titles/[slug]/SlugInfo/SlugChapters/chaptersAccordion/ChapterLink'
 import { ITitle } from '@/types/title.types'
 
-export function ChaptersCard({ attributes, id, relationships }: ITitle) {
+interface IChapterCard extends ITitle {
+	className?: string
+	chaptersLength?: number
+}
+
+export function ChaptersCard({
+	attributes,
+	id,
+	relationships,
+	chaptersLength,
+	className
+}: IChapterCard) {
 	// utils
 	const title = getLocalizedTitle(attributes)
 	const coverUrl = getCoverArt(relationships, id, 'thumbnail')
@@ -27,11 +40,17 @@ export function ChaptersCard({ attributes, id, relationships }: ITitle) {
 
 	return (
 		<div>
-			<div className='flex gap-[1rem] w-full max-s:relative'>
+			<div
+				className={twMerge(
+					'grid grid-cols-[0.3fr_2fr] gap-[1rem] w-full max-s:relative max-md:grid-cols-[0fr_3fr]',
+					className
+				)}
+			>
 				<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 					<div
-						className='relative w-[4rem] h-[auto] min-h-[6rem] max-md:max-w-[8rem]
-        max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full'
+						className={twMerge(
+							'relative aspect-8/12 h-[100%] min-w-[3rem] w-ful min-h-[100%] shrink-0 max-md:max-w-[8rem] max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full max-s:aspect-auto'
+						)}
 					>
 						<Image
 							sizes='max-width:334px'
@@ -44,12 +63,12 @@ export function ChaptersCard({ attributes, id, relationships }: ITitle) {
 					</div>
 				</Link>
 
-				<div className='flex flex-col gap-[.5rem] flex-1 max-w-full'>
+				<div className='flex flex-col gap-[.5rem] max-w-full'>
 					<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 						<p className='w-full text-md font-semibold text-white line-clamp-1'>{title}</p>
 					</Link>
 					<div>
-						{sortedChapters?.slice(0, 2).map(chapter => (
+						{sortedChapters?.slice(0, chaptersLength).map(chapter => (
 							<ChapterLink
 								key={chapter.id}
 								chapter={chapter}
