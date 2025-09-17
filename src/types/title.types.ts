@@ -48,4 +48,6 @@ export interface ITitle {
 	type?: string
 	attributes: IMangaAttributes
 	relationships?: IBaseRelationship[]
+  chaptersLength?: number
+  className?: string
 }

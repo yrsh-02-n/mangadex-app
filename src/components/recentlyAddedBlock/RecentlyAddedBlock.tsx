@@ -70,7 +70,7 @@ export function RecentlyAddedBlock() {
 							opacity: activeTitle ? 1 : 0
 						}}
 						priority
-						quality={85}
+						quality={50}
 					/>
 					<div
 						className='absolute inset-0'

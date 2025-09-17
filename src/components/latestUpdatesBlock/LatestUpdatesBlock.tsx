@@ -10,7 +10,7 @@ export function LatestUpdatesBlock() {
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return !isLoading ? (
-		<div className='grid grid-cols-3 gap-[1rem] max-xl:grid-cols-1'>
+		<div className='grid grid-cols-3 gap-[1rem] max-xl:grid-cols-2 max-lg:grid-cols-1'>
 			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded'>
 				{allTitles?.slice(0, 4).map((title, index) => (
 					<ChaptersCard
@@ -18,16 +18,18 @@ export function LatestUpdatesBlock() {
 						attributes={title.attributes}
 						id={title.id}
 						relationships={title.relationships}
+						chaptersLength={2}
 					/>
 				))}
 			</div>
-			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded max-xl:hidden'>
+			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded max-lg:hidden'>
 				{allTitles?.slice(5, 9).map((title, index) => (
 					<ChaptersCard
 						key={index}
 						attributes={title.attributes}
 						id={title.id}
 						relationships={title.relationships}
+						chaptersLength={2}
 					/>
 				))}
 			</div>
@@ -38,6 +40,7 @@ export function LatestUpdatesBlock() {
 						attributes={title.attributes}
 						id={title.id}
 						relationships={title.relationships}
+						chaptersLength={2}
 					/>
 				))}
 			</div>
