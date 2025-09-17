@@ -2,7 +2,7 @@ import { Accordion, AccordionItem } from '@heroui/accordion'
 
 import { sortStringAsNumberOrLocale } from '@/utils/sortStringAsNumberOrLocale'
 
-import AccordionLink from './AccordionLink'
+import ChapterLink from './ChapterLink'
 import { accordionItemClasses } from './styles/accordionItemClasses'
 import { ChaptersListResponse } from '@/types/api.types'
 import { IChapter } from '@/types/chapters.types'
@@ -92,7 +92,7 @@ export default function ChaptersAccordion({ data }: ChaptersAccordionProps) {
 											<p className='text-lg mb-[1rem]'>Глава {chapterNumberKey}</p>
 											<ul>
 												{chaptersWithSameNumber.map(chapter => (
-													<AccordionLink
+													<ChapterLink
 														key={chapter.id}
 														chapter={chapter}
 													/>

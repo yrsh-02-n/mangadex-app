@@ -1,42 +1,53 @@
-import { useMemo } from 'react'
+import { useLatestUpdates } from '@/hooks/useLatestUpdates'
 
-import { useEffectScroll } from '@/hooks/useEffectScroll'
-import { useLatestupdatesManga } from '@/hooks/useLatestUpdatesManga'
-
-import { GridCard } from '../titleCards/GridCard'
+import { ChaptersCard } from '../titleCards/ChaptersCard'
+import { SkeletonLoader } from '../ui/skeletonLoader/SkeletonLoader'
 
 export function LatestUpdatesBlock() {
-	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
-		useLatestupdatesManga()
+	const { data, isLoading } = useLatestUpdates()
 
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
-	console.log(allTitles)
 
-	useEffectScroll({
-		fetchNextPage,
-		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
-	})
-
-	console.log(data)
-
-	return (
-		<div className='grid grid-cols-3 gap-[1rem]'>
-			{allTitles.map((title, index) => (
-				<GridCard
-					key={index}
-					attributes={title.attributes}
-					id={title.id}
-					relationships={title.relationships}
-				/>
-			))}
+	return !isLoading ? (
+		<div className='grid grid-cols-3 gap-[1rem] max-xl:grid-cols-1'>
+			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded'>
+				{allTitles?.slice(0, 4).map((title, index) => (
+					<ChaptersCard
+						key={index}
+						attributes={title.attributes}
+						id={title.id}
+						relationships={title.relationships}
+					/>
+				))}
+			</div>
+			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded max-xl:hidden'>
+				{allTitles?.slice(5, 9).map((title, index) => (
+					<ChaptersCard
+						key={index}
+						attributes={title.attributes}
+						id={title.id}
+						relationships={title.relationships}
+					/>
+				))}
+			</div>
+			<div className='flex flex-col gap-[1rem] bg-primary p-[1rem] rounded max-xl:hidden'>
+				{allTitles?.slice(10, 14).map((title, index) => (
+					<ChaptersCard
+						key={index}
+						attributes={title.attributes}
+						id={title.id}
+						relationships={title.relationships}
+					/>
+				))}
+			</div>
+		</div>
+	) : (
+		<div className='grid grid-cols-3 gap-[1rem] h-[20rem]'>
+			<SkeletonLoader
+				count={3}
+				className='h-full'
+			/>
 		</div>
 	)
 }

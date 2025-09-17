@@ -34,7 +34,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 				<div className='flex w-full rounded max-s:relative'>
 					<div
 						className='relative w-[12rem] h-[auto] min-h-[18rem] min-w-[12rem] max-h-[18rem]
-        max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full max-sm:hidden'
+        max-s:absolute max-s:w-full max-s:h-full max-s:min-h-full max-s:max-w-full max-sm:hidden shado-lg'
 					>
 						<Image
 							sizes='max-width:334px'
@@ -48,7 +48,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 
 					<div className='flex flex-col gap-[1rem] pl-[1.5rem] flex-1 max-w-full max-sm:pl-0'>
 						<div className='flex items-top justify-between gap-[1rem] max-lg:flex-col-reverse'>
-							<p className='w-full text-3xl font-semibold text-white line-clamp-1 max-s:text-2xl'>
+							<p className='w-full text-3xl font-semibold text-white line-clamp-1 max-s:text-2xl text-shadow-lg'>
 								{title}
 							</p>
 
@@ -77,7 +77,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 									<p>Художник: {artist?.name}</p>
 								</>
 							)}
-							<p>{'Год выхода: ' + year}</p>
+							{year !== null ? <p>{'Год выхода: ' + year}</p> : <p>{'Год выхода: ниезвестен'}</p>}
 						</div>
 					</div>
 				</div>

@@ -43,7 +43,7 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 					/>
 					<div className='absolute inset-0 flex items-start'>
 						<Tag
-							className='ml-[.5rem] mt-[.2rem]'
+							className='ml-[.5rem] mt-[.5rem]'
 							tag={tags && tags[0]}
 						/>
 					</div>

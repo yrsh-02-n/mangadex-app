@@ -75,7 +75,12 @@ class MangaService {
 
 		return this.proxyAxios.get<ChaptersListResponse>('/api/mangadex-proxy', {
 			params: {
-				endpoint: `/manga/${id}/feed`
+				endpoint: `/manga/${id}/feed`,
+				'order[updatedAt]': 'desc',
+				'order[chapter]': 'desc',
+				'order[volume]': 'desc',
+				includeUnavailable: 0,
+				'includes[]': 'scanlation_group'
 			}
 		})
 	}
@@ -97,7 +102,7 @@ class MangaService {
 			params: {
 				endpoint: '/manga',
 				...params,
-				'[readableAt]': 'desc',
+				'order[latestUploadedChapter]': 'desc',
 				'contentRating[]': 'safe',
 				'includes[]': ['author', 'artist', 'cover_art']
 			}

@@ -1,29 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
+import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
+import { getCoverArt } from '@/utils/getCoverArt'
+import { getDesription } from '@/utils/getDesription'
+import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
+import { getTags } from '@/utils/getTags'
 
-import { PUBLIC_ROUTES } from '@/config/public-routes.config';
+import { TitleStatus } from '../ui/status/TitleStatus'
+import { Tag } from '../ui/tag/Tag'
 
-
-
-import { getCoverArt } from '@/utils/getCoverArt';
-import { getDesription } from '@/utils/getDesription';
-import { getLocalizedTitle } from '@/utils/getLocalizedTitle';
-import { getTags } from '@/utils/getTags';
-
-
-
-import { TitleStatus } from '../ui/status/TitleStatus';
-import { Tag } from '../ui/tag/Tag';
-
-
-
-import { ITitle } from '@/types/title.types';
-
-
-
-
+import { ITitle } from '@/types/title.types'
 
 export function GridCard({ attributes, id, relationships }: ITitle) {
 	// utils

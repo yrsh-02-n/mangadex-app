@@ -1,22 +1,14 @@
-import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 
+import { useChaptersById } from '@/hooks/useChaptersById'
+
 import ChaptersAccordion from './chaptersAccordion/ChaptersAccordion'
-import { mangaService } from '@/services/manga.service'
 
 export function SlugChapters() {
 	const params = useParams()
 	const slug = params?.slug
 
-	const { data, error } = useQuery({
-		queryKey: ['ChaptersById', slug as string],
-		queryFn: () => {
-			if (!slug) throw new Error('ID не найден')
-			return mangaService.getChaptersById(slug as string).then(res => res.data)
-		},
-		enabled: !!slug,
-		retry: false
-	})
+	const { data, error } = useChaptersById(slug as string)
 
 	return data ? (
 		<div className='bg-primary rounded p-[1.5rem]'>

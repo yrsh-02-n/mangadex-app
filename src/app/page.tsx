@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 	return (
-		<div className='text-white overflow-hidden flex flex-col gap-[6rem]'>
+		<div className='text-white overflow-hidden flex flex-col gap-[6rem] max-md:gap-[3rem]'>
 			<section className='relative'>
 				<DynamicResentlyAddedBlock />
 			</section>
@@ -54,7 +54,7 @@ export default async function Home() {
 					</Heading>
 					<ArrowButton link={PUBLIC_ROUTES.LATEST} />
 				</div>
-				{/* <DynamicLatestUpdatesBlock /> */}
+				<DynamicLatestUpdatesBlock />
 			</section>
 		</div>
 	)
