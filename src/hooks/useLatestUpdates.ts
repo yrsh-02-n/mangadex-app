@@ -1,9 +1,9 @@
-import { InfiniteData, QueryKey, useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { InfiniteData, QueryKey, useInfiniteQuery } from '@tanstack/react-query'
 
 import { mangaService } from '@/services/manga.service'
 import { MangaListResponse } from '@/types/api.types'
 
-export const useLatestupdatesManga = () => {
+export const useLatestUpdates = () => {
 	return useInfiniteQuery<
 		MangaListResponse,
 		Error,
