@@ -96,6 +96,7 @@ export function RecentlyAddedBlock() {
 					<div className='relative'>
 						<SplideSlider
 							slidesPerView={1}
+              type={'fade'}
 							onSlideChange={index => {
 								const validIndex = Math.max(0, Math.min(index, allTitles.length - 1))
 								setActiveIndex(validIndex)
@@ -103,7 +104,7 @@ export function RecentlyAddedBlock() {
 							autoplay={{ delay: 5000, pauseOnHover: true, pauseOnFocus: true }}
 							arrows={false}
 							pagination={false}
-							sliderBtnStyles='max-lg:top-[-0.2rem] max-sm:top-[0.3rem]'
+							sliderBtnStyles='right-0 max-lg:top-[-0.2em] max-sm:top-[0.3rem]'
 						>
 							{allTitles.slice(0, 10).map(title => (
 								<SplideSlide key={title.id}>

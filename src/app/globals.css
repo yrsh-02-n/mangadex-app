@@ -93,6 +93,7 @@ ul {
 
 .splide__pagination {
 	position: absolute;
+  bottom: -3rem !important;
 }
 
 .splide__pagination__page {

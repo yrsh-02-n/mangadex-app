@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
@@ -33,7 +34,17 @@ export default function RandomPage() {
 	}, [data, isLoading, isError, router])
 
 	if (isLoading) {
-		return <div className='flex items-center justify-center min-h-screen'>Загрузка...</div>
+		return (
+			<div className='flex flex-col items-center justify-center gap-[2rem] min-h-screen'>
+				<Image
+					height='200'
+					width='200'
+					alt='loader'
+					src={'/loader.gif'}
+				/>
+				<p className='text-xl font-semibold'>Загрузка...</p>
+			</div>
+		)
 	}
 
 	return null

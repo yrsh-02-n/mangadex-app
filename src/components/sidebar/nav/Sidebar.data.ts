@@ -1,4 +1,12 @@
-import { BookMarked, CalendarArrowDown, ClockPlus, Dice5, Search, Settings } from 'lucide-react'
+import {
+	BookMarked,
+	CalendarArrowDown,
+	ClockPlus,
+	Dice5,
+	Gem,
+	Search,
+	Settings
+} from 'lucide-react'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 import { USER_ROUTES } from '@/config/user-page.config'
@@ -20,6 +28,11 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
 		icon: CalendarArrowDown,
 		label: 'Последние обновления',
 		link: PUBLIC_ROUTES.LATEST
+	},
+	{
+		icon: Gem,
+		label: 'Популярное на русском',
+		link: PUBLIC_ROUTES.POPULAR
 	},
 	{
 		icon: Dice5,
