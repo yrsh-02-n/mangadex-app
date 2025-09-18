@@ -3,6 +3,7 @@ class PublicRoutes {
 	TITLES = '/titles'
 	RECENTLY = '/titles/recent'
 	LATEST = '/titles/latest'
+	POPULAR = '/titles/popular'
 	RANDOM = '/random'
 
 	AUTH = '/auth'

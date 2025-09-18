@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 
 import { DynamicLatestUpdatesBlock } from '@/components/latestUpdatesBlock/DynamicLatestUpdatesBlock'
+import { DynamicPopularRuBlock } from '@/components/popularRuBlock/DynamicPopularRuBlock'
 import { DynamicResentlyAddedBlock } from '@/components/recentlyAddedBlock/DynamicResentlyAddedBlock'
 import { ArrowButton } from '@/components/ui/button/ArrowButton'
 import { Heading } from '@/components/ui/heading/Heading'
@@ -40,9 +41,21 @@ export const metadata: Metadata = {
 
 export default async function Home() {
 	return (
-		<div className='text-white overflow-hidden flex flex-col gap-[6rem] max-md:gap-[3rem]'>
-			<section className='relative'>
+		<div className='text-white overflow-hidden flex flex-col'>
+			<section className='relative mb-[6rem] max-md:mb-[3rem]'>
 				<DynamicResentlyAddedBlock />
+			</section>
+			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
+				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
+					<Heading
+						className='mb-0'
+						isH1
+					>
+						Популярная манга на русском 🇷🇺
+					</Heading>
+					<ArrowButton link={PUBLIC_ROUTES.POPULAR} />
+				</div>
+				<DynamicPopularRuBlock />
 			</section>
 			<section className='px-[1.5rem]'>
 				<div className='flex items-center gap-[.5rem] mb-[2rem]'>

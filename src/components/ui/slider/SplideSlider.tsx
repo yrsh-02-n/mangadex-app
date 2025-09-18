@@ -13,6 +13,7 @@ export function SplideSlider({
 	loop = true,
 	autoplay = false,
 	arrows = true,
+	type = 'slide',
 	drag = false,
 	pagination = true,
 	className = '',
@@ -25,6 +26,7 @@ export function SplideSlider({
 	slidesPerView?: number
 	gap?: string
 	loop?: boolean
+	type?: 'slide' | 'fade' | 'loop'
 	autoplay?: boolean | { delay?: number; pauseOnHover?: boolean; pauseOnFocus?: boolean }
 	arrows?: boolean
 	drag?: boolean
@@ -38,14 +40,14 @@ export function SplideSlider({
 
 	const defaultOptions = {
 		perPage: slidesPerView,
-		perMove: 1,
+		perMove: type === 'fade' ? 1 : slidesPerView,
 		gap: gap,
 		loop: loop,
-		type: 'fade',
+		type: type === 'loop' ? 'slide' : type, // loop в Splide это отдельная опция, не type
+		rewind: type === 'loop' ? true : false,
 		drag: false,
 		arrows: arrows,
 		pagination: pagination,
-		rewind: true,
 		...(typeof autoplay === 'object' ? { autoplay } : {}),
 		...options
 	}
