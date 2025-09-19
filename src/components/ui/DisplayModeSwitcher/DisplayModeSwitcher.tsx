@@ -23,11 +23,11 @@ export function DisplayModeSwitcher({ onModeChange }: DisplayModeSwitcherProps) 
 	}
 
 	return (
-		<div>
+		<div className='flex'>
 			<Button
 				isDisabled={false}
 				variable={activeMode === 'tiles' ? 'secondary' : 'primary'}
-				className='rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm'
+				className='rounded-tl-sm rounded-tr-none rounded-br-none rounded-bl-sm p-[.6rem]'
 				onClick={handleGridClick}
 			>
 				<LayoutList />
@@ -35,7 +35,7 @@ export function DisplayModeSwitcher({ onModeChange }: DisplayModeSwitcherProps) 
 			<Button
 				isDisabled={false}
 				variable={activeMode === 'grid' ? 'secondary' : 'primary'}
-				className='rounded-tl-none rounded-tr-sm rounded-br-sm rounded-bl-none'
+				className='rounded-tl-none rounded-tr-sm rounded-br-sm rounded-bl-none p-[.6rem]'
 				onClick={handleTilesClick}
 			>
 				<LayoutGrid />
