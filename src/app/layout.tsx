@@ -36,7 +36,7 @@ export default function RootLayout({
 							<Header />
 							<section
 								id='main-scroll-container'
-								className='flex-grow min-h-0 pb-[2rem] text-white overflow-y-scroll'
+								className='flex-grow min-h-0 pb-0 text-white overflow-y-scroll'
 							>
 								{children}
 							</section>

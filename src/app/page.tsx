@@ -1,10 +1,14 @@
 import { Metadata } from 'next'
+import Flag from 'react-flagkit'
 
+import { AdvancedSearchBlock } from '@/components/advancedSearchBlock/AdvancedSearchBlock'
 import { DynamicLatestUpdatesBlock } from '@/components/latestUpdatesBlock/DynamicLatestUpdatesBlock'
 import { DynamicPopularRuBlock } from '@/components/popularRuBlock/DynamicPopularRuBlock'
 import { DynamicResentlyAddedBlock } from '@/components/recentlyAddedBlock/DynamicResentlyAddedBlock'
 import { ArrowButton } from '@/components/ui/button/ArrowButton'
 import { Heading } from '@/components/ui/heading/Heading'
+
+import { FLAGS } from '@/constants/flags.constants'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
@@ -47,17 +51,18 @@ export default async function Home() {
 			</section>
 			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
 				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
+          <Flag country={FLAGS['ru']} />
 					<Heading
 						className='mb-0'
 						isH1
 					>
-						Популярная манга на русском 🇷🇺
+						Популярная манга на русском
 					</Heading>
 					<ArrowButton link={PUBLIC_ROUTES.POPULAR} />
 				</div>
 				<DynamicPopularRuBlock />
 			</section>
-			<section className='px-[1.5rem]'>
+			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
 				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
 					<Heading
 						className='mb-0'
@@ -69,6 +74,7 @@ export default async function Home() {
 				</div>
 				<DynamicLatestUpdatesBlock />
 			</section>
+			<AdvancedSearchBlock />
 		</div>
 	)
 }

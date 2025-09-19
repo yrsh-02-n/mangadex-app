@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -7,14 +8,42 @@ interface ButtonProps {
 	isDisabled?: boolean
 	onClick?: () => void
 	className?: string
+	isLink?: boolean
+	link?: string
 }
 
-export function Button({ children, variable, isDisabled, onClick, className }: ButtonProps) {
-	return (
+export function Button({
+	children,
+	variable,
+	isDisabled,
+	onClick,
+	className,
+	isLink = false,
+	link
+}: ButtonProps) {
+	return isLink ? (
+		<Link href={link as string} className='self-start'>
+			<button
+				disabled={isDisabled}
+				className={twMerge(
+					'disabled:bg-disabled text-lg flex gap-[.5rem] justify-center items-center text-white px-[1rem] py-[.5rem] rounded transition-colors duration-200',
+					variable === 'primary'
+						? 'bg-accent hover:bg-accent-hover'
+						: 'bg-primary hover:bg-primary-hover',
+
+					isDisabled && 'cursor-not-allowed',
+					className
+				)}
+				onClick={onClick}
+			>
+				{children}
+			</button>
+		</Link>
+	) : (
 		<button
 			disabled={isDisabled}
 			className={twMerge(
-				'disabled:bg-disabled text-lg text-white px-[.5rem] py-[.5rem] rounded transition-colors duration-200',
+				'disabled:bg-disabled text-lg flex gap-[.5rem] justify-center items-center text-white px-[1rem] py-[.5rem] rounded transition-colors duration-200',
 				variable === 'primary'
 					? 'bg-accent hover:bg-accent-hover'
 					: 'bg-primary hover:bg-primary-hover',

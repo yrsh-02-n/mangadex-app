@@ -30,7 +30,7 @@ export default function LatestUpdatesPage() {
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section className='px-[1.5rem] mt-[6rem]'>
+		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
 			<div>
 				<Heading isH1>Последние обновления</Heading>
 			</div>
