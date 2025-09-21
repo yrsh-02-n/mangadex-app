@@ -43,7 +43,7 @@ export function SplideSlider({
 		perMove: type === 'fade' ? 1 : slidesPerView,
 		gap: gap,
 		loop: loop,
-		type: type === 'loop' ? 'slide' : type, // loop в Splide это отдельная опция, не type
+		type: type === 'loop' ? 'slide' : type,
 		rewind: type === 'loop' ? true : false,
 		drag: false,
 		arrows: arrows,

@@ -27,7 +27,7 @@ export function AdvancedSearchBlock() {
 						>
 							Нужна помощь с поиском?
 						</Heading>
-						<p className='text-3xl text-balance max-[1678px]:w-[90%] text-shadow-xl max-lg:text-2xl max-md:text-2xl max-xs:text-lg'>
+						<p className='text-2xl text-balance max-[1678px]:w-[90%] text-shadow-xl max-lg:text-2xl max-md:text-2xl max-xs:text-lg'>
 							Попробуйте расширенный поиск — он поможет найти именно то, что нужно!
 						</p>
 					</div>

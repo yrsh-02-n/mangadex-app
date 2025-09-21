@@ -3,12 +3,16 @@
 import cn from 'clsx'
 import { useEffect, useState } from 'react'
 
+import { useAuth } from '@/utils/isAuth'
+
+import { Button } from '../ui/button/Button'
 import { SearchField } from '../ui/fields/searchField/SearchField'
 
 import { UserMenu } from './user/UserMenu'
 
 export function Header() {
 	const [isScrolled, setIsScrolled] = useState(false)
+	const isUserLoggedIn = useAuth()
 
 	useEffect(() => {
 		const scrollContainer = document.getElementById('main-scroll-container')
@@ -32,7 +36,7 @@ export function Header() {
 			)}
 		>
 			<SearchField />
-			<UserMenu />
+			{isUserLoggedIn ? <UserMenu /> : <Button variable='primary' className='h-full' isLink link='/auth'>Войти</Button>}
 		</header>
 	)
 }
