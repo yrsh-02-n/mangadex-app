@@ -97,7 +97,6 @@ export function RecentlyAddedBlock() {
 						<SplideSlider
 							slidesPerView={1}
 							type={'fade'}
-							// loop={false}
 							onSlideChange={index => {
 								const validIndex = Math.max(0, Math.min(index, allTitles.length - 1))
 								setActiveIndex(validIndex)

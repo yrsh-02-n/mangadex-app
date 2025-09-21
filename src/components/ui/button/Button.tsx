@@ -22,7 +22,10 @@ export function Button({
 	link
 }: ButtonProps) {
 	return isLink ? (
-		<Link href={link as string} className='self-start'>
+		<Link
+			href={link as string}
+			className={twMerge('self-start', className)}
+		>
 			<button
 				disabled={isDisabled}
 				className={twMerge(

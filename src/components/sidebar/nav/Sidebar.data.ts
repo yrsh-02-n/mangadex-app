@@ -4,6 +4,8 @@ import {
 	ClockPlus,
 	Dice5,
 	Gem,
+	LogIn,
+	LogOut,
 	Search,
 	Settings
 } from 'lucide-react'
@@ -43,11 +45,25 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
 	{
 		icon: BookMarked,
 		label: 'Моя библиотека',
-		link: USER_ROUTES.LIBRARY
+		link: USER_ROUTES.LIBRARY,
+		authRequired: true
 	},
 	{
 		icon: Settings,
 		label: 'Настройки аккаунта',
-		link: USER_ROUTES.SETTINGS
+		link: USER_ROUTES.SETTINGS,
+		authRequired: true
+	},
+	{
+		icon: LogIn,
+		label: 'Вход',
+		link: USER_ROUTES.AUTH,
+		authRequired: false
+	},
+	{
+		icon: LogOut,
+		label: 'Выход',
+		link: USER_ROUTES.LOGOUT,
+		authRequired: true
 	}
 ]

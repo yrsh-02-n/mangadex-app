@@ -14,11 +14,11 @@ export function Sidebar() {
 	const { isSidebarOpen, toggleSidebar } = useSidebarStore()
 
 	return (
-		<div
+		<aside
 			className={cn(
 				'flex flex-col justify-between bg-primary min-h-full transition-all duration-100 ease-in shrink-0',
 				isSidebarOpen
-					? 'w-[20rem] px-[1.5rem] pb-[1.5rem] pt-[1.7rem] max-sm:absolute max-sm:w-screen max-sm:z-999'
+					? 'w-[20rem] px-[1.5rem] pb-[1.5rem] pt-[1.7rem] max-sm:absolute max-sm:w-screen max-sm:z-999 mih-h-full'
 					: 'w-[3rem] p-[.5rem] pt-[1.5rem]'
 			)}
 		>
@@ -62,6 +62,6 @@ export function Sidebar() {
 					<span>Ссылка на Github</span>
 				</Link>
 			</div>
-		</div>
+		</aside>
 	)
 }

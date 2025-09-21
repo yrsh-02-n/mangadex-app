@@ -5,6 +5,7 @@ export interface ISidebarItem {
 	link: string
 	label: string
 	isBottomBorder?: boolean
+  authRequired?: boolean
 }
 
 export interface ISidebarMenuProps {

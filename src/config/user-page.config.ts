@@ -1,7 +1,8 @@
 class UserRoutes {
 	SETTINGS = '/settings'
 	LIBRARY = '/library'
-	USER = '/user'
+	AUTH = '/auth'
+	LOGOUT = '/logout'
 }
 
 export const USER_ROUTES = new UserRoutes()
