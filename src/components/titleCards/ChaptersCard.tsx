@@ -10,7 +10,7 @@ import { useChaptersById } from '@/hooks/useChaptersById'
 import { getCoverArt } from '@/utils/getCoverArt'
 import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
 
-import ChapterLink from '@/app/(public)/titles/[slug]/SlugInfo/SlugChapters/chaptersAccordion/ChapterLink'
+import ChapterLink from '@/app/(main)/titles/[slug]/SlugInfo/SlugChapters/chaptersAccordion/ChapterLink'
 import { ITitle } from '@/types/title.types'
 
 interface IChapterCard extends ITitle {

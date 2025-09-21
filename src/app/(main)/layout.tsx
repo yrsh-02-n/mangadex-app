@@ -9,10 +9,7 @@ import { Providers } from '@/providers/Providers'
 
 import '../globals.css'
 
-const murecho = Murecho({
-	variable: '--font-murecho',
-	subsets: ['cyrillic', 'latin']
-})
+
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
 	return (

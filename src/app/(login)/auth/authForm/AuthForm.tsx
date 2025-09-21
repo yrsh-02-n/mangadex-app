@@ -1,5 +1,3 @@
-import { useAuth } from '@/utils/useAuth'
-
 import { login, signup } from '../actions'
 
 export function AuthForm() {
