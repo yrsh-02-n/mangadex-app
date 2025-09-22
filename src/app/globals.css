@@ -35,9 +35,9 @@ html {
 
 body {
 	background: var(--bg);
-	color: var(--text);
-  margin: 0;
-  min-height: 100vh;
+	color: var(--white);
+	margin: 0;
+	min-height: 100vh;
 }
 
 a,
@@ -95,7 +95,7 @@ ul {
 
 .splide__pagination {
 	position: absolute;
-  bottom: -3rem !important;
+	bottom: -3rem !important;
 }
 
 .splide__pagination__page {

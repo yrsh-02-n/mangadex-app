@@ -1,3 +1,4 @@
+import '@/app/globals.css'
 import { murecho } from '@/lib/fonts'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
