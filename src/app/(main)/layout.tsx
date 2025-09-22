@@ -1,0 +1,25 @@
+'use client'
+
+import { Header } from '@/components/header/Header'
+import { SidebarClient } from '@/components/sidebar/nav/SidebarClient'
+
+import { Providers } from '@/providers/Providers'
+
+export default function MainLayout({ children }: { children: React.ReactNode }) {
+	return (
+		<Providers>
+			<main className='flex h-full min-h-[100vh] w-full'>
+				<SidebarClient />
+				<div className='flex flex-col flex-grow h-full min-w-0 relative'>
+					<Header />
+					<section
+						id='main-scroll-container'
+						className='flex-grow min-h-0 pb-0 text-white overflow-y-scroll'
+					>
+						{children}
+					</section>
+				</div>
+			</main>
+		</Providers>
+	)
+}

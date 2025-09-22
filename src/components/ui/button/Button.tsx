@@ -10,6 +10,8 @@ interface ButtonProps {
 	className?: string
 	isLink?: boolean
 	link?: string
+	type?: string
+	formAction?: (formData: FormData) => Promise<void>
 }
 
 export function Button({
@@ -19,6 +21,7 @@ export function Button({
 	onClick,
 	className,
 	isLink = false,
+	type = 'button',
 	link
 }: ButtonProps) {
 	return isLink ? (

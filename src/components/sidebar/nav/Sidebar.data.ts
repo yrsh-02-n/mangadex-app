@@ -59,11 +59,5 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
 		label: 'Вход',
 		link: USER_ROUTES.AUTH,
 		authRequired: false
-	},
-	{
-		icon: LogOut,
-		label: 'Выход',
-		link: USER_ROUTES.LOGOUT,
-		authRequired: true
 	}
 ]

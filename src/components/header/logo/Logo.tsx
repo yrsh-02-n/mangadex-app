@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 interface ILogoProps {
-	isSidebarOpen: boolean
+	isSidebarOpen?: boolean
 }
 
 export function Logo({ isSidebarOpen }: ILogoProps) {
