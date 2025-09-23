@@ -7,6 +7,16 @@ const supabase = createClient()
 
 export const handleSignup = async (data: any, router: AppRouterInstance) => {
 	try {
+		const { data: users, error: checkError } = await supabase
+			.from('users')
+			.select('id')
+			.eq('email', data.email)
+
+		if (checkError) {
+			toast.error('Пользователь с таким email уже существует')
+			return
+		}
+
 		const { data: signUpData, error } = await supabase.auth.signUp({
 			email: data.email,
 			password: data.password,
@@ -23,10 +33,12 @@ export const handleSignup = async (data: any, router: AppRouterInstance) => {
 		}
 
 		if (signUpData.user) {
-			toast.success('Проверьте вашу почту для подтверждения регистрации.')
+			toast.success('Регистрация успешна!')
 			setTimeout(() => {
 				router.push('/')
 			}, 2000)
+		} else {
+			toast.success('Проверьте вашу почту для подтверждения регистрации.')
 		}
 	} catch (error: any) {
 		toast.error(error.message)
@@ -65,5 +77,3 @@ export const handleLogout = async (router: AppRouterInstance) => {
 		router.push('/')
 	}
 }
-
-
