@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button/Button'
 import { DefaultField } from '@/components/ui/fields/DefaultField'
 import { Tab } from '@/components/ui/tab/Tab'
 
-import { useAuth } from '@/utils/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 import { handleLogin, handleSignup } from './auth.handlers'
 import { loginSchema, registerSchema } from './schemas/auth.schemas'
