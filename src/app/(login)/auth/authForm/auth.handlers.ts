@@ -65,3 +65,5 @@ export const handleLogout = async (router: AppRouterInstance) => {
 		router.push('/')
 	}
 }
+
+

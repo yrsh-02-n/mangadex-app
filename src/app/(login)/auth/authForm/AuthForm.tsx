@@ -25,7 +25,8 @@ export function AuthForm() {
 		defaultValues: {
 			email: '',
 			password: '',
-			name: ''
+			name: '',
+			confirmPassword: ''
 		}
 	})
 
@@ -121,6 +122,26 @@ export function AuthForm() {
 						/>
 					)}
 				/>
+
+				{formType === 'register' && (
+					<Controller
+						name='confirmPassword'
+						control={control}
+						rules={{ required: true }}
+						render={({ field, fieldState }) => (
+							<DefaultField
+								id='password'
+								type='password'
+								placeholder='Повторите пароль'
+								className='w-full'
+								size='md'
+								variant='default'
+								error={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
+				)}
 
 				<div className='flex w-full gap-[1rem]'>
 					<Button
