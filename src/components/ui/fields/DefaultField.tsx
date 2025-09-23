@@ -72,7 +72,7 @@ export const DefaultField = forwardRef<HTMLInputElement, IFieldProps>(
 							/>
 						</span>
 					)}
-					{error && <span className='text-xs text-accent'>{error}</span>}
+					{error && <span className='text-xs text-accent mt-[.2rem]'>{error}</span>}
 				</div>
 			</div>
 		)

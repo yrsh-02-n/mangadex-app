@@ -2,44 +2,51 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
 
 import { Logo } from '@/components/header/logo/Logo'
 import { Button } from '@/components/ui/button/Button'
 import { DefaultField } from '@/components/ui/fields/DefaultField'
 import { Tab } from '@/components/ui/tab/Tab'
 
-import { onSubmitLogin, onSubmitSignup } from '@/utils/supabase/authUtils'
+import { useAuth } from '@/utils/useAuth'
 
+import { handleLogin, handleSignup } from './auth.handlers'
+import { loginSchema, registerSchema } from './schemas/auth.schemas'
 import { AuthFormData } from '@/types/auth.types'
-
-const authSchema = z.object({
-	email: z.string({ message: 'Неверный формат email' }),
-	password: z.string().min(6, { message: 'Пароль должен быть минимум 6 символов' }),
-	name: z.string().min(1, { message: 'Имя обязательно' })
-})
 
 export function AuthForm() {
 	const router = useRouter()
+	const { isAuthenticated } = useAuth()
 	const [formType, setFormType] = useState<'register' | 'login'>('login')
-
-	const {
-		control,
-		handleSubmit,
-		formState: { errors }
-	} = useForm<AuthFormData>({
-		resolver: zodResolver(authSchema),
+	const { control, handleSubmit } = useForm<AuthFormData>({
+		resolver: zodResolver(formType === 'register' ? registerSchema : loginSchema),
 		defaultValues: {
 			email: '',
 			password: '',
-			name: ''
+			name: '',
+			confirmPassword: ''
 		}
 	})
 
-	const changeFormRegister = () => setFormType('register')
-	const changeFormLogin = () => setFormType('login')
+	useEffect(() => {
+		if (isAuthenticated) {
+			router.push('/')
+		}
+	}, [isAuthenticated, router])
+
+	const onSubmit = async (data: AuthFormData) => {
+		try {
+			if (formType === 'register') {
+				await handleSignup(data, router)
+			} else {
+				await handleLogin(data, router)
+			}
+		} catch (error: any) {
+			alert(error.message)
+		}
+	}
 
 	return (
 		<div>
@@ -48,78 +55,99 @@ export function AuthForm() {
 			</div>
 			<div className='flex mb-[1rem]'>
 				<Tab
-					onClick={changeFormLogin}
+					onClick={() => setFormType('login')}
 					name='Вход'
 					isActive={formType === 'login'}
 				/>
 				<Tab
-					onClick={changeFormRegister}
+					onClick={() => setFormType('register')}
 					name='Регистрация'
 					isActive={formType === 'register'}
 				/>
 			</div>
-			<form className='flex flex-col gap-[1.5rem] min-w-[500px]'>
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className='flex flex-col gap-[1.5rem] min-w-[500px]'
+			>
 				{formType === 'register' && (
 					<Controller
 						name='name'
 						control={control}
-						render={({ field }) => (
+						rules={{ required: true }}
+						render={({ field, fieldState }) => (
 							<DefaultField
 								id='name'
-								type='name'
+								type='text'
 								placeholder='Имя или никнейм'
-								required
 								className='w-full'
 								size='md'
 								variant='default'
-								error={errors.name?.message}
+								error={fieldState.error?.message}
 								{...field}
 							/>
 						)}
 					/>
 				)}
+
 				<Controller
 					name='email'
 					control={control}
-					render={({ field }) => (
+					render={({ field, fieldState }) => (
 						<DefaultField
 							id='email'
 							type='email'
 							placeholder='email'
-							required
 							className='w-full'
 							size='md'
 							variant='default'
-							error={errors.email?.message}
+							error={fieldState.error?.message}
 							{...field}
 						/>
 					)}
 				/>
+
 				<Controller
 					name='password'
 					control={control}
-					render={({ field }) => (
+					render={({ field, fieldState }) => (
 						<DefaultField
 							id='password'
 							type='password'
 							placeholder='Пароль'
-							required
 							className='w-full'
 							size='md'
 							variant='default'
-							error={errors.password?.message}
+							error={fieldState.error?.message}
 							{...field}
 						/>
 					)}
 				/>
+
+				{formType === 'register' && (
+					<Controller
+						name='confirmPassword'
+						control={control}
+						rules={{ required: true }}
+						render={({ field, fieldState }) => (
+							<DefaultField
+								id='password'
+								type='password'
+								placeholder='Повторите пароль'
+								className='w-full'
+								size='md'
+								variant='default'
+								error={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
+				)}
+
 				<div className='flex w-full gap-[1rem]'>
 					<Button
 						variable='primary'
-						onClick={
-							formType === 'login' ? handleSubmit(onSubmitLogin) : handleSubmit(onSubmitSignup)
-						}
 						className='w-full'
-						type='button'
+						type='submit'
 					>
 						{formType === 'login' ? 'Войти' : 'Зарегистрироваться'}
 					</Button>

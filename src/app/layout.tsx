@@ -1,10 +1,15 @@
+import { Toaster } from 'react-hot-toast'
+
 import '@/app/globals.css'
 import { murecho } from '@/lib/fonts'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang='ru'>
-			<body className={`${murecho.variable} antialiased`}>{children}</body>
+			<body className={`${murecho.variable} antialiased`}>
+				<Toaster />
+				{children}
+			</body>
 		</html>
 	)
 }
