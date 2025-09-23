@@ -12,7 +12,7 @@ export const handleSignup = async (data: any, router: AppRouterInstance) => {
 			password: data.password,
 			options: {
 				data: {
-					name: data.name || ''
+					display_name: data.name || ''
 				}
 			}
 		})
