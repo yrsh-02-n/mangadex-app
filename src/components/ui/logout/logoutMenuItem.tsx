@@ -4,25 +4,18 @@ import { useRouter } from 'next/navigation'
 
 import { useSidebarStore } from '@/store/ui.store'
 
-import { logout } from '@/utils/supabase/client'
+import { handleLogout } from '@/app/(login)/auth/authForm/auth.handlers'
 
 export function LogoutMenuItem() {
-	const { isSidebarOpen, toggleSidebar } = useSidebarStore()
+	const { isSidebarOpen } = useSidebarStore()
 	const router = useRouter()
-
-	const handleLogout = async () => {
-		const { error } = await logout()
-		if (!error) {
-			router.push('/')
-		}
-	}
 
 	return (
 		<li>
 			<button
 				title='Выход'
 				className='flex gap-[.8rem] items-center group text-nowrap text-white'
-				onClick={handleLogout}
+				onClick={() => handleLogout(router)}
 			>
 				<LogOut
 					size={24}
