@@ -6,7 +6,6 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
-import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useRecentlyAddedManga } from '@/hooks/useRecentlyAddedManga'
 
 import { getCoverArt } from '@/utils/getCoverArt'
@@ -36,18 +35,6 @@ export function RecentlyAddedBlock() {
 		const index = Math.max(0, Math.min(activeIndex, allTitles.length - 1))
 		return allTitles[index]
 	}, [allTitles, activeIndex])
-
-	useEffectScroll({
-		fetchNextPage,
-		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
-	})
 
 	return (
 		<>
@@ -104,7 +91,7 @@ export function RecentlyAddedBlock() {
 							autoplay={{ delay: 5000, pauseOnHover: true, pauseOnFocus: true }}
 							arrows={false}
 							pagination={false}
-              options={{ rewind: true }}
+							options={{ rewind: true }}
 							sliderBtnStyles='right-0 max-lg:top-[-0.2em] max-sm:top-[0.3rem]'
 						>
 							{allTitles.slice(0, 10).map(title => (

@@ -1,12 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-
 import { ChaptersCard } from '@/components/titleCards/ChaptersCard'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
-import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useLatestUpdates } from '@/hooks/useLatestUpdates'
 

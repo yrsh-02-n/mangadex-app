@@ -8,7 +8,6 @@ import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
-import { useEffectScroll } from '@/hooks/useEffectScroll'
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useRecentlyAddedManga } from '@/hooks/useRecentlyAddedManga'
 
