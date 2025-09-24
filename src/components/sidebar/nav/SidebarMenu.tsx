@@ -2,7 +2,7 @@ import cn from 'clsx'
 
 import { LogoutMenuItem } from '@/components/ui/logout/logoutMenuItem'
 
-import { useAuth } from '@/utils/useAuth'
+import { useAuth } from '@/hooks/useAuth'
 
 import { ISidebarMenuProps } from '../sidebar.types'
 

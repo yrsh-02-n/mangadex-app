@@ -3,38 +3,31 @@
 import { useState } from 'react'
 
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
-import { ChaptersCard } from '@/components/titleCards/ChaptersCard'
+import { GridCard } from '@/components/titleCards/GridCard'
+import { TileCard } from '@/components/titleCards/TileCard'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
-import { useLatestUpdates } from '@/hooks/useLatestUpdates'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { usePopularRuManga } from '@/hooks/usePopularRuManga'
-import { TileCard } from '@/components/titleCards/TileCard'
-import { GridCard } from '@/components/titleCards/GridCard'
 
 export default function PopularPage() {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		usePopularRuManga()
 
-	useEffectScroll({
+	const sentinelRef = useInfiniteScroll({
 		fetchNextPage,
 		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
+		isFetchingNextPage
 	})
 
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div>
 				<Heading isH1>Популярная манга на русском 🇷🇺</Heading>
 			</div>
@@ -84,6 +77,10 @@ export default function PopularPage() {
 					<p>Попробуйте применить другие параметры.</p>
 				</div>
 			)}
+			<div
+				ref={sentinelRef}
+				className='h-1 w-full'
+			/>
 		</section>
 	)
 }

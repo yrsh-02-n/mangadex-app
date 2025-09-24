@@ -9,6 +9,7 @@ import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useSearchQuery } from '@/hooks/useSearchQuery'
 
 import { DynamicSyncFiltersUrl } from '@/utils/syncfiltersUrl/DynamicSyncFiltersUrl'
@@ -21,23 +22,17 @@ export default function TitlesPage() {
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useSearchQuery()
 
-	useEffectScroll({
+	const sentinelRef = useInfiniteScroll({
 		fetchNextPage,
 		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
+		isFetchingNextPage
 	})
 
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div>
 				<Heading isH1>Расширенный поиск</Heading>
 				<DynamicSyncFiltersUrl />
@@ -89,6 +84,10 @@ export default function TitlesPage() {
 					<p>Попробуйте применить другие параметры.</p>
 				</div>
 			)}
+			<div
+				ref={sentinelRef}
+				className='h-1 w-full'
+			/>
 		</section>
 	)
 }

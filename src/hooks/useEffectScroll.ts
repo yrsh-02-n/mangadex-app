@@ -1,12 +1,10 @@
 import { useEffect } from 'react'
-
 interface Props {
 	hasNextPage: boolean
 	isFetchingNextPage: boolean
 	fetchNextPage: () => void
 	scrollElementRef?: React.RefObject<HTMLElement | null>
 }
-
 export function useEffectScroll({
 	fetchNextPage,
 	hasNextPage,
@@ -23,7 +21,6 @@ export function useEffectScroll({
 				}
 				return
 			}
-
 			// if ref not exists use window as default
 			if (
 				window.innerHeight + document.documentElement.scrollTop >=
@@ -34,10 +31,8 @@ export function useEffectScroll({
 				fetchNextPage()
 			}
 		}
-
 		// get element as ref
 		const scrollElement = scrollElementRef?.current || window
-
 		scrollElement.addEventListener('scroll', handleScroll)
 		return () => scrollElement.removeEventListener('scroll', handleScroll)
 	}, [hasNextPage, isFetchingNextPage, fetchNextPage, scrollElementRef])
