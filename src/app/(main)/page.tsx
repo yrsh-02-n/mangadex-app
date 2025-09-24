@@ -51,7 +51,7 @@ export default async function Home() {
 			</section>
 			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
 				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
-          <Flag country={FLAGS['ru']} />
+					<Flag country={FLAGS['ru']} />
 					<Heading
 						className='mb-0'
 						isH1

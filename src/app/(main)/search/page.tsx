@@ -10,7 +10,7 @@ import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useSearchStore } from '@/store/search.store'
 
-import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useSearchQueryByTitle } from '@/hooks/useSearchQueryByTitle'
 
 import { DynamicSyncFiltersUrl } from '@/utils/syncfiltersUrl/DynamicSyncFiltersUrl'
@@ -21,16 +21,10 @@ export default function SearchPage() {
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useSearchQueryByTitle()
 
-	useEffectScroll({
+	const sentinelRef = useInfiniteScroll({
 		fetchNextPage,
 		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
+		isFetchingNextPage
 	})
 
 	// titles
@@ -90,6 +84,10 @@ export default function SearchPage() {
 					<p>Попробуйте применить другие параметры.</p>
 				</div>
 			)}
+			<div
+				ref={sentinelRef}
+				className='h-1 w-full'
+			/>
 		</section>
 	)
 }

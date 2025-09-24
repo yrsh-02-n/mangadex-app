@@ -1,7 +1,7 @@
 'use client'
 
 import cn from 'clsx'
-import { useEffect, useState } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
 import { useAuth } from '@/hooks/useAuth'
 
@@ -10,23 +10,31 @@ import { SearchField } from '../ui/fields/searchField/SearchField'
 
 import { UserMenu } from './user/UserMenu'
 
-export function Header() {
+interface HeaderProps {
+	scrollRef?: RefObject<HTMLDivElement | null>
+}
+
+export function Header({ scrollRef }: HeaderProps) {
 	const [isScrolled, setIsScrolled] = useState(false)
 	const { isAuthenticated } = useAuth()
 
 	useEffect(() => {
-		const scrollContainer = document.getElementById('main-scroll-container')
-
-		const handleScroll = () => {
-			const scrollTop = scrollContainer ? scrollContainer.scrollTop : window.scrollY
-			setIsScrolled(scrollTop > 10)
+		if (!scrollRef || !scrollRef.current) {
+			return
 		}
 
-		const target = scrollContainer || window
-		target.addEventListener('scroll', handleScroll)
+		const scrollElement = scrollRef.current
 
-		return () => target.removeEventListener('scroll', handleScroll)
-	}, [])
+		const handleScroll = () => {
+			setIsScrolled(scrollElement.scrollTop > 10)
+		}
+
+		scrollElement.addEventListener('scroll', handleScroll, { passive: true })
+		handleScroll()
+		return () => {
+			scrollElement.removeEventListener('scroll', handleScroll)
+		}
+	}, [scrollRef])
 
 	return (
 		<header
