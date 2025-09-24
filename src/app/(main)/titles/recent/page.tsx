@@ -9,6 +9,7 @@ import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useRecentlyAddedManga } from '@/hooks/useRecentlyAddedManga'
 
 export default function RecentlyAddedPage() {
@@ -16,23 +17,17 @@ export default function RecentlyAddedPage() {
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useRecentlyAddedManga()
 
-	useEffectScroll({
+	const sentinelRef = useInfiniteScroll({
 		fetchNextPage,
 		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
+		isFetchingNextPage
 	})
 
 	// titles
 	const allTitles = data?.pages.flatMap(page => page.data) || []
 
 	return (
-		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
+		<section className='px-[1.5rem] mt-[6rem]'>
 			<div>
 				<Heading isH1>Недавно добавленные</Heading>
 			</div>
@@ -76,6 +71,10 @@ export default function RecentlyAddedPage() {
 					<p>Попробуйте обновить страницу.</p>
 				</div>
 			)}
+			<div
+				ref={sentinelRef}
+				className='h-1 w-full'
+			/>
 		</section>
 	)
 }

@@ -7,23 +7,17 @@ import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useEffectScroll } from '@/hooks/useEffectScroll'
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll'
 import { useLatestUpdates } from '@/hooks/useLatestUpdates'
 
 export default function LatestUpdatesPage() {
-	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
 		useLatestUpdates()
 
-	useEffectScroll({
+	const sentinelRef = useInfiniteScroll({
 		fetchNextPage,
 		hasNextPage,
-		isFetchingNextPage,
-		scrollElementRef:
-			typeof document !== 'undefined'
-				? ({
-						current: document.getElementById('main-scroll-container')
-					} as React.RefObject<HTMLElement | null>)
-				: undefined
+		isFetchingNextPage
 	})
 
 	// titles
@@ -65,6 +59,10 @@ export default function LatestUpdatesPage() {
 					<p>Попробуйте обновить страницу.</p>
 				</div>
 			)}
+			<div
+				ref={sentinelRef}
+				className='h-1 w-full'
+			/>
 		</section>
 	)
 }
