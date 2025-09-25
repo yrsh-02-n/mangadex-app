@@ -45,7 +45,7 @@ export function AuthForm() {
 	}
 
 	return (
-		<div>
+		<div className='p-[1.5rem]'>
 			<div className='flex justify-center w-full mb-[2rem]'>
 				<Logo isSidebarOpen={true} />
 			</div>
@@ -63,7 +63,7 @@ export function AuthForm() {
 			</div>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='flex flex-col gap-[1.5rem] min-w-[500px]'
+				className='flex flex-col gap-[1.5rem] min-w-[500px] max-lg:min-w-[280px]'
 			>
 				{formType === 'register' && (
 					<Controller

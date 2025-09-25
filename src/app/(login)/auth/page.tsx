@@ -4,8 +4,8 @@ import { AuthForm } from './authForm/AuthForm'
 
 export default function AuthPage() {
 	return (
-		<div className='grid grid-cols-[35%_65%] grid-rows-1 min-h-screen'>
-			<div className='relative w-full h-screen min-h-screen aspect-[3/4]'>
+		<div className='grid grid-cols-[35%_65%] grid-rows-1 min-h-screen max-lg:flex max-lg:justify-center max-lg:items-center max-lg:relative max-lg:overflow-hidden'>
+			<div className='relative w-full h-screen min-h-screen aspect-[3/4] max-lg:absolute max-lg:opacity-5 max-lg:aspect-auto z-[-1] max-lg:w-full max-lg:inset-0'>
 				<Image
 					fill
 					alt='Страница авторизации'
@@ -15,9 +15,10 @@ export default function AuthPage() {
 					className='object-cover'
 				/>
 			</div>
-			<div className='flex items-center justify-center'>
+			<div className='flex items-center justify-center max-lg:w-full'>
 				<AuthForm />
 			</div>
 		</div>
 	)
 }
+
