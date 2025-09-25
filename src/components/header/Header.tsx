@@ -3,7 +3,7 @@
 import cn from 'clsx'
 import { RefObject, useEffect, useState } from 'react'
 
-import { useAuth } from '@/hooks/useAuth'
+import { useAuth } from '@/utils/supabase/userActions/useAuth'
 
 import { Button } from '../ui/button/Button'
 import { SearchField } from '../ui/fields/searchField/SearchField'
