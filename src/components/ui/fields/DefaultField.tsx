@@ -1,6 +1,7 @@
 import cn from 'clsx'
 import { LucideChevronDown, X } from 'lucide-react'
 import { forwardRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { IFieldProps } from './fields.types'
 
@@ -39,7 +40,7 @@ export const DefaultField = forwardRef<HTMLInputElement, IFieldProps>(
 						onChange={onChange}
 						readOnly={computedReadOnly}
 						placeholder={placeholder}
-						className={cn(
+						className={twMerge(
 							'text-white bg-primary rounded px-[.7rem] py-[.5rem] placeholder:text-white/50 placeholder:opacity-100 focus-visible:outline-0 focus:outline-0 outline-0',
 							fullwidth && 'w-full',
 							size === 'sm' ? 'h-[2rem]' : size === 'md' ? 'h-[3rem]' : 'h-[5rem]',

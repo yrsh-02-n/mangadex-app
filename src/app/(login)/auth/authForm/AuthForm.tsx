@@ -1,8 +1,9 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 
 import { Logo } from '@/components/header/logo/Logo'
@@ -10,7 +11,7 @@ import { Button } from '@/components/ui/button/Button'
 import { DefaultField } from '@/components/ui/fields/DefaultField'
 import { Tab } from '@/components/ui/tab/Tab'
 
-import { useAuth } from '@/hooks/useAuth'
+import { useIsAuthRedirect } from '@/hooks/useIsAuthRedirect'
 
 import { handleLogin, handleSignup } from './auth.handlers'
 import { loginSchema, registerSchema } from './schemas/auth.schemas'
@@ -18,7 +19,6 @@ import { AuthFormData } from '@/types/auth.types'
 
 export function AuthForm() {
 	const router = useRouter()
-	const { isAuthenticated } = useAuth()
 	const [formType, setFormType] = useState<'register' | 'login'>('login')
 	const { control, handleSubmit } = useForm<AuthFormData>({
 		resolver: zodResolver(formType === 'register' ? registerSchema : loginSchema),
@@ -30,11 +30,7 @@ export function AuthForm() {
 		}
 	})
 
-	useEffect(() => {
-		if (isAuthenticated) {
-			router.push('/')
-		}
-	}, [isAuthenticated, router])
+	useIsAuthRedirect()
 
 	const onSubmit = async (data: AuthFormData) => {
 		try {
@@ -143,7 +139,7 @@ export function AuthForm() {
 					/>
 				)}
 
-				<div className='flex w-full gap-[1rem]'>
+				<div className='flex flex-col w-full gap-[1rem]'>
 					<Button
 						variable='primary'
 						className='w-full'
@@ -151,6 +147,14 @@ export function AuthForm() {
 					>
 						{formType === 'login' ? 'Войти' : 'Зарегистрироваться'}
 					</Button>
+					{formType === 'login' && (
+						<Link
+							className='text-center text-sm text-white hover:text-accent transition-colors duration-200'
+							href={'auth/password-recovery'}
+						>
+							Забыли пароль?
+						</Link>
+					)}
 				</div>
 			</form>
 		</div>

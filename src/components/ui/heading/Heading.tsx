@@ -17,6 +17,6 @@ export function Heading({ isH1, children, className }: IHeadingProps) {
 			{children}
 		</h1>
 	) : (
-		<h2 className={cn('text-xl font-semibold mb-[2rem] max-md:text-lg', className)}>{children}</h2>
+		<h2 className={twMerge('text-xl font-semibold mb-[2rem] max-md:text-lg', className)}>{children}</h2>
 	)
 }

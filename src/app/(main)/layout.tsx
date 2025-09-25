@@ -16,7 +16,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 				<div className='flex flex-col flex-grow h-full min-w-0 relative'>
 					<Header scrollRef={scrollContainerRef} />
 					<section
-						id='main-scroll-container'
 						ref={scrollContainerRef}
 						className='flex-grow min-h-0 pb-0 text-white overflow-y-auto'
 					>

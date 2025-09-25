@@ -16,7 +16,6 @@ export function useInfiniteScroll({
 	const observer = useRef<IntersectionObserver | null>(null)
 	const sentinelRef = useRef<HTMLDivElement>(null)
 
-	// Используем useCallback для стабильной функции
 	const loadMore = useCallback(() => {
 		if (hasNextPage && !isFetchingNextPage) {
 			fetchNextPage()
