@@ -10,6 +10,7 @@ export const handleSignup = async (data: any, router: AppRouterInstance) => {
 		email: data.email,
 		password: data.password,
 		options: {
+			emailRedirectTo: `${window.location.origin}/auth/confirmed`,
 			data: {
 				display_name: data.name || ''
 			}
@@ -24,7 +25,7 @@ export const handleSignup = async (data: any, router: AppRouterInstance) => {
 	if (signUpData.user) {
 		toast.success('Регистрация успешна!')
 		setTimeout(() => {
-			router.push('/')
+			router.push('auth/success')
 		}, 2000)
 	} else {
 		toast.success('Проверьте вашу почту для подтверждения регистрации.')
@@ -47,6 +48,34 @@ export const handleLogin = async (data: any, router: AppRouterInstance) => {
 				toast.error(error.message)
 			}
 			return
+		}
+
+		if (loginData.user) {
+			// ✅ Проверь, есть ли профиль
+			const { data: profile, error: profileError } = await supabase
+				.from('profiles')
+				.select('id')
+				.eq('id', loginData.user.id)
+				.single()
+
+			if (profileError && profileError.code === 'PGRST116') {
+				// "Row not found"
+				// Профиль не существует → создай его
+				const { error: createError } = await supabase.from('profiles').insert({
+					id: loginData.user.id,
+					username:
+						loginData.user.user_metadata?.display_name ||
+						loginData.user.email?.split('@')[0] ||
+						'user',
+					avatar_url: null
+				})
+
+				if (createError) {
+					console.error('Ошибка при создании профиля:', createError.message)
+					toast.error('Ошибка при создании профиля.')
+					return
+				}
+			}
 		}
 
 		toast.success('Добро пожаловать, username!')

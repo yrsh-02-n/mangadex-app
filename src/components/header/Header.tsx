@@ -39,7 +39,7 @@ export function Header({ scrollRef }: HeaderProps) {
 	return (
 		<header
 			className={cn(
-				'absolute z-998 top-0 left-0 right-0 flex justify-between items-center gap-[2rem] p-[1.5rem] h-[5rem] transition-all duration-300',
+				'absolute z-998 top-0 left-0 right-0 flex justify-between items-center gap-[1rem] p-[1.5rem] h-[5rem] transition-all duration-300',
 				isScrolled ? 'bg-bg/80 backdrop-blur-md' : 'bg-transparent'
 			)}
 		>

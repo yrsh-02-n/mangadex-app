@@ -10,8 +10,8 @@ export function SlugInfo({ data }: MangaRes) {
 			{data ? (
 				<div className='grid grid-cols-[18rem_auto] gap-[2rem] max-md:flex max-md:flex-col'>
 					<SlugAttributes data={data} />
-          {/* chapters have different query inside */}
-					<SlugChapters /> 
+					{/* chapters have different query inside */}
+					<SlugChapters />
 				</div>
 			) : (
 				<div className='flex gap-[2rem] max-[810px]:flex-col'>

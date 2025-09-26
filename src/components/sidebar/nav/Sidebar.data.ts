@@ -5,7 +5,6 @@ import {
 	Dice5,
 	Gem,
 	LogIn,
-	LogOut,
 	Search,
 	Settings
 } from 'lucide-react'
@@ -50,7 +49,7 @@ export const SIDEBAR_DATA: ISidebarItem[] = [
 	},
 	{
 		icon: Settings,
-		label: 'Настройки аккаунта',
+		label: 'Настройки профиля',
 		link: USER_ROUTES.SETTINGS,
 		authRequired: true
 	},
