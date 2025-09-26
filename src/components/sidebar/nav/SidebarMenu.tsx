@@ -13,7 +13,7 @@ export function SidebarMenu({ isSidebarOpen }: ISidebarMenuProps) {
 	const { isAuthenticated } = useAuth()
 
 	const filteredData = SIDEBAR_DATA.filter(item => {
-		const authOnlyItems = ['Моя библиотека', 'Настройки аккаунта', 'Выход']
+		const authOnlyItems = ['Моя библиотека', 'Настройки профиля', 'Выход']
 		const guestOnlyItems = ['Вход']
 
 		if (authOnlyItems.includes(item.label)) {
