@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
 				hostname: 'uploads.mangadex.org',
 				port: '',
 				pathname: '/covers/**'
+			},
+			{
+				protocol: 'https',
+				hostname: 'keqfumjwzqtqdlwfwpao.supabase.co',
+				port: '',
+				pathname: '/**'
 			}
 		]
 	}
