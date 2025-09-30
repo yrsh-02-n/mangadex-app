@@ -1,96 +1,37 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
-import { useUserStore } from '@/store/user.store'
-
-import { createClient } from '@/utils/supabase/client'
-import { extractFileNameFromUrl } from '@/utils/supabase/extractFilenameFromUrl'
-import { isPlaceholderAvatar } from '@/utils/supabase/isPlaceholderAvatar'
-import { deleteAvatar } from '@/utils/supabase/userActions/deleteAvatar'
-
-import { DeleteAvatarbutton } from './DeleteAvatarButton'
+import { useDeleteAvatar } from '@/hooks/avatar/useDeleteAvatar'
+import { useUpdateAvatar } from '@/hooks/avatar/useUpdateAvatar'
+import { useUserProfile } from '@/hooks/useUserProfile'
 
 export function SettingsAvatar() {
-	const { profile, fetchProfile, loading } = useUserStore()
-	const [uploading, setUploading] = useState<boolean>(false)
+	const { data: profile, isLoading } = useUserProfile()
+	const updateMutation = useUpdateAvatar()
+	const deleteMutation = useDeleteAvatar()
+
 	const [imageError, setImageError] = useState<boolean>(false)
 	const placeholderUrl = '/user/avatar-placeholder.png'
-	const supabase = createClient()
-
-	useEffect(() => {
-		fetchProfile()
-		setImageError(false)
-	}, [fetchProfile])
 
 	const onDrop = async (acceptedFiles: File[]) => {
 		if (!acceptedFiles[0]) return
 
-		const file = acceptedFiles[0]
-		setUploading(true)
-
-		try {
-			const cleanFileName = file.name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9._-]/g, '')
-
-			const { error: uploadError } = await supabase.storage
-				.from('avatars')
-				.upload(cleanFileName, file, {
-					cacheControl: '3600',
-					upsert: false
-				})
-
-			if (uploadError) throw uploadError
-
-			const { data } = supabase.storage.from('avatars').getPublicUrl(cleanFileName)
-			const publicUrl = data.publicUrl
-
-			const userResponse = await supabase.auth.getUser()
-			if (userResponse.error) throw userResponse.error
-
-			const user = userResponse.data.user
-			if (!user) throw new Error('Пользователь не авторизован')
-
-			const { data: profileData, error: profileFetchError } = await supabase
-				.from('profiles')
-				.select('avatar_url')
-				.eq('id', user.id)
-				.single()
-
-			if (profileFetchError) throw profileFetchError
-
-			const oldAvatarPath = profileData?.avatar_url
-
-			const { error: profileUpdateError } = await supabase
-				.from('profiles')
-				.update({ avatar_url: publicUrl })
-				.eq('id', user.id)
-
-			if (profileUpdateError) throw profileUpdateError
-
-			if (oldAvatarPath) {
-				const oldFileName = extractFileNameFromUrl(oldAvatarPath)
-
-				if (oldFileName && !isPlaceholderAvatar(oldFileName)) {
-					try {
-						await deleteAvatar(oldFileName)
-					} catch (deleteError: any) {}
-				}
+		updateMutation.mutate(acceptedFiles[0], {
+			onSuccess: () => {
+				toast.success('Аватарка успешно загружена!')
+				setImageError(false)
+			},
+			onError: (error: any) => {
+				console.error('Ошибка при загрузке аватарки:', error)
+				toast.error('Произошла ошибка при загрузке аватарки')
 			}
-
-			await fetchProfile()
-			setImageError(false)
-			toast.success('Аватарка успешно загружена!')
-		} catch (error: any) {
-			console.error('Ошибка при загрузке аватарки:', error)
-			toast.error('Произошла ошибка при загрузке аватарки')
-		} finally {
-			setUploading(false)
-		}
+		})
 	}
 
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -105,7 +46,7 @@ export function SettingsAvatar() {
 
 	return (
 		<div className='flex gap-[2rem]'>
-			{loading ? (
+			{isLoading ? (
 				<SkeletonLoader
 					count={1}
 					className='w-[150px] h-[150px] rounded-full bg-stone-700 flex-shrink-0'
@@ -119,12 +60,8 @@ export function SettingsAvatar() {
 						priority
 						alt='Аватар пользователя'
 						className='rounded-full max-h-[150px] max-w-[150px] object-cover'
-						onError={() => {
-							setImageError(true)
-						}}
-						onLoad={() => {
-							setImageError(false)
-						}}
+						onError={() => setImageError(true)}
+						onLoad={() => setImageError(false)}
 					/>
 				</div>
 			)}
@@ -135,14 +72,25 @@ export function SettingsAvatar() {
 				}`}
 			>
 				<input {...getInputProps()} />
-				{uploading ? (
+				{updateMutation.isPending ? (
 					<p>Загрузка...</p>
 				) : (
 					<div className='flex flex-col'>
 						<p>
 							{isDragActive ? 'Отпустите файл здесь' : 'Перетащите аватар сюда (максимум 1 МБ)'}
 						</p>
-						{avatarUrl !== placeholderUrl && <DeleteAvatarbutton />}
+						{profile?.avatar_url && !deleteMutation.isPending && (
+							<div onClick={e => e.stopPropagation()}>
+								<span>или </span>
+								<button
+									onClick={() => deleteMutation.mutate()}
+									disabled={deleteMutation.isPending}
+									className='text-white border-b border-white hover:text-accent hover:border-accent transition-colors duration-200'
+								>
+									удалите аватар
+								</button>
+							</div>
+						)}
 					</div>
 				)}
 			</div>

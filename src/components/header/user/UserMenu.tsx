@@ -1,16 +1,22 @@
 import Image from 'next/image'
 
+import { useUserProfile } from '@/hooks/useUserProfile'
+
 export function UserMenu() {
-	// sign out, settings, library
+	const { data: profile } = useUserProfile()
+
+	const avatarUrl = profile?.avatar_url ? profile.avatar_url : '/user/avatar-placeholder.png'
 	return (
 		<button>
-			<Image
-				src={'/user/avatar-placeholder.png'}
-				width={32}
-				height={32}
-				alt='Ваш аккаунт'
-				className='shrink-0 rounded-full'
-			/>
+			<div className='relative w-[32px] h-[32px]'>
+				<Image
+					src={avatarUrl}
+					fill
+					sizes='32'
+					alt='Ваш аккаунт'
+					className='object-cover shrink-0 rounded-full'
+				/>
+			</div>
 		</button>
 	)
 }
