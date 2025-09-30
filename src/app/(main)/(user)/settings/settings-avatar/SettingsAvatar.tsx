@@ -14,13 +14,18 @@ import { extractFileNameFromUrl } from '@/utils/supabase/extractFilenameFromUrl'
 import { isPlaceholderAvatar } from '@/utils/supabase/isPlaceholderAvatar'
 import { deleteAvatar } from '@/utils/supabase/userActions/deleteAvatar'
 
+import { DeleteAvatarbutton } from './DeleteAvatarButton'
+
 export function SettingsAvatar() {
 	const { profile, fetchProfile, loading } = useUserStore()
 	const [uploading, setUploading] = useState<boolean>(false)
+	const [imageError, setImageError] = useState<boolean>(false)
+	const placeholderUrl = '/user/avatar-placeholder.png'
 	const supabase = createClient()
 
 	useEffect(() => {
 		fetchProfile()
+		setImageError(false)
 	}, [fetchProfile])
 
 	const onDrop = async (acceptedFiles: File[]) => {
@@ -71,7 +76,6 @@ export function SettingsAvatar() {
 				const oldFileName = extractFileNameFromUrl(oldAvatarPath)
 
 				if (oldFileName && !isPlaceholderAvatar(oldFileName)) {
-					// API route for deleting
 					try {
 						await deleteAvatar(oldFileName)
 					} catch (deleteError: any) {}
@@ -79,6 +83,7 @@ export function SettingsAvatar() {
 			}
 
 			await fetchProfile()
+			setImageError(false)
 			toast.success('Аватарка успешно загружена!')
 		} catch (error: any) {
 			console.error('Ошибка при загрузке аватарки:', error)
@@ -95,7 +100,8 @@ export function SettingsAvatar() {
 		multiple: false
 	})
 
-	const avatarUrl = profile?.avatar_url || '/user/avatar-placeholder.png'
+	// show placeholder if app cant get avatar url
+	const avatarUrl = !imageError && profile?.avatar_url ? profile.avatar_url : placeholderUrl
 
 	return (
 		<div className='flex gap-[2rem]'>
@@ -113,6 +119,12 @@ export function SettingsAvatar() {
 						priority
 						alt='Аватар пользователя'
 						className='rounded-full max-h-[150px] max-w-[150px] object-cover'
+						onError={() => {
+							setImageError(true)
+						}}
+						onLoad={() => {
+							setImageError(false)
+						}}
 					/>
 				</div>
 			)}
@@ -126,7 +138,12 @@ export function SettingsAvatar() {
 				{uploading ? (
 					<p>Загрузка...</p>
 				) : (
-					<p>{isDragActive ? 'Отпустите файл здесь' : 'Перетащите аватар сюда (максимум 1 МБ)'}</p>
+					<div className='flex flex-col'>
+						<p>
+							{isDragActive ? 'Отпустите файл здесь' : 'Перетащите аватар сюда (максимум 1 МБ)'}
+						</p>
+						{avatarUrl !== placeholderUrl && <DeleteAvatarbutton />}
+					</div>
 				)}
 			</div>
 		</div>
