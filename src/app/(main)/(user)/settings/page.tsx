@@ -3,18 +3,14 @@ import { redirect } from 'next/navigation'
 import { Heading } from '@/components/ui/heading/Heading'
 
 import { createClient } from '@/utils/supabase/server'
+import { getUser } from '@/utils/supabase/userActions/getUser'
+
+import { SettingsAvatar } from './settings-avatar/SettingsAvatar'
 
 export default async function UserSettingsPage() {
 	const supabase = await createClient()
 
-	const {
-		data: { user },
-		error
-	} = await supabase.auth.getUser()
-
-	if (error || !user) {
-		redirect('/auth')
-	}
+	const user = await getUser()
 
 	const { data: profile, error: profileError } = await supabase
 		.from('profiles')
@@ -23,11 +19,9 @@ export default async function UserSettingsPage() {
 		.single()
 
 	if (profileError) {
-		// Это сработает только если ошибка на уровне базы (не "нет строки")
 		console.error('Profile query error:', profileError)
 	}
 
-	// Обработка случая, если профиль не найден
 	const username = profile?.username || 'Гость'
 
 	return (
@@ -41,14 +35,7 @@ export default async function UserSettingsPage() {
 						Настройки профиля
 					</Heading>
 				</div>
-				<div className='flex flex-col'>
-					<Heading
-						isH1
-						className='mb-0'
-					>
-						Привет, {username}
-					</Heading>
-				</div>
+				<SettingsAvatar />
 			</div>
 		</section>
 	)

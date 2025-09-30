@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 export function UserMenu() {
-  // sign out, settings, library
+	// sign out, settings, library
 	return (
 		<button>
 			<Image
@@ -9,7 +9,7 @@ export function UserMenu() {
 				width={32}
 				height={32}
 				alt='Ваш аккаунт'
-        className='shrink-0 rounded-full'
+				className='shrink-0 rounded-full'
 			/>
 		</button>
 	)
