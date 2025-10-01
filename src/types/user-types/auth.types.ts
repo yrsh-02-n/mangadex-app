@@ -5,14 +5,14 @@ export type AuthFormData = {
 	confirmPassword?: string
 }
 
-export type RecoveryFormData = {
-	email: string
-}
+// export type RecoveryFormData = {
+// 	email: string
+// }
 
-export type ResetPasswordFormData = {
-	password: string
-	confirmPassword: string
-}
+// export type ResetPasswordFormData = {
+// 	password: string
+// 	confirmPassword: string
+// }
 
 export interface OTPVerificationFormData {
 	otp: string
