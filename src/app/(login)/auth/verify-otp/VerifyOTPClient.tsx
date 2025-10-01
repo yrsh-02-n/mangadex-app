@@ -12,9 +12,9 @@ import { Heading } from '@/components/ui/heading/Heading'
 
 import { createClient } from '@/utils/supabase/client'
 
-import { otpVerificationSchema } from '../authForm/schemas/auth.schemas'
+import { otpVerificationSchema } from '../../../schemas/auth.schemas'
 
-import { OTPVerificationFormData } from '@/types/auth.types'
+import { OTPVerificationFormData } from '@/types/user-types/auth.types'
 
 export default function VerifyOTPClient() {
 	const [email, setEmail] = useState('')

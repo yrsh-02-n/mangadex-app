@@ -57,7 +57,7 @@ export const useUpdateAvatar = () => {
 			return publicUrl
 		},
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['userProfile'] })
+			queryClient.invalidateQueries({ queryKey: ['updateAvatar'] })
 		}
 	})
 }

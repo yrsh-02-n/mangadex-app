@@ -13,9 +13,10 @@ import { Tab } from '@/components/ui/tab/Tab'
 
 import { useIsAuthRedirect } from '@/hooks/useIsAuthRedirect'
 
+import { loginSchema, registerSchema } from '../../../schemas/auth.schemas'
+
 import { handleLogin, handleSignup } from './auth.handlers'
-import { loginSchema, registerSchema } from './schemas/auth.schemas'
-import { AuthFormData } from '@/types/auth.types'
+import { AuthFormData } from '@/types/user-types/auth.types'
 
 export function AuthForm() {
 	const router = useRouter()

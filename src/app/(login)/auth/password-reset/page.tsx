@@ -11,9 +11,11 @@ import { Heading } from '@/components/ui/heading/Heading'
 
 import { resetPassword } from '@/utils/supabase/userActions/userActions'
 
-import { resetPasswordSchema } from '../authForm/schemas/auth.schemas'
+import { resetPasswordSchema } from '../../../schemas/auth.schemas'
 
-import { ResetPasswordFormData } from '@/types/auth.types'
+import { AuthFormData } from '@/types/user-types/auth.types'
+
+type ResetPasswordFormData = Required<Pick<AuthFormData, 'confirmPassword' | 'password'>>
 
 export default function PasswordResetPage() {
 	const router = useRouter()

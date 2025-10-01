@@ -13,9 +13,11 @@ import { useIsAuthRedirect } from '@/hooks/useIsAuthRedirect'
 
 import { recoveryPassword } from '@/utils/supabase/userActions/userActions'
 
-import { recoverySchema } from '../authForm/schemas/auth.schemas'
+import { recoverySchema } from '../../../schemas/auth.schemas'
 
-import { RecoveryFormData } from '@/types/auth.types'
+import { AuthFormData } from '@/types/user-types/auth.types'
+
+type RecoveryFormData = Pick<AuthFormData, 'email'>
 
 export default function PasswordRecoveryPage() {
 	const router = useRouter()
@@ -50,7 +52,9 @@ export default function PasswordRecoveryPage() {
 					>
 						Восстановление пароля
 					</Heading>
-					<p className='max-xs:text-xs'>Введите email, и получите 6-значный код для сброса пароля на почте</p>
+					<p className='max-xs:text-xs'>
+						Введите email, и получите 6-значный код для сброса пароля на почте
+					</p>
 				</div>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
