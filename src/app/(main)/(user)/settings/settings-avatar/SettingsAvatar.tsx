@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
+import { ModifyButton } from '@/components/ui/button/ModifyButton'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { useDeleteAvatar } from '@/hooks/avatar/useDeleteAvatar'
@@ -45,7 +46,7 @@ export function SettingsAvatar() {
 	const avatarUrl = !imageError && profile?.avatar_url ? profile.avatar_url : placeholderUrl
 
 	return (
-		<div className='flex gap-[2rem]'>
+		<div className='flex gap-[2rem] pb-[2rem] border-b border-white'>
 			{isLoading ? (
 				<SkeletonLoader
 					count={1}
@@ -82,13 +83,13 @@ export function SettingsAvatar() {
 						{profile?.avatar_url && !deleteMutation.isPending && (
 							<div onClick={e => e.stopPropagation()}>
 								<span>или </span>
-								<button
+								<ModifyButton
+									hasBorder
 									onClick={() => deleteMutation.mutate()}
 									disabled={deleteMutation.isPending}
-									className='text-white border-b border-white hover:text-accent hover:border-accent transition-colors duration-200'
 								>
 									удалите аватар
-								</button>
+								</ModifyButton>
 							</div>
 						)}
 					</div>

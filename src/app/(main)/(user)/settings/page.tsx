@@ -6,6 +6,7 @@ import { createClient } from '@/utils/supabase/server'
 import { getUser } from '@/utils/supabase/userActions/getUser'
 
 import { SettingsAvatar } from './settings-avatar/SettingsAvatar'
+import { SettingsUsername } from './settings-username/SettingsUsername'
 
 export default async function UserSettingsPage() {
 	const supabase = await createClient()
@@ -36,6 +37,7 @@ export default async function UserSettingsPage() {
 					</Heading>
 				</div>
 				<SettingsAvatar />
+				<SettingsUsername />
 			</div>
 		</section>
 	)
