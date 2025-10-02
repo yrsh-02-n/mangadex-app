@@ -1,9 +1,27 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+
 import { Heading } from '@/components/ui/heading/Heading'
 
-import { SettingsAvatar } from './settings-avatar/SettingsAvatar'
-import { SettingsUsername } from './settings-username/SettingsUsername'
+import { useAuth } from '@/utils/supabase/userActions/useAuth'
 
-export default async function UserSettingsPage() {
+import { SettingsAvatar } from './settings-avatar/SettingsAvatar'
+import { SettingsEmail } from './settings-userdata/SettingsEmail'
+import { SettingsPassword } from './settings-userdata/SettingsPassword'
+import { SettingsUsername } from './settings-userdata/SettingsUsername'
+
+export default function UserSettingsPage() {
+	const router = useRouter()
+	const { isAuthenticated, loading } = useAuth()
+
+	useEffect(() => {
+		if (!loading && !isAuthenticated) {
+			router.push('/auth')
+		}
+	}, [isAuthenticated, loading, router])
+
 	return (
 		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
 			<div className='flex flex-col gap-[1.5rem] bg-primary rounded p-[1.5rem]'>
@@ -16,7 +34,13 @@ export default async function UserSettingsPage() {
 					</Heading>
 				</div>
 				<SettingsAvatar />
-				<SettingsUsername />
+				<div className='flex gap-[4rem] w-full pb-[2rem] border-b border-white mb-[.5rem]'>
+					<SettingsUsername />
+					<SettingsEmail />
+				</div>
+				<div>
+					<SettingsPassword />
+				</div>
 			</div>
 		</section>
 	)
