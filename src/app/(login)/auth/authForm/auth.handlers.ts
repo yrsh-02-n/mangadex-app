@@ -59,8 +59,6 @@ export const handleLogin = async (data: any, router: AppRouterInstance) => {
 				.single()
 
 			if (profileError && profileError.code === 'PGRST116') {
-				// "Row not found"
-				// Профиль не существует → создай его
 				const { error: createError } = await supabase.from('profiles').insert({
 					id: loginData.user.id,
 					username:
@@ -78,7 +76,7 @@ export const handleLogin = async (data: any, router: AppRouterInstance) => {
 			}
 		}
 
-		toast.success('Добро пожаловать, username!')
+		toast.success(`Добро пожаловать!`)
 		router.push('/')
 	} catch (error: any) {
 		toast.error(error.message)

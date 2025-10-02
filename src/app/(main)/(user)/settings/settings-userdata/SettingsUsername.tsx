@@ -25,7 +25,7 @@ export function SettingsUsername() {
 	}, [username])
 
 	return (
-		<div className='flex flex-col gap-[1rem]'>
+		<div className='flex flex-col gap-[1rem] w-[300px]'>
 			<Heading
 				isH1={false}
 				className='mb-0'
@@ -46,7 +46,7 @@ export function SettingsUsername() {
 					</div>
 					<UpdateNameForm
 						isShow={readyToUpdate}
-						classname='max-w-[300px]'
+						classname='w-full'
 						onSuccess={() => setReadyToUpdate(false)}
 					/>
 				</div>

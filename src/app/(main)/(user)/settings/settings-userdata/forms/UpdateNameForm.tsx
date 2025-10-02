@@ -42,7 +42,7 @@ export const UpdateNameForm = ({ isShow, classname, onSuccess }: Props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(useUpdateUsernameHandler)}
-			className={cn('relative', isShow ? '' : 'hidden', classname)}
+			className={cn('relative', isShow ? '' : 'hidden')}
 		>
 			<Controller
 				name='name'

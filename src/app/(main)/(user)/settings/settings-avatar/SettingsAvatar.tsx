@@ -55,6 +55,7 @@ export function SettingsAvatar() {
 			) : (
 				<div className='relative w-[150px] h-[150px] flex-shrink-0'>
 					<Image
+						key={avatarUrl}
 						src={avatarUrl}
 						fill
 						quality={100}
