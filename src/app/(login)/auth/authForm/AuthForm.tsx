@@ -93,7 +93,7 @@ export function AuthForm() {
 						<DefaultField
 							id='email'
 							type='email'
-							placeholder='email'
+							placeholder='Email'
 							className='w-full'
 							size='md'
 							variant='default'

@@ -26,7 +26,7 @@ export function SettingsEmail() {
 	}, [email])
 
 	return (
-		<div className='flex flex-col gap-[1rem] w-[300px]'>
+		<div className='flex flex-col gap-[1rem] w-[300px] max-md:w-full'>
 			<Heading
 				isH1={false}
 				className='mb-0'
@@ -34,9 +34,9 @@ export function SettingsEmail() {
 				Ваш email:
 			</Heading>
 			{!isLoading && (
-				<div className='flex flex-col gap-[1rem]'>
-					<div className='flex items-end gap-[.8rem]'>
-						<p className='text-xl'>{currentEmail}</p>
+				<div className='flex flex-col gap-[1rem] max-md:gap-[.5rem]'>
+					<div className='flex items-end gap-[.8rem] max-s:flex-col max-s:items-start max-s:gap-0'>
+						<p className='text-lg'>{currentEmail}</p>
 						<ModifyButton
 							onClick={() => setReadyToUpdate(true)}
 							disabled={updateMutation.isPending}

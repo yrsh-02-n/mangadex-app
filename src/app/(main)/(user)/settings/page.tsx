@@ -34,7 +34,7 @@ export default function UserSettingsPage() {
 					</Heading>
 				</div>
 				<SettingsAvatar />
-				<div className='flex gap-[4rem] w-full pb-[2rem] border-b border-white mb-[.5rem]'>
+				<div className='flex gap-[4rem] w-full pb-[2rem] border-b border-white mb-[.5rem] max-lg:flex-col max-lg:gap-[1rem]'>
 					<SettingsUsername />
 					<SettingsEmail />
 				</div>

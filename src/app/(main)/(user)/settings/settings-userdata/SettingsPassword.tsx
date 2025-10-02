@@ -13,7 +13,7 @@ export function SettingsPassword() {
 	const [readyToUpdate, setReadyToUpdate] = useState<boolean>(false)
 
 	return (
-		<div className='flex flex-col gap-[1rem] w-[300px]'>
+		<div className='flex flex-col gap-[1rem] w-[300px] max-md:w-full'>
 			<div className='flex'>
 				<Button
 					variable='primary'

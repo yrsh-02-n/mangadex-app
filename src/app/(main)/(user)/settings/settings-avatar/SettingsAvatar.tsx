@@ -1,10 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 import toast from 'react-hot-toast'
 
+import { Button } from '@/components/ui/button/Button'
 import { ModifyButton } from '@/components/ui/button/ModifyButton'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
@@ -42,11 +43,25 @@ export function SettingsAvatar() {
 		multiple: false
 	})
 
+	// mobile upload items
+	const mobileInputRef = useRef<HTMLInputElement>(null)
+
+	const handleMobileUploadClick = () => {
+		mobileInputRef.current?.click()
+	}
+
+	const handleMobileFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files
+		if (files && files.length > 0) {
+			onDrop(Array.from(files))
+		}
+	}
+
 	// show placeholder if app cant get avatar url
 	const avatarUrl = !imageError && profile?.avatar_url ? profile.avatar_url : placeholderUrl
 
 	return (
-		<div className='flex gap-[2rem] pb-[2rem] border-b border-white'>
+		<div className='flex gap-[2rem] pb-[2rem] border-b border-white max-md:flex-col max-md:items-center'>
 			{isLoading ? (
 				<SkeletonLoader
 					count={1}
@@ -69,7 +84,7 @@ export function SettingsAvatar() {
 			)}
 			<div
 				{...getRootProps()}
-				className={`flex items-center justify-center border-2 border-dashed rounded p-6 text-center cursor-pointer w-full hover:border-accent hover:bg-bg/30 transition-all duration-300 ${
+				className={`flex items-center justify-center border-2 border-dashed rounded p-6 text-center cursor-pointer w-full hover:border-accent hover:bg-bg/30 transition-all duration-300 max-md:hidden ${
 					isDragActive ? 'border-accent bg-bg/30' : 'border-white'
 				}`}
 			>
@@ -94,6 +109,31 @@ export function SettingsAvatar() {
 							</div>
 						)}
 					</div>
+				)}
+			</div>
+			<div className='w-full flex-col gap-[1rem] hidden max-md:flex'>
+				<input
+					type='file'
+					ref={mobileInputRef}
+					accept='image/*'
+					onChange={handleMobileFileChange}
+					className='hidden'
+				/>
+				<Button
+					variable='primary'
+					className='w-full'
+					onClick={handleMobileUploadClick}
+				>
+					Загрузить аватар
+				</Button>
+				{profile?.avatar_url && !deleteMutation.isPending && (
+					<Button
+						variable='secondary'
+						className={'border-white border w-full'}
+						onClick={() => deleteMutation.mutate()}
+					>
+						Удалить аватар
+					</Button>
 				)}
 			</div>
 		</div>

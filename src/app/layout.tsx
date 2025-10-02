@@ -7,7 +7,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang='ru'>
 			<body className={`${murecho.variable} antialiased`}>
-				<Toaster />
+				<Toaster
+					toastOptions={{
+						style: {
+							backgroundColor: '#272727',
+							color: 'white'
+						}
+					}}
+				/>
 				{children}
 			</body>
 		</html>
