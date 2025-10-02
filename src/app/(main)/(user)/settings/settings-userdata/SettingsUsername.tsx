@@ -25,7 +25,7 @@ export function SettingsUsername() {
 	}, [username])
 
 	return (
-		<div className='flex flex-col gap-[1rem] w-[300px]'>
+		<div className='flex flex-col gap-[1rem] w-[300px] max-md:w-full max-md:gap-[.5rem]'>
 			<Heading
 				isH1={false}
 				className='mb-0'
@@ -33,9 +33,9 @@ export function SettingsUsername() {
 				Ваш никнейм:
 			</Heading>
 			{!isLoading && (
-				<div className='flex flex-col gap-[1rem]'>
-					<div className='flex items-end gap-[.8rem]'>
-						<p className='text-xl'>{currentUsername}</p>
+				<div className='flex flex-col gap-[1rem] max-md:gap-[.5rem]'>
+					<div className='flex items-end gap-[.8rem] max-s:flex-col max-s:items-start max-s:gap-0'>
+						<p className='text-lg'>{currentUsername}</p>
 						<ModifyButton
 							onClick={() => setReadyToUpdate(true)}
 							disabled={updateMutation.isPending}

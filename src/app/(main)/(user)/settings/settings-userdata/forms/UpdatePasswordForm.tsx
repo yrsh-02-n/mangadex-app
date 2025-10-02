@@ -45,10 +45,10 @@ export const UpdatePasswordForm = ({ isShow, classname, onSuccess }: Props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(useUpdatePasswordHandler)}
-			className={cn(isShow ? '' : 'hidden')}
+			className={cn(isShow ? 'max-md:w-full' : 'hidden')}
 		>
-			<div className='flex gap-[1rem] w-full'>
-				<div className='w-[300px]'>
+			<div className='flex gap-[1rem] w-full max-lg:flex-col max-lg:gap-[1rem]'>
+				<div className='w-[300px] max-md:w-full'>
 					<Controller
 						name='password'
 						control={control}
@@ -70,7 +70,7 @@ export const UpdatePasswordForm = ({ isShow, classname, onSuccess }: Props) => {
 						)}
 					/>
 				</div>
-				<div className='w-[300px]'>
+				<div className='w-[300px] max-md:w-full'>
 					<Controller
 						name='confirmPassword'
 						control={control}
@@ -94,7 +94,7 @@ export const UpdatePasswordForm = ({ isShow, classname, onSuccess }: Props) => {
 				</div>
 				<Button
 					variable='primary'
-					className='h-[2rem] w-[15rem]'
+					className='h-[2rem] w-[200px] max-lg:w-[300px] max-md:w-full'
 				>
 					Сменить пароль
 				</Button>

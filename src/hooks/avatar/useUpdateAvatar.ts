@@ -22,7 +22,7 @@ export const useUpdateAvatar = () => {
 			if (uploadError) throw uploadError
 
 			const { data } = supabase.storage.from('avatars').getPublicUrl(cleanFileName)
-			const publicUrl = `${data.publicUrl}?t=${Date.now()}`
+			const publicUrl = data.publicUrl
 
 			const user = userResponse.data.user
 			if (!user) throw new Error('Пользователь не авторизован')
