@@ -60,7 +60,7 @@ export function SearchCard({ attributes, id, relationships }: ITitle) {
 							))}
 						</div>
 						<div>
-							<p className='line-clamp-2 text-balance text-white max-lg:hidden'>{description}</p>
+							<p className='line-clamp-2 text-balance text-white max-lg:hidden break-all'>{description}</p>
 						</div>
 					</div>
 				</div>

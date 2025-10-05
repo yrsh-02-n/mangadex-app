@@ -64,7 +64,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 							))}
 						</div>
 						<div>
-							<p className='line-clamp-3 text-balance max-s:line-clamp-3 max-w-[95%]'>
+							<p className='line-clamp-3 text-balance max-s:line-clamp-3 max-w-[95%] break-all'>
 								{description}
 							</p>
 						</div>
