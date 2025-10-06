@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 
+// Теперь хук может принимать опциональный buttonRef
 export const useClickOutside = <T extends HTMLElement = HTMLElement>(
-	buttonRef: React.RefObject<HTMLElement | null>,
 	handler: () => void,
-	deps: React.DependencyList = []
+	deps: React.DependencyList = [],
+	buttonRef?: React.RefObject<HTMLElement | null> // опциональный параметр
 ) => {
 	const dropdownRef = useRef<T>(null)
 
@@ -12,7 +13,7 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
 			if (
 				dropdownRef.current &&
 				!dropdownRef.current.contains(event.target as Node) &&
-				buttonRef.current &&
+				buttonRef?.current &&
 				!buttonRef.current.contains(event.target as Node)
 			) {
 				handler()
@@ -24,7 +25,7 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
 		return () => {
 			document.removeEventListener('mousedown', handleClick)
 		}
-	}, deps)
+	}, [buttonRef, handler, ...deps])
 
 	return dropdownRef
 }

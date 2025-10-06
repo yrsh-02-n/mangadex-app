@@ -9,7 +9,7 @@ import { useClickOutside } from '@/hooks/useClickOutside'
 export const LibraryButton = () => {
 	const [isShow, setIsShow] = useState<boolean>(false)
 	const buttonRef = useRef<HTMLButtonElement>(null)
-	const dropdownRef = useClickOutside<HTMLDivElement>(buttonRef, () => setIsShow(false), [isShow])
+	const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsShow(false), [isShow], buttonRef)
 
 	const toggleIsShow = () => {
 		setIsShow(prev => !prev)
