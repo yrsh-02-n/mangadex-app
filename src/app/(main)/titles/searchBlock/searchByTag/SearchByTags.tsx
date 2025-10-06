@@ -5,6 +5,8 @@ import { Modal } from '@/components/ui/modal/Modal'
 
 import { useSearchStore } from '@/store/search.store'
 
+import { useClickOutside } from '@/hooks/useClickOutside'
+
 import { SelectedTagsDisplay } from './tagsModal/SelectedTagsDisplay'
 import { TagsModalItem } from './tagsModal/TagsModalItem'
 import { mangaService } from '@/services/manga.service'
@@ -29,27 +31,7 @@ export function SearchByTags() {
 
 	const tagsData = tags.data.data
 
-	// close modal outside and by click on input
-	useEffect(() => {
-		const handleClick = (event: MouseEvent) => {
-			if (
-				buttonRef.current &&
-				!buttonRef.current.contains(event.target as Node) &&
-				modalRef.current &&
-				!modalRef.current.contains(event.target as Node)
-			) {
-				setIsShow(false)
-			}
-		}
-
-		if (isShow) {
-			document.addEventListener('mousedown', handleClick)
-		}
-
-		return () => {
-			document.removeEventListener('mousedown', handleClick)
-		}
-	}, [isShow])
+	const dropdownRef = useClickOutside<HTMLDivElement>(() => setIsShow(false), [isShow])
 
 	// clear field
 	const handleResetField = (e: React.MouseEvent) => {
@@ -61,7 +43,10 @@ export function SearchByTags() {
 	}
 
 	return (
-		<div className='w-full relative'>
+		<div
+			className='w-full relative'
+			ref={dropdownRef}
+		>
 			<p className='mb-[.4rem]'>Фильтр по тегам</p>
 			<button
 				ref={buttonRef}

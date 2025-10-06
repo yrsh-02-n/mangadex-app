@@ -1,24 +1,24 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { ListingContainer } from '@/components/listingContainer/ListingContainer'
 import { Heading } from '@/components/ui/heading/Heading'
 import { Tab } from '@/components/ui/tab/Tab'
 
-import { useSearchQuery } from '@/hooks/useSearchQuery'
-
 import { useAuth } from '@/utils/supabase/userActions/useAuth'
+import { useUserLibrary } from '@/utils/supabase/userActions/useUserLibrary'
 
 import { LibrarySection } from './librarySection/LibrarySection'
+import { ReadingStatus } from '@/types/enums'
+import { IUserLibrary } from '@/types/user-types/library.types'
 
 export default function UserLibraryPage() {
 	const router = useRouter()
 	const { isAuthenticated, loading } = useAuth()
-	const [currentSection, setCurrentSection] = useState<
-		'reading' | 'planned' | 'completed' | 'paused' | 'dropped'
-	>('reading')
+	const [currentSection, setCurrentSection] = useState<IUserLibrary['section']>(
+		ReadingStatus.READING
+	)
 
 	useEffect(() => {
 		if (!loading && !isAuthenticated) {
@@ -26,28 +26,30 @@ export default function UserLibraryPage() {
 		}
 	}, [isAuthenticated, loading, router])
 
-	// for test
-	const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage, isError } =
-		useSearchQuery()
+	const { data: library, isLoading, isError } = useUserLibrary()
 
-	const allTitles = data?.pages.flatMap(page => page.data) || []
+	useEffect(() => {
+		if (library) {
+			console.log(library)
+		}
+	}, [library])
 
 	let sectionNumber = 0
 
 	switch (currentSection) {
-		case 'reading':
+		case ReadingStatus.READING:
 			sectionNumber = 1
 			break
-		case 'planned':
+		case ReadingStatus.PLANNED:
 			sectionNumber = 2
 			break
-		case 'completed':
+		case ReadingStatus.COMPLETED:
 			sectionNumber = 3
 			break
-		case 'paused':
+		case ReadingStatus.PAUSED:
 			sectionNumber = 4
 			break
-		case 'dropped':
+		case ReadingStatus.DROPPED:
 			sectionNumber = 5
 			break
 		default:
@@ -64,28 +66,28 @@ export default function UserLibraryPage() {
 				<div className='flex'>
 					<Tab
 						name='Читаю'
-						isActive={currentSection === 'reading'}
-						onClick={() => setCurrentSection('reading')}
+						isActive={currentSection === ReadingStatus.READING}
+						onClick={() => setCurrentSection(ReadingStatus.READING)}
 					/>
 					<Tab
 						name='В планах'
-						isActive={currentSection === 'planned'}
-						onClick={() => setCurrentSection('planned')}
+						isActive={currentSection === ReadingStatus.PLANNED}
+						onClick={() => setCurrentSection(ReadingStatus.PLANNED)}
 					/>
 					<Tab
 						name='Прочитано'
-						isActive={currentSection === 'completed'}
-						onClick={() => setCurrentSection('completed')}
+						isActive={currentSection === ReadingStatus.COMPLETED}
+						onClick={() => setCurrentSection(ReadingStatus.COMPLETED)}
 					/>
 					<Tab
 						name='Отложено'
-						isActive={currentSection === 'paused'}
-						onClick={() => setCurrentSection('paused')}
+						isActive={currentSection === ReadingStatus.PAUSED}
+						onClick={() => setCurrentSection(ReadingStatus.PAUSED)}
 					/>
 					<Tab
 						name='Брошено'
-						isActive={currentSection === 'dropped'}
-						onClick={() => setCurrentSection('dropped')}
+						isActive={currentSection === ReadingStatus.DROPPED}
+						onClick={() => setCurrentSection(ReadingStatus.DROPPED)}
 					/>
 				</div>
 				<div>
@@ -93,7 +95,7 @@ export default function UserLibraryPage() {
 					<LibrarySection
 						isLoading={isLoading}
 						isError={isError}
-						titles={allTitles}
+						titles={library?.[currentSection] || []}
 					/>
 				</div>
 			</div>

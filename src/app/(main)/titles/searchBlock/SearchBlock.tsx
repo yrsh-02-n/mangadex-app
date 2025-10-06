@@ -33,14 +33,14 @@ export function SearchBlock({ data }: SearchBlockProps) {
 				<Button
 					variable='primary'
 					onClick={applyFilters}
-          className='max-md:w-full'
+					className='max-md:w-full'
 				>
 					Искать
 				</Button>
 				<Button
 					variable='secondary'
 					onClick={resetSelectedFilters}
-          className='max-md:w-full'
+					className='max-md:w-full'
 				>
 					Сбросить фильтры
 				</Button>

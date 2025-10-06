@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ReactNode } from 'react'
+import { ReactNode, forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 interface ButtonProps {
@@ -14,29 +14,41 @@ interface ButtonProps {
 	formAction?: (formData: FormData) => Promise<void>
 }
 
-export function Button({
-	children,
-	variable,
-	isDisabled,
-	onClick,
-	className,
-	isLink = false,
-	type = 'button',
-	link
-}: ButtonProps) {
-	return isLink ? (
-		<Link
-			href={link as string}
-			className={twMerge('self-start', className)}
-		>
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	(
+		{ children, variable, isDisabled, onClick, className, isLink = false, type = 'button', link },
+		ref
+	) => {
+		return isLink ? (
+			<Link
+				href={link as string}
+				className={twMerge('self-start', className)}
+			>
+				<button
+					ref={ref}
+					disabled={isDisabled}
+					className={twMerge(
+						'disabled:bg-disabled text-lg flex gap-[.5rem] justify-center items-center text-white px-[1rem] py-[.5rem] rounded transition-colors duration-200',
+						variable === 'primary'
+							? 'bg-accent hover:bg-accent-hover'
+							: 'bg-primary hover:bg-primary-hover',
+						isDisabled && 'cursor-not-allowed',
+						className
+					)}
+					onClick={onClick}
+				>
+					{children}
+				</button>
+			</Link>
+		) : (
 			<button
+				ref={ref}
 				disabled={isDisabled}
 				className={twMerge(
 					'disabled:bg-disabled text-lg flex gap-[.5rem] justify-center items-center text-white px-[1rem] py-[.5rem] rounded transition-colors duration-200',
 					variable === 'primary'
 						? 'bg-accent hover:bg-accent-hover'
 						: 'bg-primary hover:bg-primary-hover',
-
 					isDisabled && 'cursor-not-allowed',
 					className
 				)}
@@ -44,22 +56,8 @@ export function Button({
 			>
 				{children}
 			</button>
-		</Link>
-	) : (
-		<button
-			disabled={isDisabled}
-			className={twMerge(
-				'disabled:bg-disabled text-lg flex gap-[.5rem] justify-center items-center text-white px-[1rem] py-[.5rem] rounded transition-colors duration-200',
-				variable === 'primary'
-					? 'bg-accent hover:bg-accent-hover'
-					: 'bg-primary hover:bg-primary-hover',
+		)
+	}
+)
 
-				isDisabled && 'cursor-not-allowed',
-				className
-			)}
-			onClick={onClick}
-		>
-			{children}
-		</button>
-	)
-}
+Button.displayName = 'Button'
