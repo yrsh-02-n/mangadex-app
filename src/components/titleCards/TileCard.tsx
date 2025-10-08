@@ -1,27 +1,15 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from 'next/image'
+import Link from 'next/link'
 
+import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
+import { getCoverArt } from '@/utils/getCoverArt'
+import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
+import { getTags } from '@/utils/getTags'
 
-import { PUBLIC_ROUTES } from '@/config/public-routes.config';
+import { Tag } from '../ui/tag/Tag'
 
-
-
-import { getCoverArt } from '@/utils/getCoverArt';
-import { getLocalizedTitle } from '@/utils/getLocalizedTitle';
-import { getTags } from '@/utils/getTags';
-
-
-
-import { Tag } from '../ui/tag/Tag';
-
-
-
-import { ITitle } from '@/types/title.types';
-
-
-
-
+import { ITitle } from '@/types/title.types'
 
 export function TileCard({ attributes, id, relationships }: ITitle) {
 	// utils
@@ -33,16 +21,25 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 		<div>
 			<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 				<div className='relative aspect-[8/11]'>
-					<Image
-            sizes='max-width:334px'
+					{/* <Image
+						sizes='max-width:334px'
 						fill
 						alt={`${title}`}
 						src={coverUrl}
 						className='rounded shadow-md object-cover'
-            priority
-            unoptimized
+						priority
+						unoptimized
+					/> */}
 
+					<img
+						src={coverUrl}
+						alt={title}
+						width={200}
+						height={280}
+						loading='lazy'
+						className='rounded-sm shadow-md object-cover'
 					/>
+
 					<div className='absolute inset-0 flex items-start'>
 						<Tag
 							className='ml-[.5rem] mt-[.5rem]'
