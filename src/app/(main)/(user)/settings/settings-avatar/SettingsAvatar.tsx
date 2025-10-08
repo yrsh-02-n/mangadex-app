@@ -79,6 +79,7 @@ export function SettingsAvatar() {
 						className='rounded-full max-h-[150px] max-w-[150px] object-cover'
 						onError={() => setImageError(true)}
 						onLoad={() => setImageError(false)}
+						unoptimized
 					/>
 				</div>
 			)}

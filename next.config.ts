@@ -7,17 +7,14 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'uploads.mangadex.org',
-				port: '',
-				pathname: '/covers/**'
+				hostname: 'uploads.mangadex.org'
 			},
 			{
 				protocol: 'https',
-				hostname: 'keqfumjwzqtqdlwfwpao.supabase.co',
-				port: '',
-				pathname: '/**'
+				hostname: 'keqfumjwzqtqdlwfwpao.supabase.co'
 			}
-		]
+		],
+		domains: ['uploads.mangadex.org', 'keqfumjwzqtqdlwfwpao.supabase.co']
 	}
 }
 

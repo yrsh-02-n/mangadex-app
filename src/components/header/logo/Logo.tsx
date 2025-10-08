@@ -16,6 +16,7 @@ export function Logo({ isSidebarOpen }: ILogoProps) {
 				width={isSidebarOpen ? 220 : 32}
 				height={isSidebarOpen ? 120 : 32}
 				alt='Логотип сайта'
+				unoptimized
 			/>
 		</Link>
 	)

@@ -41,6 +41,7 @@ export default function RandomPage() {
 					width='200'
 					alt='loader'
 					src={'/loader.gif'}
+					unoptimized
 				/>
 				<p className='text-xl font-semibold'>Загрузка...</p>
 			</div>

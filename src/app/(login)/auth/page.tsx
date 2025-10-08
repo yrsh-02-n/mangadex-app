@@ -13,6 +13,7 @@ export default function AuthPage() {
 					quality={50}
 					priority
 					className='object-cover'
+					unoptimized
 				/>
 			</div>
 			<div className='flex items-center justify-center max-lg:w-full'>
@@ -21,4 +22,3 @@ export default function AuthPage() {
 		</div>
 	)
 }
-
