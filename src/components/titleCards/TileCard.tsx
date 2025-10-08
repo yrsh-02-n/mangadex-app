@@ -21,7 +21,7 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 		<div>
 			<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 				<div className='relative aspect-[8/11]'>
-					{/* <Image
+					<Image
 						sizes='max-width:334px'
 						fill
 						alt={`${title}`}
@@ -29,15 +29,6 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 						className='rounded shadow-md object-cover'
 						priority
 						unoptimized
-					/> */}
-
-					<img
-						src={coverUrl}
-						alt={title}
-						width={200}
-						height={280}
-						loading='lazy'
-						className='rounded-sm shadow-md object-cover'
 					/>
 
 					<div className='absolute inset-0 flex items-start'>
