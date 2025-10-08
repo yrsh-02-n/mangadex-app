@@ -13,8 +13,7 @@ const nextConfig: NextConfig = {
 				protocol: 'https',
 				hostname: 'keqfumjwzqtqdlwfwpao.supabase.co'
 			}
-		],
-		domains: ['uploads.mangadex.org', 'keqfumjwzqtqdlwfwpao.supabase.co']
+		]
 	}
 }
 

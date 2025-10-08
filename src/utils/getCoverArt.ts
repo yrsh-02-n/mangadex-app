@@ -21,13 +21,27 @@ export const getCoverArt = (
 
 	const baseFileName = coverRel.attributes.fileName
 
+	let imageUrl: string
+
 	switch (size) {
 		case 'thumbnail':
-			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
+			imageUrl = `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
+			break
 		case 'small':
-			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.512.jpg`
+			imageUrl = `https://uploads.mangadex.org/covers/${id}/${baseFileName}.512.jpg`
+			break
 		case 'original':
 		default:
-			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
+			imageUrl = `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
+			break
 	}
+
+	// Используем прокси для изображений, если включено
+	const useProxy = process.env.NEXT_PUBLIC_USE_IMAGE_PROXY === 'true'
+
+	if (useProxy) {
+		return `/api/image-proxy?url=${encodeURIComponent(imageUrl)}`
+	}
+
+	return imageUrl
 }
