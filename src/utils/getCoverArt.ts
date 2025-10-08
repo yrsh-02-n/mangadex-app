@@ -8,7 +8,7 @@ export const getCoverArt = (
 	size?: 'thumbnail' | 'small' | 'medium' | 'large' | 'original'
 ) => {
 	if (!relationships || !id) {
-		return '/placeholder-cover.png'
+		return '/placeholder-cover.jpg'
 	}
 
 	const coverRel = relationships?.find(
@@ -28,6 +28,6 @@ export const getCoverArt = (
 			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.512.jpg`
 		case 'original':
 		default:
-			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}`
+			return `https://uploads.mangadex.org/covers/${id}/${baseFileName}.256.jpg`
 	}
 }

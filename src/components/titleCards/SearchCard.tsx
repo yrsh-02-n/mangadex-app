@@ -41,6 +41,7 @@ export function SearchCard({ attributes, id, relationships }: ITitle) {
 							src={coverUrl}
 							className='rounded-tl-sm rounded-bl-sm shadow-md object-cover max-s:opacity-10 z-[1]'
 							priority
+							unoptimized
 						/>
 					</div>
 
