@@ -7,5 +7,6 @@ export interface IUserLibrary {
 		| ReadingStatus.COMPLETED
 		| ReadingStatus.PAUSED
 		| ReadingStatus.DROPPED
+		| string
 	mangaId: string
 }

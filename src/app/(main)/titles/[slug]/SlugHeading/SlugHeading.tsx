@@ -1,7 +1,6 @@
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
 
-import { SelectLibrarySection } from '@/components/selectLibrarySection/SelectLibrarySection'
-import { Button } from '@/components/ui/button/Button'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 import { TitleStatus } from '@/components/ui/status/TitleStatus'
@@ -16,7 +15,7 @@ import { AuthorArtist } from './AuthorArtist'
 import { LibraryButton } from './LibraryButton'
 import { MangaRes } from '@/types/api.types'
 
-export function SlugHeading({ data }: MangaRes) {
+export function SlugHeading({ data, mangaId }: { data: MangaRes['data']; mangaId: string }) {
 	const mangaData = data?.data
 	const title = mangaData?.attributes ? getLocalizedTitle(mangaData.attributes) : ''
 	// title on original lang
@@ -40,6 +39,7 @@ export function SlugHeading({ data }: MangaRes) {
 							src={coverUrl}
 							className='rounded-sm shadow-md object-cover max-[810px]:object-top'
 							priority
+              unoptimized
 						/>
 					</div>
 
@@ -84,7 +84,7 @@ export function SlugHeading({ data }: MangaRes) {
 								{year !== null ? <p>{'Год выхода: ' + year}</p> : <p>{'Год выхода: ниезвестен'}</p>}
 							</div>
 							<div className='relative w-fit'>
-								<LibraryButton />
+								<LibraryButton mangaId={mangaId}  />
 							</div>
 						</div>
 					</div>

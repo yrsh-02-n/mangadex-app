@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { RadioList } from '../ui/radioList/RadioList'
@@ -7,6 +6,8 @@ import { ReadingStatus } from '@/types/enums'
 
 interface Props {
 	isShow: boolean
+	selectedStatus: string
+	onChange: (value: string) => void
 }
 
 const statusOptions = [
@@ -17,20 +18,18 @@ const statusOptions = [
 	{ value: ReadingStatus.DROPPED, label: 'Брошено' }
 ]
 
-export function SelectLibrarySection({ isShow }: Props) {
-	const [selectedStatus, setSelectedStatus] = useState<string>('')
-
+export function SelectLibrarySection({ isShow, selectedStatus, onChange }: Props) {
 	return (
 		<div
 			className={twMerge(
-				'absolute bg-primary py-[.5rem] top-[2.74rem] left-0 right-0 rounded-b hidden',
+				'absolute bg-bg py-[.5rem] top-[2.74rem] left-0 right-0 rounded-b hidden shadow-xl',
 				isShow && 'block'
 			)}
 		>
 			<RadioList
 				options={statusOptions}
 				selected={selectedStatus}
-				onChange={setSelectedStatus}
+				onChange={onChange}
 			/>
 		</div>
 	)

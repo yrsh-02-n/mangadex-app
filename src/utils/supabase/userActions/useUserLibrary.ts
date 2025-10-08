@@ -2,9 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 
 import { getUserLibrary } from '../mangaActions/mangaActions'
 
-export const useUserLibrary = () => {
+export function useUserLibrary() {
 	return useQuery({
 		queryKey: ['userLibrary'],
-		queryFn: getUserLibrary
+		queryFn: getUserLibrary,
+		enabled: true
 	})
 }

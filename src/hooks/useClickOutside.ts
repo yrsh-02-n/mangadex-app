@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react'
 
-// Теперь хук может принимать опциональный buttonRef
 export const useClickOutside = <T extends HTMLElement = HTMLElement>(
 	handler: () => void,
 	deps: React.DependencyList = [],
-	buttonRef?: React.RefObject<HTMLElement | null> // опциональный параметр
+	buttonRef?: React.RefObject<HTMLElement | null>
 ) => {
 	const dropdownRef = useRef<T>(null)
 

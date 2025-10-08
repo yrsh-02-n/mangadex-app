@@ -40,6 +40,8 @@ export function TileCard({ attributes, id, relationships }: ITitle) {
 						src={coverUrl}
 						className='rounded shadow-md object-cover'
             priority
+            unoptimized
+
 					/>
 					<div className='absolute inset-0 flex items-start'>
 						<Tag

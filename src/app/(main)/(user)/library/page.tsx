@@ -34,28 +34,6 @@ export default function UserLibraryPage() {
 		}
 	}, [library])
 
-	let sectionNumber = 0
-
-	switch (currentSection) {
-		case ReadingStatus.READING:
-			sectionNumber = 1
-			break
-		case ReadingStatus.PLANNED:
-			sectionNumber = 2
-			break
-		case ReadingStatus.COMPLETED:
-			sectionNumber = 3
-			break
-		case ReadingStatus.PAUSED:
-			sectionNumber = 4
-			break
-		case ReadingStatus.DROPPED:
-			sectionNumber = 5
-			break
-		default:
-			sectionNumber = 1
-			break
-	}
 
 	return (
 		<section className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
@@ -91,11 +69,10 @@ export default function UserLibraryPage() {
 					/>
 				</div>
 				<div>
-					section {sectionNumber}
 					<LibrarySection
 						isLoading={isLoading}
 						isError={isError}
-						titles={library?.[currentSection] || []}
+						titles={library?.[currentSection.toLowerCase() as keyof typeof library] || []}
 					/>
 				</div>
 			</div>

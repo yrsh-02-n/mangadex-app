@@ -5,7 +5,6 @@ import { useState } from 'react'
 import { ListingContainer } from '@/components/listingContainer/ListingContainer'
 import { GridCard } from '@/components/titleCards/GridCard'
 import { TileCard } from '@/components/titleCards/TileCard'
-import { DisplayModeSwitcher } from '@/components/ui/DisplayModeSwitcher/DisplayModeSwitcher'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 
 import { ITitle } from '@/types/title.types'
@@ -23,28 +22,34 @@ export function LibrarySection({ isLoading, titles, isError, onModeChange }: Pro
 	return (
 		<div>
 			{!isLoading ? (
-				<ListingContainer
-					onModeChange={setDisplayMode}
-					displayMode={displayMode}
-				>
-					{displayMode === 'tiles'
-						? titles.map((title, index) => (
-								<TileCard
-									key={index}
-									attributes={title.attributes}
-									id={title.id}
-									relationships={title.relationships}
-								/>
-							))
-						: titles.map((title, index) => (
-								<GridCard
-									key={index}
-									attributes={title.attributes}
-									id={title.id}
-									relationships={title.relationships}
-								/>
-							))}
-				</ListingContainer>
+				titles.length > 0 ? (
+					<ListingContainer
+						onModeChange={setDisplayMode}
+						displayMode={displayMode}
+					>
+						{displayMode === 'tiles'
+							? titles.map((title, index) => (
+									<TileCard
+										key={index}
+										attributes={title.attributes}
+										id={title.id}
+										relationships={title.relationships}
+									/>
+								))
+							: titles.map((title, index) => (
+									<GridCard
+										key={index}
+										attributes={title.attributes}
+										id={title.id}
+										relationships={title.relationships}
+									/>
+								))}
+					</ListingContainer>
+				) : (
+					<div className='text-center py-8'>
+						<p className='text-lg'>Раздел пуст</p>
+					</div>
+				)
 			) : (
 				<ListingContainer
 					onModeChange={setDisplayMode}
