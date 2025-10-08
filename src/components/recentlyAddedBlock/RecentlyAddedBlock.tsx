@@ -45,7 +45,7 @@ export function RecentlyAddedBlock() {
 				/>
 			)}
 			<div className='w-full relative px-[1.5rem]'>
-				<div className='absolute z-[-1] w-full h-[32rem] right-0 max-lg:h-[34rem]'>
+				<div className='absolute z-[-1] w-full h-[32rem] right-0 max-lg:h-[34rem] blur-md'>
 					<Image
 						src={getCoverArt(activeTitle?.relationships, activeTitle?.id) || ''}
 						alt='Background'
