@@ -19,23 +19,43 @@ export async function addMangaToLibrary({ section, mangaId }: IUserLibrary) {
 		throw new Error('Пользователь не авторизован')
 	}
 
-	console.log('Добавляем в библиотеку:', { user_id: user.id, manga_id: mangaId, section })
+	// Проверяем, есть ли уже запись
+	const { data: existing, error: fetchError } = await supabase
+		.from('user_library')
+		.select('user_id, manga_id')
+		.eq('user_id', user.id)
+		.eq('manga_id', mangaId)
+		.single()
 
-	const { error } = await supabase.from('user_library').upsert(
-		{
+	if (fetchError && fetchError.code !== 'PGRST116') {
+		console.error('Ошибка при проверке существования записи:', fetchError)
+		throw new Error(fetchError.message || 'Ошибка при проверке существования записи')
+	}
+
+	if (existing) {
+		// Обновляем
+		const { error } = await supabase
+			.from('user_library')
+			.update({ section })
+			.eq('user_id', user.id)
+			.eq('manga_id', mangaId)
+		if (error) {
+			console.error('Ошибка при обновлении статуса:', error)
+			throw new Error(error.message || 'Ошибка при обновлении статуса')
+		}
+	} else {
+		// Вставляем
+		const { error } = await supabase.from('user_library').insert({
 			user_id: user.id,
 			manga_id: mangaId,
 			section: section
-		},
-		{ onConflict: 'user_id, manga_id' }
-	)
-
-	if (error) {
-		console.error('Ошибка при добавлении манги в библиотеку:', error)
-		throw error
+		})
+		if (error) {
+			console.error('Ошибка при добавлении манги:', error)
+			throw new Error(error.message || 'Ошибка при добавлении манги')
+		}
 	}
 }
-
 
 export async function getUserLibrary() {
 	const {
@@ -54,14 +74,12 @@ export async function getUserLibrary() {
 
 	if (error) {
 		console.error('Ошибка при получении библиотеки:', error)
-		throw error
+		throw new Error(error.message || 'Ошибка при получении библиотеки')
 	}
-
 
 	const mangaIds = data.map(item => item.manga_id)
 	const mangaPromises = mangaIds.map(id => mangaService.byId(id).then(res => res.data))
 	const mangaResponses = await Promise.all(mangaPromises)
-
 
 	const mangaMap = mangaResponses.reduce(
 		(acc, res) => {
@@ -94,7 +112,7 @@ export async function getUserLibrary() {
 			acc[section].push({
 				id: manga.id,
 				attributes: manga.attributes,
-        relationships: manga.relationships 
+				relationships: manga.relationships
 			})
 
 			return acc
@@ -135,7 +153,7 @@ export async function getUserLibraryEntry(mangaId: string) {
 			return null
 		}
 		console.error('Ошибка при получении статуса манги:', error)
-		throw error
+		throw new Error(error.message || 'Ошибка при получении статуса манги')
 	}
 
 	return data.section

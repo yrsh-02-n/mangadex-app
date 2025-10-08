@@ -47,7 +47,7 @@ export function LibrarySection({ isLoading, titles, isError, onModeChange }: Pro
 					</ListingContainer>
 				) : (
 					<div className='text-center py-8'>
-						<p className='text-lg'>Раздел пуст</p>
+						<p className='text-lg'>Раздел пуст</p>  
 					</div>
 				)
 			) : (

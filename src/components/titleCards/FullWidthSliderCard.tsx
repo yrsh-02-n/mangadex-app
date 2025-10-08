@@ -43,6 +43,7 @@ export function FullWidthSliderCard({ attributes, id, relationships }: ITitle) {
 							src={coverUrl}
 							className='rounded shadow-md object-cover max-s:opacity-10 z-[1]'
 							priority
+							unoptimized
 						/>
 					</div>
 

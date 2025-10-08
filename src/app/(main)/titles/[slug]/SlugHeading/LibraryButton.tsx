@@ -1,12 +1,12 @@
+import { useQuery } from '@tanstack/react-query'
 import cn from 'clsx'
 import { ChevronDown, LucideCheckCheck } from 'lucide-react'
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { SelectLibrarySection } from '@/components/selectLibrarySection/SelectLibrarySection'
 import { Button } from '@/components/ui/button/Button'
 
 import { useClickOutside } from '@/hooks/useClickOutside'
-import { useQuery } from '@tanstack/react-query'
 
 import { addMangaToLibrary, getUserLibraryEntry } from '@/utils/supabase/mangaActions/mangaActions'
 
@@ -56,15 +56,25 @@ export const LibraryButton = ({ mangaId }: { mangaId: string }) => {
 	const isInLibrary = !!selectedStatus
 
 	if (isStatusLoading) {
-		return <Button variable='primary' className='px-[1rem] w-[18rem]'>
-			Загрузка...
-		</Button>
+		return (
+			<Button
+				variable='primary'
+				className='px-[1rem] w-[18rem]'
+			>
+				Загрузка...
+			</Button>
+		)
 	}
 
 	if (isError) {
-		return <Button variable='primary' className='px-[1rem] w-[18rem]'>
-			Ошибка
-		</Button>
+		return (
+			<Button
+				variable='primary'
+				className='px-[1rem] w-[18rem]'
+			>
+				Ошибка
+			</Button>
+		)
 	}
 
 	return (
