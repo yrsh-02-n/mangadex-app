@@ -1,6 +1,6 @@
 import Image from 'next/image'
+import { useParams } from 'next/navigation'
 
-import { Button } from '@/components/ui/button/Button'
 import { Heading } from '@/components/ui/heading/Heading'
 import { SkeletonLoader } from '@/components/ui/skeletonLoader/SkeletonLoader'
 import { TitleStatus } from '@/components/ui/status/TitleStatus'
@@ -12,9 +12,10 @@ import { getLocalizedTitle } from '@/utils/getLocalizedTitle'
 import { getTags } from '@/utils/getTags'
 
 import { AuthorArtist } from './AuthorArtist'
+import { LibraryButton } from './LibraryButton'
 import { MangaRes } from '@/types/api.types'
 
-export function SlugHeading({ data }: MangaRes) {
+export function SlugHeading({ data, mangaId }: { data: MangaRes['data']; mangaId: string }) {
 	const mangaData = data?.data
 	const title = mangaData?.attributes ? getLocalizedTitle(mangaData.attributes) : ''
 	// title on original lang
@@ -38,6 +39,7 @@ export function SlugHeading({ data }: MangaRes) {
 							src={coverUrl}
 							className='rounded-sm shadow-md object-cover max-[810px]:object-top'
 							priority
+              unoptimized
 						/>
 					</div>
 
@@ -65,7 +67,7 @@ export function SlugHeading({ data }: MangaRes) {
 								</div>
 							</div>
 
-							<p className='mb-[2rem] break-all'>{description}</p>
+							<p className='mb-[2rem] break-words hyphens-auto'>{description}</p>
 
 							<div className='flex gap-x-[1rem] gap-y-[1rem] flex-wrap mb-[2rem] max-md:hidden'>
 								{tags?.map((tag, index) => (
@@ -81,12 +83,9 @@ export function SlugHeading({ data }: MangaRes) {
 								<AuthorArtist data={data} />
 								{year !== null ? <p>{'Год выхода: ' + year}</p> : <p>{'Год выхода: ниезвестен'}</p>}
 							</div>
-							<Button
-								variable='primary'
-								className='px-[1rem]'
-							>
-								Добавить в библиотеку
-							</Button>
+							<div className='relative w-fit'>
+								<LibraryButton mangaId={mangaId}  />
+							</div>
 						</div>
 					</div>
 				</div>

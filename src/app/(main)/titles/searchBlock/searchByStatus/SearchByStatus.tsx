@@ -2,10 +2,9 @@ import { ISelectOption, SelectField } from '@/components/ui/fields/selectField/S
 
 import { useSearchStore } from '@/store/search.store'
 
-import { getLocalizedDemographic } from '@/utils/getLocalizedDemographic'
 import { getLocalizedStatus } from '@/utils/getLocalizedStatus'
 
-import { PublicationDemographic, Status } from '@/types/enums'
+import { Status } from '@/types/enums'
 
 const statusOptions = [
 	{

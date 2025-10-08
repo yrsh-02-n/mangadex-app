@@ -23,7 +23,10 @@ export default function TitlePage() {
 
 	return (
 		<div className='px-[1.5rem] mt-[6rem] pb-[2rem]'>
-			<SlugHeading data={data} />
+			<SlugHeading
+				data={data}
+				mangaId={slug as string}
+			/>
 			<SlugInfo data={data} />
 		</div>
 	)

@@ -16,9 +16,7 @@ export interface ISelectOption {
 	readonly label: string
 	readonly flag?: string
 }
-
 type SelectValue = readonly ISelectOption[] | null
-
 // for change tags display to '+1' format at mobile resolution
 const AdaptiveMultiValue: React.FC<
 	MultiValueProps<ISelectOption, true, GroupBase<ISelectOption>>
@@ -26,12 +24,9 @@ const AdaptiveMultiValue: React.FC<
 	const allSelectedValues = props.selectProps.value as SelectValue
 	const isSelectedArray = Array.isArray(allSelectedValues)
 	const selectedCount = isSelectedArray ? allSelectedValues.length : 0
-
 	const isMobile = typeof window !== 'undefined' ? window.innerWidth <= 480 : false
-
 	if (isMobile && isSelectedArray && selectedCount > 1) {
 		const isFirst = props.index === 0
-
 		if (isFirst) {
 			return (
 				<components.MultiValue {...props}>
@@ -42,11 +37,9 @@ const AdaptiveMultiValue: React.FC<
 			return null
 		}
 	}
-
 	return <components.MultiValue {...props} />
 }
 //
-
 // Single value with flag
 const { Option } = components
 const IconOption: React.FC<OptionProps<ISelectOption>> = props => (
@@ -57,7 +50,6 @@ const IconOption: React.FC<OptionProps<ISelectOption>> = props => (
 		</div>
 	</Option>
 )
-
 // replace dropdown icon
 const { DropdownIndicator } = components
 const DropdownIcon: React.FC<
@@ -70,7 +62,6 @@ const DropdownIcon: React.FC<
 		/>
 	</DropdownIndicator>
 )
-
 // replace remove btn
 const { ClearIndicator } = components
 const RemoveIcon: React.FC<ClearIndicatorProps<ISelectOption, true>> = props => (
@@ -78,14 +69,12 @@ const RemoveIcon: React.FC<ClearIndicatorProps<ISelectOption, true>> = props => 
 		<X size={20} />
 	</ClearIndicator>
 )
-
 interface Props {
 	options: readonly ISelectOption[]
 	placeholder: string
 	value: SelectValue
 	onChange: (newValue: SelectValue) => void
 }
-
 export function SelectField({ options, placeholder, value, onChange }: Props) {
 	return (
 		<Select<ISelectOption, true>
