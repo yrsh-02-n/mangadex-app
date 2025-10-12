@@ -1,5 +1,5 @@
 import { SplideSlide } from '@splidejs/react-splide'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { usePopularRuManga } from '@/hooks/usePopularRuManga'
@@ -15,16 +15,16 @@ export function PopularRuBlock() {
 	const slidesCount: number = getSlidesCount()
 	const [isPagination, setIsPagination] = useState<boolean>(false)
 	const [isArrows, setIsArrows] = useState<boolean>(false)
+	const [isMobile, setIsMobile] = useState<boolean>(
+		typeof window !== 'undefined' ? window.innerWidth <= 640 : false
+	)
 
 	useEffect(() => {
 		const handleResize = () => {
-			if (window.innerWidth <= 640) {
-				setIsPagination(true)
-				setIsArrows(false)
-			} else {
-				setIsPagination(false)
-				setIsArrows(true)
-			}
+			const isMobileView = window.innerWidth <= 640
+			setIsPagination(isMobileView)
+			setIsArrows(!isMobileView)
+			setIsMobile(isMobileView)
 		}
 
 		handleResize()
@@ -35,7 +35,11 @@ export function PopularRuBlock() {
 	}, [])
 
 	// titles
-	const allTitles = data?.pages.flatMap(page => page.data) || []
+	const allTitles = useMemo(() => data?.pages.flatMap(page => page.data) || [], [data])
+	const visibleTitles = useMemo(
+		() => (isMobile ? allTitles.slice(0, 10) : allTitles),
+		[allTitles, isMobile]
+	)
 
 	return !isLoading ? (
 		<div className=''>
@@ -51,7 +55,7 @@ export function PopularRuBlock() {
 					!isArrows && 'hidden'
 				)}
 			>
-				{allTitles.map(title => (
+				{visibleTitles.map(title => (
 					<SplideSlide key={title.id}>
 						<TileCard
 							attributes={title.attributes}
