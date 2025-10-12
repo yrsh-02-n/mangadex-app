@@ -18,7 +18,7 @@ export function Sidebar() {
 			className={cn(
 				'flex flex-col justify-between bg-primary min-h-full transition-all duration-100 ease-in shrink-0',
 				isSidebarOpen
-					? 'w-[20rem] px-[1.5rem] pb-[1.5rem] pt-[1.7rem] max-sm:absolute max-sm:w-screen max-sm:z-999 mih-h-full'
+					? 'w-[20rem] px-[1.5rem] pb-[1.5rem] pt-[1.7rem] max-sm:fixed max-sm:inset-0 max-sm:h-dvh max-sm:w-screen max-sm:z-[999] max-sm:overflow-y-auto max-sm:overscroll-none max-sm:touch-pan-y'
 					: 'w-[3rem] p-[.5rem] pt-[1.5rem]'
 			)}
 		>
