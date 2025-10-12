@@ -6,17 +6,22 @@ interface ListingContainerProps {
 	children: ReactNode
 	displayMode?: 'tiles' | 'grid'
 	onModeChange: (mode: 'tiles' | 'grid') => void
+	hasBg: boolean
 }
 
 export function ListingContainer({
 	children,
 	displayMode = 'tiles',
-	onModeChange
+	onModeChange,
+	hasBg
 }: ListingContainerProps) {
 	return (
 		<div>
 			<div className='flex justify-end w-full mb-[1rem]'>
-				<DisplayModeSwitcher onModeChange={onModeChange} />
+				<DisplayModeSwitcher
+					onModeChange={onModeChange}
+					hasBg={hasBg}
+				/>
 			</div>
 			<div
 				className={

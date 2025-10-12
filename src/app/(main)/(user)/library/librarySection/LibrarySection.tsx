@@ -14,9 +14,10 @@ interface Props {
 	titles: ITitle[]
 	isError: boolean
 	onModeChange?: (mode: 'tiles' | 'grid') => void
+	hasBg?: boolean
 }
 
-export function LibrarySection({ isLoading, titles, isError, onModeChange }: Props) {
+export function LibrarySection({ isLoading, titles, isError, onModeChange, hasBg = true }: Props) {
 	const [displayMode, setDisplayMode] = useState<'tiles' | 'grid'>('tiles')
 
 	return (
@@ -26,6 +27,7 @@ export function LibrarySection({ isLoading, titles, isError, onModeChange }: Pro
 					<ListingContainer
 						onModeChange={setDisplayMode}
 						displayMode={displayMode}
+						hasBg={hasBg}
 					>
 						{displayMode === 'tiles'
 							? titles.map((title, index) => (
@@ -42,18 +44,20 @@ export function LibrarySection({ isLoading, titles, isError, onModeChange }: Pro
 										attributes={title.attributes}
 										id={title.id}
 										relationships={title.relationships}
+                    className='bg-bg/40'
 									/>
 								))}
 					</ListingContainer>
 				) : (
 					<div className='text-center py-8'>
-						<p className='text-lg'>Раздел пуст</p>  
+						<p className='text-lg'>Раздел пуст</p>
 					</div>
 				)
 			) : (
 				<ListingContainer
 					onModeChange={setDisplayMode}
 					displayMode={displayMode}
+					hasBg={hasBg}
 				>
 					<SkeletonLoader
 						count={18}
