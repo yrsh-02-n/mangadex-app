@@ -49,7 +49,7 @@ export function AdvancedSearchBlock() {
 					alt='Background'
 					fill
 					style={{
-						objectPosition: 'right top',
+						objectPosition: '85% top',
 						objectFit: 'cover'
 					}}
 					priority
@@ -64,6 +64,7 @@ export function AdvancedSearchBlock() {
 					transition: 'opacity 0.2s ease'
 				}}
 			/>
+			<div className='absolute inset-0 z-[1] hidden pointer-events-none max-s:block bg-black/60' />
 		</section>
 	)
 }

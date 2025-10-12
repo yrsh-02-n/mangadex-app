@@ -13,7 +13,7 @@ interface IHeadingProps {
 
 export function Heading({ isH1, children, className }: IHeadingProps) {
 	return isH1 ? (
-		<h1 className={twMerge('text-2xl font-semibold mb-[2rem] max-md:text-xl', className)}>
+		<h1 className={twMerge('text-2xl font-semibold mb-[2rem] max-md:text-xl max-xs:text-md', className)}>
 			{children}
 		</h1>
 	) : (

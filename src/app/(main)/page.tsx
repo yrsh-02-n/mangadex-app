@@ -50,7 +50,7 @@ export default async function Home() {
 				<DynamicResentlyAddedBlock />
 			</section>
 			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
-				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
+				<div className='flex items-center gap-[.5rem] mb-[2rem] max-s:items-baseline'>
 					<Flag country={FLAGS['ru']} />
 					<Heading
 						className='mb-0'
@@ -62,7 +62,7 @@ export default async function Home() {
 				</div>
 				<DynamicPopularRuBlock />
 			</section>
-			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[8rem]'>
+			<section className='px-[1.5rem] mb-[6rem] max-md:mb-[1rem]'>
 				<div className='flex items-center gap-[.5rem] mb-[2rem]'>
 					<Heading
 						className='mb-0'
