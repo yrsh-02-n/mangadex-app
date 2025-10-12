@@ -6,14 +6,14 @@ interface ListingContainerProps {
 	children: ReactNode
 	displayMode?: 'tiles' | 'grid'
 	onModeChange: (mode: 'tiles' | 'grid') => void
-	hasBg: boolean
+	hasBg?: boolean
 }
 
 export function ListingContainer({
 	children,
 	displayMode = 'tiles',
 	onModeChange,
-	hasBg
+	hasBg = false
 }: ListingContainerProps) {
 	return (
 		<div>
