@@ -31,14 +31,14 @@ export const metadata: Metadata = {
 		description: 'Поиск и каталогизация манги',
 		url: '',
 		siteName: 'MangaNexus',
-		// images: [
-		// 	{
-		// 		url: 'https://yrshdev.ru/og-image.jpg',
-		// 		width: 1200,
-		// 		height: 630,
-		// 		alt: 'Поиск и каталогизация манги'
-		// 	}
-		// ],
+		images: [
+			{
+				url: 'https://mangadex-app-liard.vercel.app/bage.jpg',
+				width: 1200,
+				height: 630,
+				alt: 'Поиск и каталогизация манги'
+			}
+		],
 		locale: 'ru_RU'
 	}
 }
