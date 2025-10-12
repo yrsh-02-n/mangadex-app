@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { twMerge } from 'tailwind-merge'
 
 import { PUBLIC_ROUTES } from '@/config/public-routes.config'
 
@@ -13,7 +14,7 @@ import { Tag } from '../ui/tag/Tag'
 
 import { ITitle } from '@/types/title.types'
 
-export function GridCard({ attributes, id, relationships }: ITitle) {
+export function GridCard({ attributes, id, relationships, className }: ITitle) {
 	// utils
 	const title = getLocalizedTitle(attributes)
 	const coverUrl = getCoverArt(relationships, id, 'thumbnail')
@@ -22,7 +23,7 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 
 	return (
 		<div>
-			<div className='flex w-full bg-primary rounded max-s:relative'>
+			<div className={twMerge('flex w-full bg-primary rounded max-s:relative', className)}>
 				<Link href={`${PUBLIC_ROUTES.TITLES}/${id}`}>
 					<div
 						className='relative w-[12rem] h-[auto] min-h-[18rem] max-md:max-w-[8rem]
@@ -35,7 +36,7 @@ export function GridCard({ attributes, id, relationships }: ITitle) {
 							src={coverUrl}
 							className='rounded-tl-sm rounded-bl-sm shadow-md object-cover max-s:opacity-10 z-[1]'
 							priority
-              unoptimized
+							unoptimized
 						/>
 					</div>
 				</Link>
