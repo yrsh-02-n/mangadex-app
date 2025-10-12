@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MangaDex App
+
+Next.js 15 application for browsing manga via the MangaDex API with Supabase-backed authentication, personal libraries, and a responsive UI tailored for desktop and mobile.
+
+## Features
+- Browse curated collections: recent additions, popular titles, search with advanced filters.
+- View detailed manga pages including metadata, chapter feeds, and cover art.
+- Manage a personal library with custom reading statuses via Supabase.
+- Auth flows for login, password recovery, and profile settings.
+- Component library powered by Tailwind CSS, HeroUI, and Storybook for rapid UI iteration.
+
+## Tech Stack
+- Framework: Next.js 15 (App Router) with React 19 and TypeScript.
+- Styling: Tailwind CSS, clsx, tailwind-merge.
+- Data & State: TanStack Query, Zustand, React Hook Form, Zod.
+- Backend integrations: Supabase auth/storage helpers, MangaDex REST API consumed through Next.js API proxy routes.
+- Tooling: ESLint, Vitest, Playwright, Storybook.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18.18+ (recommended 20+) and npm 9+.
+- A Supabase project with email/password auth enabled.
+- MangaDex account if you plan to exercise authenticated endpoints (optional, the public API suffices for browsing).
 
+### Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-org/mangadex-app.git
+cd mangadex-app
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
+Create a `.env.local` based on `.env.example`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Description |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL (`https://...supabase.co`). |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/public API key. |
+| `NEXT_PUBLIC_USE_IMAGE_PROXY` | `true` to proxy MangaDex images through the built-in API route (recommended for production on Vercel), `false` to load images directly in local development. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> The proxies under `src/app/api/*` rely on these variables to forward secure requests to MangaDex and Supabase.
 
-## Learn More
+### Development
+```bash
+npm run dev
+```
+Visit `http://localhost:3000`. Hot module replacement is enabled by default via Turbopack.
 
-To learn more about Next.js, take a look at the following resources:
+### Linting & Testing
+```bash
+npm run lint          # ESLint (Next.js config)
+npx vitest            # Unit tests (JSDOM by default)
+npx vitest --coverage # Coverage report
+npx playwright test   # E2E tests (configure browsers first with `npx playwright install`)
+npm run storybook     # Component development sandbox on http://localhost:6006
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Production Build
+```bash
+npm run build
+npm run start
+```
+When deploying to Vercel, the `vercel-build` script installs dependencies with legacy peer rules before building.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
+```
+src/
+  app/                    # App Router pages, layouts, API routes
+  components/             # Reusable UI components & layout blocks
+  hooks/                  # Custom React hooks (data fetching, UI state)
+  services/               # API client wrappers (e.g., MangaDex proxy)
+  store/                  # Zustand stores
+  types/                  # Shared TypeScript definitions
+  utils/                  # Helpers (Supabase actions, formatting, etc.)
+```
 
-## Deploy on Vercel
+Supabase-related logic lives under `src/utils/supabase`, while UI primitives (buttons, tabs, cards) are organized in `src/components/ui`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development Workflow
+1. Create a feature branch from `main`.
+2. Implement changes with accompanying tests or Storybook stories whenever relevant.
+3. Run `npm run lint` and applicable test suites.
+4. Commit with conventional messages (e.g., `feat(library): add reading progress indicator`).
+5. Open a pull request; include screenshots or Storybook links for UI updates.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment Notes
+- The image proxy API route (`/api/image-proxy`) avoids CORS issues and improves caching on Vercel.
+- To use Supabase server-side helpers, ensure the project URL and service role key (if needed) are provided through Vercel environment variables.
+- Configure `NEXT_PUBLIC_USE_IMAGE_PROXY=true` in production to route images through the proxy.
+
+## Contributing
+Issues and pull requests are welcome. Please describe any Supabase schema changes or new environment variables when contributing.
+
+## License
+This project is released under the MIT License. See `LICENSE` for details.
